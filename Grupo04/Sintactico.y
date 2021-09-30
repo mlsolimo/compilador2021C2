@@ -27,6 +27,9 @@ extern int yylineno;
 %token TYPE_INTEGER
 %token TYPE_FLOAT
 %token TYPE_STRING
+%token DISPLAY
+%token CONST_STRING
+%token GET
 %token WHILE
 %token ENDWHILE
 
@@ -48,6 +51,15 @@ gramatica: dec_variable       {;}
         |  equmax             {;}
         |  equmin             {;}
         ;
+
+display: DISPLAY CONST_STRING    {insertString(&symbolTable, $1);}
+       | DISPLAY ID              {;}
+       ;
+
+const_string_rule: 
+
+get: GET ID {;}
+   ;
 
 dec_variable: DIM OP_MENOR lista_asig OP_MAYOR {
                                                     char dataType[100];
