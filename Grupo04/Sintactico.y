@@ -56,8 +56,6 @@ display: DISPLAY CONST_STRING    {insertString(&symbolTable, $1);}
        | DISPLAY ID              {;}
        ;
 
-const_string_rule: 
-
 get: GET ID {;}
    ;
 
