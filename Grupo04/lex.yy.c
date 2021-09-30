@@ -525,11 +525,12 @@ char *yytext;
 #include <string.h>
 
 FILE *yyin;
+int yylval;
 
 int yyerror(void);
 int errorLex(void);
 
-#line 533 "lex.yy.c"
+#line 534 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -680,9 +681,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 67 "Lexico.l"
+#line 68 "Lexico.l"
 
-#line 686 "lex.yy.c"
+#line 687 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -775,32 +776,32 @@ do_action:	/* This label is used only to access EOF actions. */
 	{ /* beginning of action switch */
 case 1:
 YY_RULE_SETUP
-#line 68 "Lexico.l"
+#line 69 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return WHILE;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 69 "Lexico.l"
+#line 70 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return ENDWHILE;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 70 "Lexico.l"
+#line 71 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return IF;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 71 "Lexico.l"
+#line 72 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return ENDIF;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 72 "Lexico.l"
+#line 73 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return OP_ASIG;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 73 "Lexico.l"
+#line 74 "Lexico.l"
 {
                         printf("\nConstante entera:" %s\n, yytext);
                         int num = atoi(strdup(yytext));
@@ -809,13 +810,14 @@ YY_RULE_SETUP
 							errorLexico();
 						} else {
                             printf("\nPalabra reservada: %s\n", yytext);
+                            yylval.strVal = strdup(yytext);
 					 		return CONST_ENTERA;
 						}
                 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 84 "Lexico.l"
+#line 86 "Lexico.l"
 {
                         printf("\nConstante real:" %s\n, yytext);
                         float num = atoi(strdup(yytext));
@@ -824,6 +826,7 @@ YY_RULE_SETUP
 							errorLexico();
 						} else {
                             printf("\nPalabra reservada: %s\n", yytext);
+                            yylval.strVal = strdup(yytext);
 					 		return CONST_FLOAT;
 						}
 
@@ -831,12 +834,13 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 96 "Lexico.l"
+#line 99 "Lexico.l"
 {
                     printf("\nConstante string:" %s\n, yytext);
                     if(strlen(yytext)<=30)
                     {
                         printf("\nPalabra reservada: %s\n", yytext);
+                        yylval.strVal = strdup(yytext);
 						return CONST_STRING;
                     }
 					else
@@ -848,195 +852,195 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 109 "Lexico.l"
+#line 113 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return ID;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 110 "Lexico.l"
+#line 114 "Lexico.l"
 
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 111 "Lexico.l"
+#line 115 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return DISPLAY;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 112 "Lexico.l"
+#line 116 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return GET;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 113 "Lexico.l"
+#line 117 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return OP_COMP;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 114 "Lexico.l"
+#line 118 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return OP_MAYORIGUAL;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 115 "Lexico.l"
+#line 119 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return OP_MAYOR;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 116 "Lexico.l"
+#line 120 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return OP_MENOR;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 117 "Lexico.l"
+#line 121 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return OP_MENORIGUAL;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 118 "Lexico.l"
+#line 122 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return OP_DISTINTO;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 119 "Lexico.l"
+#line 123 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return OR;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 120 "Lexico.l"
+#line 124 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return AND;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 121 "Lexico.l"
+#line 125 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return NOT;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 122 "Lexico.l"
+#line 126 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return OP_DIVISION;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 123 "Lexico.l"
+#line 127 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return OP_SUMA;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 124 "Lexico.l"
+#line 128 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return OP_MULT;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 125 "Lexico.l"
+#line 129 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return OP_RESTA;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 126 "Lexico.l"
+#line 130 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return PARENTESIS_A;}    
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 127 "Lexico.l"
+#line 131 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return PARENTESIS_C;}    
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 128 "Lexico.l"
+#line 132 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return CORCHETE_A;}  
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 129 "Lexico.l"
+#line 133 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return CORCHETE_C;}  
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 130 "Lexico.l"
+#line 134 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return DIM;}  
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 131 "Lexico.l"
+#line 135 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return AS;}  
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 132 "Lexico.l"
+#line 136 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return TYPE_INTEGER;}  
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 133 "Lexico.l"
+#line 137 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return TYPE_FLOAT;}  
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 134 "Lexico.l"
+#line 138 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return TYPE_CONST;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 135 "Lexico.l"
+#line 139 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return FOR;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 136 "Lexico.l"
+#line 140 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return TO;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 137 "Lexico.l"
+#line 141 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return NEXT;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 138 "Lexico.l"
+#line 142 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return EQUMAX;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 139 "Lexico.l"
+#line 143 "Lexico.l"
 {printf("\nPalabra reservada: %s\n", yytext); return EQUMIN;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 140 "Lexico.l"
-{printf("\nPalabra reservada: %s\n", yytext); return OP_SEP_EXP;}
+#line 144 "Lexico.l"
+{printf("\nPalabra reservada: %s\n", yytext); return PUNTO_COMA;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 141 "Lexico.l"
-{printf("\nPalabra reservada: %s\n", yytext); return OP_SEP;}
+#line 145 "Lexico.l"
+{printf("\nPalabra reservada: %s\n", yytext); return COMA;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 142 "Lexico.l"
+#line 146 "Lexico.l"
 
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 143 "Lexico.l"
+#line 147 "Lexico.l"
 
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 144 "Lexico.l"
+#line 148 "Lexico.l"
 
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 145 "Lexico.l"
-{printf("FLEX - No se encontro token\n");errorLexico();}
+#line 149 "Lexico.l"
+{printf("FLEX - No se encontro token\n"); errorLexico();}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 146 "Lexico.l"
+#line 150 "Lexico.l"
 ECHO;
 	YY_BREAK
-#line 1040 "lex.yy.c"
+#line 1044 "lex.yy.c"
 			case YY_STATE_EOF(INITIAL):
 				yyterminate();
 
@@ -1920,12 +1924,12 @@ int main()
 	return 0;
 	}
 #endif
-#line 146 "Lexico.l"
+#line 150 "Lexico.l"
 
 
 int errorLex(void)
 {
-    printf("Error lexico\n");
+    printf("Error de lexico\n");
     system("Pause");
     exit(1);
 }

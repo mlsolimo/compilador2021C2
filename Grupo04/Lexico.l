@@ -5,6 +5,7 @@
 #include <string.h>
 
 FILE *yyin;
+int yylval;
 
 int yyerror(void);
 int errorLex(void);
@@ -78,6 +79,7 @@ COMA          ","
 							errorLexico();
 						} else {
                             printf("\nPalabra reservada: %s\n", yytext);
+                            yylval.strVal = strdup(yytext);
 					 		return CONST_ENTERA;
 						}
                 }
@@ -89,6 +91,7 @@ COMA          ","
 							errorLexico();
 						} else {
                             printf("\nPalabra reservada: %s\n", yytext);
+                            yylval.strVal = strdup(yytext);
 					 		return CONST_FLOAT;
 						}
 
@@ -98,6 +101,7 @@ COMA          ","
                     if(strlen(yytext)<=30)
                     {
                         printf("\nPalabra reservada: %s\n", yytext);
+                        yylval.strVal = strdup(yytext);
 						return CONST_STRING;
                     }
 					else
@@ -142,12 +146,12 @@ COMA          ","
 "\n"
 "\t"
 " "
-.				{printf("FLEX - No se encontro token\n");errorLexico();}
+.				{printf("FLEX - No se encontro token\n"); errorLexico();}
 %%
 
 int errorLex(void)
 {
-    printf("Error lexico\n");
+    printf("Error de lexico\n");
     system("Pause");
     exit(1);
 }
