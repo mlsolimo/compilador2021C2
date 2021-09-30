@@ -820,7 +820,7 @@ YY_RULE_SETUP
 #line 86 "Lexico.l"
 {
                         printf("\nConstante real:" %s\n, yytext);
-                        float num = atoi(strdup(yytext));
+                        float num = atof(strdup(yytext));
 						if (num < -2147483648 && num > 2147483647) {
 							printf("Valor numerico menor a -2147483648 o mayor a 2147483647\n");
 							errorLexico();

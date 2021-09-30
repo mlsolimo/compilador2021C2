@@ -54,7 +54,7 @@ DIM             "DIM"|"dim"
 AS              "AS"|"as"         
 TYPE_INTEGER    "INTEGER"|"integer"
 TYPE_FLOAT      "REAL"|"real"
-TYPE_CONST      "STRING"|"string"
+TYPE_STRING      "STRING"|"string"
 FOR             "FOR"|"for"
 TO              "TO"|"to"
 NEXT            "NEXT"|"next"
@@ -85,7 +85,7 @@ COMA          ","
                 }
 {CONST_REAL}    {
                         printf("\nConstante real:" %s\n, yytext);
-                        float num = atoi(strdup(yytext));
+                        float num = atof(strdup(yytext));
 						if (num < -2147483648 && num > 2147483647) {
 							printf("Valor numerico menor a -2147483648 o mayor a 2147483647\n");
 							errorLexico();
@@ -135,7 +135,7 @@ COMA          ","
 {AS}            {printf("\nPalabra reservada: %s\n", yytext); return AS;}  
 {TYPE_INTEGER}  {printf("\nPalabra reservada: %s\n", yytext); return TYPE_INTEGER;}  
 {TYPE_FLOAT}    {printf("\nPalabra reservada: %s\n", yytext); return TYPE_FLOAT;}  
-{TYPE_CONST}    {printf("\nPalabra reservada: %s\n", yytext); return TYPE_CONST;}
+{TYPE_STRING}    {printf("\nPalabra reservada: %s\n", yytext); return TYPE_CONST;}
 {FOR}           {printf("\nPalabra reservada: %s\n", yytext); return FOR;}
 {TO}            {printf("\nPalabra reservada: %s\n", yytext); return TO;}
 {NEXT}          {printf("\nPalabra reservada: %s\n", yytext); return NEXT;}
