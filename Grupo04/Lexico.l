@@ -59,8 +59,8 @@ TO              "TO"|"to"
 NEXT            "NEXT"|"next"
 EQUMAX          "EQUMAX"|"equmax"
 EQUMIN          "EQUMIN"|"equmin"
-OP_SEP_EXP      ";"
-OP_SEP          ","
+PUNTO_COMA      ";"
+COMA          ","
 
 
 
@@ -137,8 +137,8 @@ OP_SEP          ","
 {NEXT}          {printf("\nPalabra reservada: %s\n", yytext); return NEXT;}
 {EQUMAX}        {printf("\nPalabra reservada: %s\n", yytext); return EQUMAX;}
 {EQUMIN}        {printf("\nPalabra reservada: %s\n", yytext); return EQUMIN;}
-{OP_SEP_EXP}    {printf("\nPalabra reservada: %s\n", yytext); return OP_SEP_EXP;}
-{OP_SEP}        {printf("\nPalabra reservada: %s\n", yytext); return OP_SEP;}
+{PUNTO_COMA}    {printf("\nPalabra reservada: %s\n", yytext); return PUNTO_COMA;}
+{COMA}          {printf("\nPalabra reservada: %s\n", yytext); return COMA;}
 "\n"
 "\t"
 " "
