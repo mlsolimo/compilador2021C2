@@ -3,12 +3,14 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
+#include <limits.h>
+#include <math.h>
+#include "y.tab.h"
 
 FILE *yyin;
-int yylval;
 
 int yyerror(void);
-int errorLex(void);
+int errorLexico(void);
 
 %}
 
@@ -33,8 +35,8 @@ OP_ASIG         ":="
 CONST_ENTERA    {DIGITO}+
 CONST_REAL      "-"?{DIGITO}+.".".{DIGITO}+
 CONST_STRING    {COMILLA}.(.)+.{COMILLA}
-ID		        {LETRA}({LETRA}|{DIGITO})*
-COMENTARIO      "/*".(.)*."*/"
+VARIABLE		{LETRA}({LETRA}|{DIGITO})*
+COMENTARIO      "*/".(.)*."/*"
 DISPLAY         "DISPLAY"|"display"
 GET             "GET"|"get"
 OP_COMP			"=""="
@@ -61,7 +63,7 @@ NEXT            "NEXT"|"next"
 EQUMAX          "EQUMAX"|"equmax"
 EQUMIN          "EQUMIN"|"equmin"
 PUNTO_COMA      ";"
-COMA          ","
+COMA            ","
 
 
 
@@ -69,10 +71,11 @@ COMA          ","
 {WHILE}         {printf("\nPalabra reservada: %s\n", yytext); return WHILE;}
 {ENDWHILE}      {printf("\nPalabra reservada: %s\n", yytext); return ENDWHILE;}
 {IF}            {printf("\nPalabra reservada: %s\n", yytext); return IF;}
+{ELSE}          {printf("\nPalabra reservada: %s\n", yytext); return ELSE;}
 {ENDIF}         {printf("\nPalabra reservada: %s\n", yytext); return ENDIF;}
 {OP_ASIG}       {printf("\nPalabra reservada: %s\n", yytext); return OP_ASIG;}
 {CONST_ENTERA}  {
-                        printf("\nConstante entera:" %s\n, yytext);
+                        printf("\nConstante entera: %s\n", yytext);
                         int num = atoi(strdup(yytext));
 						if (num > 65535) {
 							printf("Valor numerico mayor a 65535 %d\n",num);
@@ -80,11 +83,11 @@ COMA          ","
 						} else {
                             printf("\nPalabra reservada: %s\n", yytext);
                             yylval.strVal = strdup(yytext);
-					 		return CONST_ENTERA;
+					 		return CONST_INT;
 						}
                 }
 {CONST_REAL}    {
-                        printf("\nConstante real:" %s\n, yytext);
+                        printf("\nConstante real: %s\n", yytext);
                         float num = atof(strdup(yytext));
 						if (num < -2147483648 && num > 2147483647) {
 							printf("Valor numerico menor a -2147483648 o mayor a 2147483647\n");
@@ -92,12 +95,12 @@ COMA          ","
 						} else {
                             printf("\nPalabra reservada: %s\n", yytext);
                             yylval.strVal = strdup(yytext);
-					 		return CONST_FLOAT;
+					 		return CONST_REAL;
 						}
 
                 }
 {CONST_STRING}  {
-                    printf("\nConstante string:" %s\n, yytext);
+                    printf("\nConstante string: %s\n", yytext);
                     if(strlen(yytext)<=30)
                     {
                         printf("\nPalabra reservada: %s\n", yytext);
@@ -110,7 +113,7 @@ COMA          ","
 						errorLexico();
                     }
                 }
-{ID}            {printf("\nPalabra reservada: %s\n", yytext); return ID;}
+{VARIABLE}      {printf("\nPalabra reservada: %s\n", yytext); return VARIABLE;}
 {COMENTARIO}    
 {DISPLAY}       {printf("\nPalabra reservada: %s\n", yytext); return DISPLAY;}
 {GET}           {printf("\nPalabra reservada: %s\n", yytext); return GET;}
@@ -135,7 +138,7 @@ COMA          ","
 {AS}            {printf("\nPalabra reservada: %s\n", yytext); return AS;}  
 {TYPE_INTEGER}  {printf("\nPalabra reservada: %s\n", yytext); return TYPE_INTEGER;}  
 {TYPE_FLOAT}    {printf("\nPalabra reservada: %s\n", yytext); return TYPE_FLOAT;}  
-{TYPE_STRING}    {printf("\nPalabra reservada: %s\n", yytext); return TYPE_CONST;}
+{TYPE_STRING}    {printf("\nPalabra reservada: %s\n", yytext); return TYPE_STRING;}
 {FOR}           {printf("\nPalabra reservada: %s\n", yytext); return FOR;}
 {TO}            {printf("\nPalabra reservada: %s\n", yytext); return TO;}
 {NEXT}          {printf("\nPalabra reservada: %s\n", yytext); return NEXT;}
@@ -143,13 +146,14 @@ COMA          ","
 {EQUMIN}        {printf("\nPalabra reservada: %s\n", yytext); return EQUMIN;}
 {PUNTO_COMA}    {printf("\nPalabra reservada: %s\n", yytext); return PUNTO_COMA;}
 {COMA}          {printf("\nPalabra reservada: %s\n", yytext); return COMA;}
+{DIGITO}        {printf("\nPalabra reservada: %s\n", yytext); return DIGITO;}
 "\n"
 "\t"
 " "
 .				{printf("FLEX - No se encontro token\n"); errorLexico();}
 %%
 
-int errorLex(void)
+int errorLexico(void)
 {
     printf("Error de lexico\n");
     system("Pause");
@@ -159,6 +163,7 @@ int errorLex(void)
 int yyerror(void)
 {
     printf("Error de sintasix\n");
+    printf("ERROR SINTACTICO EN LA LINEA: %d\n", yylineno);
     system("Pause");
     exit(1);
 }

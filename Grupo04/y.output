@@ -1,0 +1,1957 @@
+Terminals unused in grammar
+
+   OP_SUM
+   OP_DISTINTO
+   OP_DIVISIONISION
+
+
+Gramática
+
+    0 $accept: programa_final $end
+
+    1 programa_final: programa
+
+    2 programa: sentencia gramatica
+    3         | gramatica
+
+    4 sentencia: sentencia gramatica PUNTO_COMA
+    5          | gramatica PUNTO_COMA
+
+    6 gramatica: dec_variable
+    7          | asig
+    8          | display
+    9          | get
+   10          | for
+   11          | if
+   12          | while
+   13          | equmax
+   14          | equmin
+
+   15 dec_variable: DIM CORCHETE_A lista_asig CORCHETE_C
+
+   16 lista_asig: VARIABLE COMA lista_asig COMA tipo
+   17           | VARIABLE CORCHETE_C AS CORCHETE_A tipo
+
+   18 tipo: TYPE_INTEGER
+   19     | TYPE_FLOAT
+   20     | TYPE_STRING
+
+   21 asig: VARIABLE OP_ASIG expresion
+   22     | VARIABLE OP_ASIG CONST_STRING
+
+   23 expresion: expresion OP_SUMA termino
+   24          | expresion OP_RESTA termino
+   25          | termino
+
+   26 termino: termino OP_MULT factor
+   27        | termino OP_DIVISION factor
+   28        | factor
+
+   29 factor: PARENTESIS_A expresion PARENTESIS_C
+   30       | DIGITO
+   31       | VARIABLE
+
+   32 display: DISPLAY CONST_STRING
+   33        | DISPLAY CONST_INT
+   34        | DISPLAY CONST_REAL
+
+   35 get: GET VARIABLE
+
+   36 $@1: /* vacío */
+
+   37 for: FOR VARIABLE OP_ASIG expresion TO expresion CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+
+   38 step: CONST_INT
+   39     | /* vacío */
+
+   40 while: WHILE PARENTESIS_A cond_final PARENTESIS_C sentencia ENDWHILE
+
+   41 $@2: /* vacío */
+
+   42 if: IF cond_final sentencia $@2 ENDIF
+
+   43 $@3: /* vacío */
+
+   44 $@4: /* vacío */
+
+   45 $@5: /* vacío */
+
+   46 if: IF cond_final sentencia $@3 ELSE $@4 sentencia $@5 ENDIF
+
+   47 $@6: /* vacío */
+
+   48 if: IF cond_final ELSE $@6 ENDIF
+   49   | IF cond_final ENDIF
+
+   50 cond_final: PARENTESIS_A cond_final AND cond_final PARENTESIS_C
+   51           | PARENTESIS_A cond AND cond_final PARENTESIS_C
+   52           | PARENTESIS_A cond_final AND cond PARENTESIS_C
+   53           | PARENTESIS_A cond_final OR cond_final PARENTESIS_C
+   54           | PARENTESIS_A cond OR cond_final PARENTESIS_C
+   55           | PARENTESIS_A cond_final OR cond PARENTESIS_C
+   56           | PARENTESIS_A cond AND cond PARENTESIS_C
+   57           | PARENTESIS_A cond OR cond PARENTESIS_C
+   58           | PARENTESIS_A cond PARENTESIS_C
+   59           | NOT cond_final
+   60           | PARENTESIS_A cond_final PARENTESIS_C
+
+   61 cond: expresion OP_COMP expresion
+   62     | expresion OP_MAYORIGUAL expresion
+   63     | expresion OP_MENORIGUAL expresion
+   64     | expresion OP_MENOR expresion
+   65     | expresion OP_MAYOR expresion
+   66     | expresion AND expresion
+   67     | expresion OR expresion
+   68     | expresion NOT termino
+   69     | NOT VARIABLE
+
+   70 equmax: EQUMAX PARENTESIS_A expresion PUNTO_COMA CORCHETE_A lista CORCHETE_C PARENTESIS_C
+
+   71 equmin: EQUMIN PARENTESIS_A expresion PUNTO_COMA CORCHETE_A lista CORCHETE_C PARENTESIS_C
+
+   72 lista: expr_list
+   73      | lista COMA expr_list
+
+   74 expr_list: CONST_INT
+   75          | CONST_REAL
+   76          | CONST_STRING
+   77          | VARIABLE
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256)
+DIM (258) 15
+AS (259) 17
+OP_MENOR (260) 64
+OP_MAYOR (261) 65
+OP_ASIG (262) 21 22 37
+OP_SUM (263)
+OP_DIVISION (264) 27
+OP_RESTA (265) 24
+OP_MULT (266) 26
+OP_COMP (267) 61
+OP_MAYORIGUAL (268) 62
+OP_MENORIGUAL (269) 63
+OP_DISTINTO (270)
+VARIABLE (271) 16 17 21 22 31 35 37 69 77
+COMA (272) 16 73
+TYPE_INTEGER (273) 18
+TYPE_FLOAT (274) 19
+TYPE_STRING (275) 20
+DISPLAY (276) 32 33 34
+CONST_STRING (277) 22 32 76
+CONST_INT (278) 33 38 74
+CONST_REAL (279) 34 75
+DIGITO (280) 30
+GET (281) 35
+WHILE (282) 40
+ENDWHILE (283) 40
+IF (284) 42 46 48 49
+ELSE (285) 46 48
+ENDIF (286) 42 46 48 49
+PUNTO_COMA (287) 4 5 70 71
+PARENTESIS_A (288) 29 40 50 51 52 53 54 55 56 57 58 60 70 71
+PARENTESIS_C (289) 29 40 50 51 52 53 54 55 56 57 58 60 70 71
+CORCHETE_A (290) 15 17 37 70 71
+CORCHETE_C (291) 15 17 37 70 71
+FOR (292) 37
+TO (293) 37
+NEXT (294) 37
+EQUMIN (295) 71
+EQUMAX (296) 70
+AND (297) 50 51 52 56 66
+OR (298) 53 54 55 57 67
+NOT (299) 59 68 69
+OP_SUMA (300) 23
+OP_DIVISIONISION (301)
+
+
+No terminales con las reglas donde aparecen
+
+$accept (47)
+    en la izquierda: 0
+programa_final (48)
+    en la izquierda: 1, en la derecha: 0
+programa (49)
+    en la izquierda: 2 3, en la derecha: 1
+sentencia (50)
+    en la izquierda: 4 5, en la derecha: 2 4 40 42 46
+gramatica (51)
+    en la izquierda: 6 7 8 9 10 11 12 13 14, en la derecha: 2 3 4 5
+dec_variable (52)
+    en la izquierda: 15, en la derecha: 6
+lista_asig (53)
+    en la izquierda: 16 17, en la derecha: 15 16
+tipo (54)
+    en la izquierda: 18 19 20, en la derecha: 16 17
+asig (55)
+    en la izquierda: 21 22, en la derecha: 7
+expresion (56)
+    en la izquierda: 23 24 25, en la derecha: 21 23 24 29 37 61 62
+    63 64 65 66 67 68 70 71
+termino (57)
+    en la izquierda: 26 27 28, en la derecha: 23 24 25 26 27 68
+factor (58)
+    en la izquierda: 29 30 31, en la derecha: 26 27 28
+display (59)
+    en la izquierda: 32 33 34, en la derecha: 8
+get (60)
+    en la izquierda: 35, en la derecha: 9
+for (61)
+    en la izquierda: 37, en la derecha: 10
+$@1 (62)
+    en la izquierda: 36, en la derecha: 37
+step (63)
+    en la izquierda: 38 39, en la derecha: 37
+while (64)
+    en la izquierda: 40, en la derecha: 12
+if (65)
+    en la izquierda: 42 46 48 49, en la derecha: 11
+$@2 (66)
+    en la izquierda: 41, en la derecha: 42
+$@3 (67)
+    en la izquierda: 43, en la derecha: 46
+$@4 (68)
+    en la izquierda: 44, en la derecha: 46
+$@5 (69)
+    en la izquierda: 45, en la derecha: 46
+$@6 (70)
+    en la izquierda: 47, en la derecha: 48
+cond_final (71)
+    en la izquierda: 50 51 52 53 54 55 56 57 58 59 60, en la derecha:
+    40 42 46 48 49 50 51 52 53 54 55 59 60
+cond (72)
+    en la izquierda: 61 62 63 64 65 66 67 68 69, en la derecha: 51
+    52 54 55 56 57 58
+equmax (73)
+    en la izquierda: 70, en la derecha: 13
+equmin (74)
+    en la izquierda: 71, en la derecha: 14
+lista (75)
+    en la izquierda: 72 73, en la derecha: 70 71 73
+expr_list (76)
+    en la izquierda: 74 75 76 77, en la derecha: 72 73
+
+
+estado 0
+
+    0 $accept: . programa_final $end
+
+    DIM       desplazar e ir al estado 1
+    VARIABLE  desplazar e ir al estado 2
+    DISPLAY   desplazar e ir al estado 3
+    GET       desplazar e ir al estado 4
+    WHILE     desplazar e ir al estado 5
+    IF        desplazar e ir al estado 6
+    FOR       desplazar e ir al estado 7
+    EQUMIN    desplazar e ir al estado 8
+    EQUMAX    desplazar e ir al estado 9
+
+    programa_final  ir al estado 10
+    programa        ir al estado 11
+    sentencia       ir al estado 12
+    gramatica       ir al estado 13
+    dec_variable    ir al estado 14
+    asig            ir al estado 15
+    display         ir al estado 16
+    get             ir al estado 17
+    for             ir al estado 18
+    while           ir al estado 19
+    if              ir al estado 20
+    equmax          ir al estado 21
+    equmin          ir al estado 22
+
+
+estado 1
+
+   15 dec_variable: DIM . CORCHETE_A lista_asig CORCHETE_C
+
+    CORCHETE_A  desplazar e ir al estado 23
+
+
+estado 2
+
+   21 asig: VARIABLE . OP_ASIG expresion
+   22     | VARIABLE . OP_ASIG CONST_STRING
+
+    OP_ASIG  desplazar e ir al estado 24
+
+
+estado 3
+
+   32 display: DISPLAY . CONST_STRING
+   33        | DISPLAY . CONST_INT
+   34        | DISPLAY . CONST_REAL
+
+    CONST_STRING  desplazar e ir al estado 25
+    CONST_INT     desplazar e ir al estado 26
+    CONST_REAL    desplazar e ir al estado 27
+
+
+estado 4
+
+   35 get: GET . VARIABLE
+
+    VARIABLE  desplazar e ir al estado 28
+
+
+estado 5
+
+   40 while: WHILE . PARENTESIS_A cond_final PARENTESIS_C sentencia ENDWHILE
+
+    PARENTESIS_A  desplazar e ir al estado 29
+
+
+estado 6
+
+   42 if: IF . cond_final sentencia $@2 ENDIF
+   46   | IF . cond_final sentencia $@3 ELSE $@4 sentencia $@5 ENDIF
+   48   | IF . cond_final ELSE $@6 ENDIF
+   49   | IF . cond_final ENDIF
+
+    PARENTESIS_A  desplazar e ir al estado 30
+    NOT           desplazar e ir al estado 31
+
+    cond_final  ir al estado 32
+
+
+estado 7
+
+   37 for: FOR . VARIABLE OP_ASIG expresion TO expresion CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+
+    VARIABLE  desplazar e ir al estado 33
+
+
+estado 8
+
+   71 equmin: EQUMIN . PARENTESIS_A expresion PUNTO_COMA CORCHETE_A lista CORCHETE_C PARENTESIS_C
+
+    PARENTESIS_A  desplazar e ir al estado 34
+
+
+estado 9
+
+   70 equmax: EQUMAX . PARENTESIS_A expresion PUNTO_COMA CORCHETE_A lista CORCHETE_C PARENTESIS_C
+
+    PARENTESIS_A  desplazar e ir al estado 35
+
+
+estado 10
+
+    0 $accept: programa_final . $end
+
+    $end  desplazar e ir al estado 36
+
+
+estado 11
+
+    1 programa_final: programa .
+
+    $default  reduce usando la regla 1 (programa_final)
+
+
+estado 12
+
+    2 programa: sentencia . gramatica
+    4 sentencia: sentencia . gramatica PUNTO_COMA
+
+    DIM       desplazar e ir al estado 1
+    VARIABLE  desplazar e ir al estado 2
+    DISPLAY   desplazar e ir al estado 3
+    GET       desplazar e ir al estado 4
+    WHILE     desplazar e ir al estado 5
+    IF        desplazar e ir al estado 6
+    FOR       desplazar e ir al estado 7
+    EQUMIN    desplazar e ir al estado 8
+    EQUMAX    desplazar e ir al estado 9
+
+    gramatica     ir al estado 37
+    dec_variable  ir al estado 14
+    asig          ir al estado 15
+    display       ir al estado 16
+    get           ir al estado 17
+    for           ir al estado 18
+    while         ir al estado 19
+    if            ir al estado 20
+    equmax        ir al estado 21
+    equmin        ir al estado 22
+
+
+estado 13
+
+    3 programa: gramatica .
+    5 sentencia: gramatica . PUNTO_COMA
+
+    PUNTO_COMA  desplazar e ir al estado 38
+
+    $default  reduce usando la regla 3 (programa)
+
+
+estado 14
+
+    6 gramatica: dec_variable .
+
+    $default  reduce usando la regla 6 (gramatica)
+
+
+estado 15
+
+    7 gramatica: asig .
+
+    $default  reduce usando la regla 7 (gramatica)
+
+
+estado 16
+
+    8 gramatica: display .
+
+    $default  reduce usando la regla 8 (gramatica)
+
+
+estado 17
+
+    9 gramatica: get .
+
+    $default  reduce usando la regla 9 (gramatica)
+
+
+estado 18
+
+   10 gramatica: for .
+
+    $default  reduce usando la regla 10 (gramatica)
+
+
+estado 19
+
+   12 gramatica: while .
+
+    $default  reduce usando la regla 12 (gramatica)
+
+
+estado 20
+
+   11 gramatica: if .
+
+    $default  reduce usando la regla 11 (gramatica)
+
+
+estado 21
+
+   13 gramatica: equmax .
+
+    $default  reduce usando la regla 13 (gramatica)
+
+
+estado 22
+
+   14 gramatica: equmin .
+
+    $default  reduce usando la regla 14 (gramatica)
+
+
+estado 23
+
+   15 dec_variable: DIM CORCHETE_A . lista_asig CORCHETE_C
+
+    VARIABLE  desplazar e ir al estado 39
+
+    lista_asig  ir al estado 40
+
+
+estado 24
+
+   21 asig: VARIABLE OP_ASIG . expresion
+   22     | VARIABLE OP_ASIG . CONST_STRING
+
+    VARIABLE      desplazar e ir al estado 41
+    CONST_STRING  desplazar e ir al estado 42
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 45
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 25
+
+   32 display: DISPLAY CONST_STRING .
+
+    $default  reduce usando la regla 32 (display)
+
+
+estado 26
+
+   33 display: DISPLAY CONST_INT .
+
+    $default  reduce usando la regla 33 (display)
+
+
+estado 27
+
+   34 display: DISPLAY CONST_REAL .
+
+    $default  reduce usando la regla 34 (display)
+
+
+estado 28
+
+   35 get: GET VARIABLE .
+
+    $default  reduce usando la regla 35 (get)
+
+
+estado 29
+
+   40 while: WHILE PARENTESIS_A . cond_final PARENTESIS_C sentencia ENDWHILE
+
+    PARENTESIS_A  desplazar e ir al estado 30
+    NOT           desplazar e ir al estado 31
+
+    cond_final  ir al estado 48
+
+
+estado 30
+
+   50 cond_final: PARENTESIS_A . cond_final AND cond_final PARENTESIS_C
+   51           | PARENTESIS_A . cond AND cond_final PARENTESIS_C
+   52           | PARENTESIS_A . cond_final AND cond PARENTESIS_C
+   53           | PARENTESIS_A . cond_final OR cond_final PARENTESIS_C
+   54           | PARENTESIS_A . cond OR cond_final PARENTESIS_C
+   55           | PARENTESIS_A . cond_final OR cond PARENTESIS_C
+   56           | PARENTESIS_A . cond AND cond PARENTESIS_C
+   57           | PARENTESIS_A . cond OR cond PARENTESIS_C
+   58           | PARENTESIS_A . cond PARENTESIS_C
+   60           | PARENTESIS_A . cond_final PARENTESIS_C
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 49
+    NOT           desplazar e ir al estado 50
+
+    expresion   ir al estado 51
+    termino     ir al estado 46
+    factor      ir al estado 47
+    cond_final  ir al estado 52
+    cond        ir al estado 53
+
+
+estado 31
+
+   59 cond_final: NOT . cond_final
+
+    PARENTESIS_A  desplazar e ir al estado 30
+    NOT           desplazar e ir al estado 31
+
+    cond_final  ir al estado 54
+
+
+estado 32
+
+   42 if: IF cond_final . sentencia $@2 ENDIF
+   46   | IF cond_final . sentencia $@3 ELSE $@4 sentencia $@5 ENDIF
+   48   | IF cond_final . ELSE $@6 ENDIF
+   49   | IF cond_final . ENDIF
+
+    DIM       desplazar e ir al estado 1
+    VARIABLE  desplazar e ir al estado 2
+    DISPLAY   desplazar e ir al estado 3
+    GET       desplazar e ir al estado 4
+    WHILE     desplazar e ir al estado 5
+    IF        desplazar e ir al estado 6
+    ELSE      desplazar e ir al estado 55
+    ENDIF     desplazar e ir al estado 56
+    FOR       desplazar e ir al estado 7
+    EQUMIN    desplazar e ir al estado 8
+    EQUMAX    desplazar e ir al estado 9
+
+    sentencia     ir al estado 57
+    gramatica     ir al estado 58
+    dec_variable  ir al estado 14
+    asig          ir al estado 15
+    display       ir al estado 16
+    get           ir al estado 17
+    for           ir al estado 18
+    while         ir al estado 19
+    if            ir al estado 20
+    equmax        ir al estado 21
+    equmin        ir al estado 22
+
+
+estado 33
+
+   37 for: FOR VARIABLE . OP_ASIG expresion TO expresion CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+
+    OP_ASIG  desplazar e ir al estado 59
+
+
+estado 34
+
+   71 equmin: EQUMIN PARENTESIS_A . expresion PUNTO_COMA CORCHETE_A lista CORCHETE_C PARENTESIS_C
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 60
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 35
+
+   70 equmax: EQUMAX PARENTESIS_A . expresion PUNTO_COMA CORCHETE_A lista CORCHETE_C PARENTESIS_C
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 61
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 36
+
+    0 $accept: programa_final $end .
+
+    $default  aceptar
+
+
+estado 37
+
+    2 programa: sentencia gramatica .
+    4 sentencia: sentencia gramatica . PUNTO_COMA
+
+    PUNTO_COMA  desplazar e ir al estado 62
+
+    $default  reduce usando la regla 2 (programa)
+
+
+estado 38
+
+    5 sentencia: gramatica PUNTO_COMA .
+
+    $default  reduce usando la regla 5 (sentencia)
+
+
+estado 39
+
+   16 lista_asig: VARIABLE . COMA lista_asig COMA tipo
+   17           | VARIABLE . CORCHETE_C AS CORCHETE_A tipo
+
+    COMA        desplazar e ir al estado 63
+    CORCHETE_C  desplazar e ir al estado 64
+
+
+estado 40
+
+   15 dec_variable: DIM CORCHETE_A lista_asig . CORCHETE_C
+
+    CORCHETE_C  desplazar e ir al estado 65
+
+
+estado 41
+
+   31 factor: VARIABLE .
+
+    $default  reduce usando la regla 31 (factor)
+
+
+estado 42
+
+   22 asig: VARIABLE OP_ASIG CONST_STRING .
+
+    $default  reduce usando la regla 22 (asig)
+
+
+estado 43
+
+   30 factor: DIGITO .
+
+    $default  reduce usando la regla 30 (factor)
+
+
+estado 44
+
+   29 factor: PARENTESIS_A . expresion PARENTESIS_C
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 66
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 45
+
+   21 asig: VARIABLE OP_ASIG expresion .
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+
+    OP_RESTA  desplazar e ir al estado 67
+    OP_SUMA   desplazar e ir al estado 68
+
+    $default  reduce usando la regla 21 (asig)
+
+
+estado 46
+
+   25 expresion: termino .
+   26 termino: termino . OP_MULT factor
+   27        | termino . OP_DIVISION factor
+
+    OP_DIVISION  desplazar e ir al estado 69
+    OP_MULT      desplazar e ir al estado 70
+
+    $default  reduce usando la regla 25 (expresion)
+
+
+estado 47
+
+   28 termino: factor .
+
+    $default  reduce usando la regla 28 (termino)
+
+
+estado 48
+
+   40 while: WHILE PARENTESIS_A cond_final . PARENTESIS_C sentencia ENDWHILE
+
+    PARENTESIS_C  desplazar e ir al estado 71
+
+
+estado 49
+
+   29 factor: PARENTESIS_A . expresion PARENTESIS_C
+   50 cond_final: PARENTESIS_A . cond_final AND cond_final PARENTESIS_C
+   51           | PARENTESIS_A . cond AND cond_final PARENTESIS_C
+   52           | PARENTESIS_A . cond_final AND cond PARENTESIS_C
+   53           | PARENTESIS_A . cond_final OR cond_final PARENTESIS_C
+   54           | PARENTESIS_A . cond OR cond_final PARENTESIS_C
+   55           | PARENTESIS_A . cond_final OR cond PARENTESIS_C
+   56           | PARENTESIS_A . cond AND cond PARENTESIS_C
+   57           | PARENTESIS_A . cond OR cond PARENTESIS_C
+   58           | PARENTESIS_A . cond PARENTESIS_C
+   60           | PARENTESIS_A . cond_final PARENTESIS_C
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 49
+    NOT           desplazar e ir al estado 50
+
+    expresion   ir al estado 72
+    termino     ir al estado 46
+    factor      ir al estado 47
+    cond_final  ir al estado 52
+    cond        ir al estado 53
+
+
+estado 50
+
+   59 cond_final: NOT . cond_final
+   69 cond: NOT . VARIABLE
+
+    VARIABLE      desplazar e ir al estado 73
+    PARENTESIS_A  desplazar e ir al estado 30
+    NOT           desplazar e ir al estado 31
+
+    cond_final  ir al estado 54
+
+
+estado 51
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   61 cond: expresion . OP_COMP expresion
+   62     | expresion . OP_MAYORIGUAL expresion
+   63     | expresion . OP_MENORIGUAL expresion
+   64     | expresion . OP_MENOR expresion
+   65     | expresion . OP_MAYOR expresion
+   66     | expresion . AND expresion
+   67     | expresion . OR expresion
+   68     | expresion . NOT termino
+
+    OP_MENOR       desplazar e ir al estado 74
+    OP_MAYOR       desplazar e ir al estado 75
+    OP_RESTA       desplazar e ir al estado 67
+    OP_COMP        desplazar e ir al estado 76
+    OP_MAYORIGUAL  desplazar e ir al estado 77
+    OP_MENORIGUAL  desplazar e ir al estado 78
+    AND            desplazar e ir al estado 79
+    OR             desplazar e ir al estado 80
+    NOT            desplazar e ir al estado 81
+    OP_SUMA        desplazar e ir al estado 68
+
+
+estado 52
+
+   50 cond_final: PARENTESIS_A cond_final . AND cond_final PARENTESIS_C
+   52           | PARENTESIS_A cond_final . AND cond PARENTESIS_C
+   53           | PARENTESIS_A cond_final . OR cond_final PARENTESIS_C
+   55           | PARENTESIS_A cond_final . OR cond PARENTESIS_C
+   60           | PARENTESIS_A cond_final . PARENTESIS_C
+
+    PARENTESIS_C  desplazar e ir al estado 82
+    AND           desplazar e ir al estado 83
+    OR            desplazar e ir al estado 84
+
+
+estado 53
+
+   51 cond_final: PARENTESIS_A cond . AND cond_final PARENTESIS_C
+   54           | PARENTESIS_A cond . OR cond_final PARENTESIS_C
+   56           | PARENTESIS_A cond . AND cond PARENTESIS_C
+   57           | PARENTESIS_A cond . OR cond PARENTESIS_C
+   58           | PARENTESIS_A cond . PARENTESIS_C
+
+    PARENTESIS_C  desplazar e ir al estado 85
+    AND           desplazar e ir al estado 86
+    OR            desplazar e ir al estado 87
+
+
+estado 54
+
+   59 cond_final: NOT cond_final .
+
+    $default  reduce usando la regla 59 (cond_final)
+
+
+estado 55
+
+   48 if: IF cond_final ELSE . $@6 ENDIF
+
+    $default  reduce usando la regla 47 ($@6)
+
+    $@6  ir al estado 88
+
+
+estado 56
+
+   49 if: IF cond_final ENDIF .
+
+    $default  reduce usando la regla 49 (if)
+
+
+estado 57
+
+    4 sentencia: sentencia . gramatica PUNTO_COMA
+   42 if: IF cond_final sentencia . $@2 ENDIF
+   46   | IF cond_final sentencia . $@3 ELSE $@4 sentencia $@5 ENDIF
+
+    DIM       desplazar e ir al estado 1
+    VARIABLE  desplazar e ir al estado 2
+    DISPLAY   desplazar e ir al estado 3
+    GET       desplazar e ir al estado 4
+    WHILE     desplazar e ir al estado 5
+    IF        desplazar e ir al estado 6
+    FOR       desplazar e ir al estado 7
+    EQUMIN    desplazar e ir al estado 8
+    EQUMAX    desplazar e ir al estado 9
+
+    ELSE      reduce usando la regla 43 ($@3)
+    $default  reduce usando la regla 41 ($@2)
+
+    gramatica     ir al estado 89
+    dec_variable  ir al estado 14
+    asig          ir al estado 15
+    display       ir al estado 16
+    get           ir al estado 17
+    for           ir al estado 18
+    while         ir al estado 19
+    if            ir al estado 20
+    $@2           ir al estado 90
+    $@3           ir al estado 91
+    equmax        ir al estado 21
+    equmin        ir al estado 22
+
+
+estado 58
+
+    5 sentencia: gramatica . PUNTO_COMA
+
+    PUNTO_COMA  desplazar e ir al estado 38
+
+
+estado 59
+
+   37 for: FOR VARIABLE OP_ASIG . expresion TO expresion CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 92
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 60
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   71 equmin: EQUMIN PARENTESIS_A expresion . PUNTO_COMA CORCHETE_A lista CORCHETE_C PARENTESIS_C
+
+    OP_RESTA    desplazar e ir al estado 67
+    PUNTO_COMA  desplazar e ir al estado 93
+    OP_SUMA     desplazar e ir al estado 68
+
+
+estado 61
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   70 equmax: EQUMAX PARENTESIS_A expresion . PUNTO_COMA CORCHETE_A lista CORCHETE_C PARENTESIS_C
+
+    OP_RESTA    desplazar e ir al estado 67
+    PUNTO_COMA  desplazar e ir al estado 94
+    OP_SUMA     desplazar e ir al estado 68
+
+
+estado 62
+
+    4 sentencia: sentencia gramatica PUNTO_COMA .
+
+    $default  reduce usando la regla 4 (sentencia)
+
+
+estado 63
+
+   16 lista_asig: VARIABLE COMA . lista_asig COMA tipo
+
+    VARIABLE  desplazar e ir al estado 39
+
+    lista_asig  ir al estado 95
+
+
+estado 64
+
+   17 lista_asig: VARIABLE CORCHETE_C . AS CORCHETE_A tipo
+
+    AS  desplazar e ir al estado 96
+
+
+estado 65
+
+   15 dec_variable: DIM CORCHETE_A lista_asig CORCHETE_C .
+
+    $default  reduce usando la regla 15 (dec_variable)
+
+
+estado 66
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   29 factor: PARENTESIS_A expresion . PARENTESIS_C
+
+    OP_RESTA      desplazar e ir al estado 67
+    PARENTESIS_C  desplazar e ir al estado 97
+    OP_SUMA       desplazar e ir al estado 68
+
+
+estado 67
+
+   24 expresion: expresion OP_RESTA . termino
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    termino  ir al estado 98
+    factor   ir al estado 47
+
+
+estado 68
+
+   23 expresion: expresion OP_SUMA . termino
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    termino  ir al estado 99
+    factor   ir al estado 47
+
+
+estado 69
+
+   27 termino: termino OP_DIVISION . factor
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    factor  ir al estado 100
+
+
+estado 70
+
+   26 termino: termino OP_MULT . factor
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    factor  ir al estado 101
+
+
+estado 71
+
+   40 while: WHILE PARENTESIS_A cond_final PARENTESIS_C . sentencia ENDWHILE
+
+    DIM       desplazar e ir al estado 1
+    VARIABLE  desplazar e ir al estado 2
+    DISPLAY   desplazar e ir al estado 3
+    GET       desplazar e ir al estado 4
+    WHILE     desplazar e ir al estado 5
+    IF        desplazar e ir al estado 6
+    FOR       desplazar e ir al estado 7
+    EQUMIN    desplazar e ir al estado 8
+    EQUMAX    desplazar e ir al estado 9
+
+    sentencia     ir al estado 102
+    gramatica     ir al estado 58
+    dec_variable  ir al estado 14
+    asig          ir al estado 15
+    display       ir al estado 16
+    get           ir al estado 17
+    for           ir al estado 18
+    while         ir al estado 19
+    if            ir al estado 20
+    equmax        ir al estado 21
+    equmin        ir al estado 22
+
+
+estado 72
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   29 factor: PARENTESIS_A expresion . PARENTESIS_C
+   61 cond: expresion . OP_COMP expresion
+   62     | expresion . OP_MAYORIGUAL expresion
+   63     | expresion . OP_MENORIGUAL expresion
+   64     | expresion . OP_MENOR expresion
+   65     | expresion . OP_MAYOR expresion
+   66     | expresion . AND expresion
+   67     | expresion . OR expresion
+   68     | expresion . NOT termino
+
+    OP_MENOR       desplazar e ir al estado 74
+    OP_MAYOR       desplazar e ir al estado 75
+    OP_RESTA       desplazar e ir al estado 67
+    OP_COMP        desplazar e ir al estado 76
+    OP_MAYORIGUAL  desplazar e ir al estado 77
+    OP_MENORIGUAL  desplazar e ir al estado 78
+    PARENTESIS_C   desplazar e ir al estado 97
+    AND            desplazar e ir al estado 79
+    OR             desplazar e ir al estado 80
+    NOT            desplazar e ir al estado 81
+    OP_SUMA        desplazar e ir al estado 68
+
+
+estado 73
+
+   69 cond: NOT VARIABLE .
+
+    $default  reduce usando la regla 69 (cond)
+
+
+estado 74
+
+   64 cond: expresion OP_MENOR . expresion
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 103
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 75
+
+   65 cond: expresion OP_MAYOR . expresion
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 104
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 76
+
+   61 cond: expresion OP_COMP . expresion
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 105
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 77
+
+   62 cond: expresion OP_MAYORIGUAL . expresion
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 106
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 78
+
+   63 cond: expresion OP_MENORIGUAL . expresion
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 107
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 79
+
+   66 cond: expresion AND . expresion
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 108
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 80
+
+   67 cond: expresion OR . expresion
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 109
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 81
+
+   68 cond: expresion NOT . termino
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    termino  ir al estado 110
+    factor   ir al estado 47
+
+
+estado 82
+
+   60 cond_final: PARENTESIS_A cond_final PARENTESIS_C .
+
+    $default  reduce usando la regla 60 (cond_final)
+
+
+estado 83
+
+   50 cond_final: PARENTESIS_A cond_final AND . cond_final PARENTESIS_C
+   52           | PARENTESIS_A cond_final AND . cond PARENTESIS_C
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 49
+    NOT           desplazar e ir al estado 50
+
+    expresion   ir al estado 51
+    termino     ir al estado 46
+    factor      ir al estado 47
+    cond_final  ir al estado 111
+    cond        ir al estado 112
+
+
+estado 84
+
+   53 cond_final: PARENTESIS_A cond_final OR . cond_final PARENTESIS_C
+   55           | PARENTESIS_A cond_final OR . cond PARENTESIS_C
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 49
+    NOT           desplazar e ir al estado 50
+
+    expresion   ir al estado 51
+    termino     ir al estado 46
+    factor      ir al estado 47
+    cond_final  ir al estado 113
+    cond        ir al estado 114
+
+
+estado 85
+
+   58 cond_final: PARENTESIS_A cond PARENTESIS_C .
+
+    $default  reduce usando la regla 58 (cond_final)
+
+
+estado 86
+
+   51 cond_final: PARENTESIS_A cond AND . cond_final PARENTESIS_C
+   56           | PARENTESIS_A cond AND . cond PARENTESIS_C
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 49
+    NOT           desplazar e ir al estado 50
+
+    expresion   ir al estado 51
+    termino     ir al estado 46
+    factor      ir al estado 47
+    cond_final  ir al estado 115
+    cond        ir al estado 116
+
+
+estado 87
+
+   54 cond_final: PARENTESIS_A cond OR . cond_final PARENTESIS_C
+   57           | PARENTESIS_A cond OR . cond PARENTESIS_C
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 49
+    NOT           desplazar e ir al estado 50
+
+    expresion   ir al estado 51
+    termino     ir al estado 46
+    factor      ir al estado 47
+    cond_final  ir al estado 117
+    cond        ir al estado 118
+
+
+estado 88
+
+   48 if: IF cond_final ELSE $@6 . ENDIF
+
+    ENDIF  desplazar e ir al estado 119
+
+
+estado 89
+
+    4 sentencia: sentencia gramatica . PUNTO_COMA
+
+    PUNTO_COMA  desplazar e ir al estado 62
+
+
+estado 90
+
+   42 if: IF cond_final sentencia $@2 . ENDIF
+
+    ENDIF  desplazar e ir al estado 120
+
+
+estado 91
+
+   46 if: IF cond_final sentencia $@3 . ELSE $@4 sentencia $@5 ENDIF
+
+    ELSE  desplazar e ir al estado 121
+
+
+estado 92
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   37 for: FOR VARIABLE OP_ASIG expresion . TO expresion CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+
+    OP_RESTA  desplazar e ir al estado 67
+    TO        desplazar e ir al estado 122
+    OP_SUMA   desplazar e ir al estado 68
+
+
+estado 93
+
+   71 equmin: EQUMIN PARENTESIS_A expresion PUNTO_COMA . CORCHETE_A lista CORCHETE_C PARENTESIS_C
+
+    CORCHETE_A  desplazar e ir al estado 123
+
+
+estado 94
+
+   70 equmax: EQUMAX PARENTESIS_A expresion PUNTO_COMA . CORCHETE_A lista CORCHETE_C PARENTESIS_C
+
+    CORCHETE_A  desplazar e ir al estado 124
+
+
+estado 95
+
+   16 lista_asig: VARIABLE COMA lista_asig . COMA tipo
+
+    COMA  desplazar e ir al estado 125
+
+
+estado 96
+
+   17 lista_asig: VARIABLE CORCHETE_C AS . CORCHETE_A tipo
+
+    CORCHETE_A  desplazar e ir al estado 126
+
+
+estado 97
+
+   29 factor: PARENTESIS_A expresion PARENTESIS_C .
+
+    $default  reduce usando la regla 29 (factor)
+
+
+estado 98
+
+   24 expresion: expresion OP_RESTA termino .
+   26 termino: termino . OP_MULT factor
+   27        | termino . OP_DIVISION factor
+
+    OP_DIVISION  desplazar e ir al estado 69
+    OP_MULT      desplazar e ir al estado 70
+
+    $default  reduce usando la regla 24 (expresion)
+
+
+estado 99
+
+   23 expresion: expresion OP_SUMA termino .
+   26 termino: termino . OP_MULT factor
+   27        | termino . OP_DIVISION factor
+
+    OP_DIVISION  desplazar e ir al estado 69
+    OP_MULT      desplazar e ir al estado 70
+
+    $default  reduce usando la regla 23 (expresion)
+
+
+estado 100
+
+   27 termino: termino OP_DIVISION factor .
+
+    $default  reduce usando la regla 27 (termino)
+
+
+estado 101
+
+   26 termino: termino OP_MULT factor .
+
+    $default  reduce usando la regla 26 (termino)
+
+
+estado 102
+
+    4 sentencia: sentencia . gramatica PUNTO_COMA
+   40 while: WHILE PARENTESIS_A cond_final PARENTESIS_C sentencia . ENDWHILE
+
+    DIM       desplazar e ir al estado 1
+    VARIABLE  desplazar e ir al estado 2
+    DISPLAY   desplazar e ir al estado 3
+    GET       desplazar e ir al estado 4
+    WHILE     desplazar e ir al estado 5
+    ENDWHILE  desplazar e ir al estado 127
+    IF        desplazar e ir al estado 6
+    FOR       desplazar e ir al estado 7
+    EQUMIN    desplazar e ir al estado 8
+    EQUMAX    desplazar e ir al estado 9
+
+    gramatica     ir al estado 89
+    dec_variable  ir al estado 14
+    asig          ir al estado 15
+    display       ir al estado 16
+    get           ir al estado 17
+    for           ir al estado 18
+    while         ir al estado 19
+    if            ir al estado 20
+    equmax        ir al estado 21
+    equmin        ir al estado 22
+
+
+estado 103
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   64 cond: expresion OP_MENOR expresion .
+
+    OP_RESTA  desplazar e ir al estado 67
+    OP_SUMA   desplazar e ir al estado 68
+
+    $default  reduce usando la regla 64 (cond)
+
+
+estado 104
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   65 cond: expresion OP_MAYOR expresion .
+
+    OP_RESTA  desplazar e ir al estado 67
+    OP_SUMA   desplazar e ir al estado 68
+
+    $default  reduce usando la regla 65 (cond)
+
+
+estado 105
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   61 cond: expresion OP_COMP expresion .
+
+    OP_RESTA  desplazar e ir al estado 67
+    OP_SUMA   desplazar e ir al estado 68
+
+    $default  reduce usando la regla 61 (cond)
+
+
+estado 106
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   62 cond: expresion OP_MAYORIGUAL expresion .
+
+    OP_RESTA  desplazar e ir al estado 67
+    OP_SUMA   desplazar e ir al estado 68
+
+    $default  reduce usando la regla 62 (cond)
+
+
+estado 107
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   63 cond: expresion OP_MENORIGUAL expresion .
+
+    OP_RESTA  desplazar e ir al estado 67
+    OP_SUMA   desplazar e ir al estado 68
+
+    $default  reduce usando la regla 63 (cond)
+
+
+estado 108
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   66 cond: expresion AND expresion .
+
+    OP_RESTA  desplazar e ir al estado 67
+    OP_SUMA   desplazar e ir al estado 68
+
+    $default  reduce usando la regla 66 (cond)
+
+
+estado 109
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   67 cond: expresion OR expresion .
+
+    OP_RESTA  desplazar e ir al estado 67
+    OP_SUMA   desplazar e ir al estado 68
+
+    $default  reduce usando la regla 67 (cond)
+
+
+estado 110
+
+   26 termino: termino . OP_MULT factor
+   27        | termino . OP_DIVISION factor
+   68 cond: expresion NOT termino .
+
+    OP_DIVISION  desplazar e ir al estado 69
+    OP_MULT      desplazar e ir al estado 70
+
+    $default  reduce usando la regla 68 (cond)
+
+
+estado 111
+
+   50 cond_final: PARENTESIS_A cond_final AND cond_final . PARENTESIS_C
+
+    PARENTESIS_C  desplazar e ir al estado 128
+
+
+estado 112
+
+   52 cond_final: PARENTESIS_A cond_final AND cond . PARENTESIS_C
+
+    PARENTESIS_C  desplazar e ir al estado 129
+
+
+estado 113
+
+   53 cond_final: PARENTESIS_A cond_final OR cond_final . PARENTESIS_C
+
+    PARENTESIS_C  desplazar e ir al estado 130
+
+
+estado 114
+
+   55 cond_final: PARENTESIS_A cond_final OR cond . PARENTESIS_C
+
+    PARENTESIS_C  desplazar e ir al estado 131
+
+
+estado 115
+
+   51 cond_final: PARENTESIS_A cond AND cond_final . PARENTESIS_C
+
+    PARENTESIS_C  desplazar e ir al estado 132
+
+
+estado 116
+
+   56 cond_final: PARENTESIS_A cond AND cond . PARENTESIS_C
+
+    PARENTESIS_C  desplazar e ir al estado 133
+
+
+estado 117
+
+   54 cond_final: PARENTESIS_A cond OR cond_final . PARENTESIS_C
+
+    PARENTESIS_C  desplazar e ir al estado 134
+
+
+estado 118
+
+   57 cond_final: PARENTESIS_A cond OR cond . PARENTESIS_C
+
+    PARENTESIS_C  desplazar e ir al estado 135
+
+
+estado 119
+
+   48 if: IF cond_final ELSE $@6 ENDIF .
+
+    $default  reduce usando la regla 48 (if)
+
+
+estado 120
+
+   42 if: IF cond_final sentencia $@2 ENDIF .
+
+    $default  reduce usando la regla 42 (if)
+
+
+estado 121
+
+   46 if: IF cond_final sentencia $@3 ELSE . $@4 sentencia $@5 ENDIF
+
+    $default  reduce usando la regla 44 ($@4)
+
+    $@4  ir al estado 136
+
+
+estado 122
+
+   37 for: FOR VARIABLE OP_ASIG expresion TO . expresion CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+
+    VARIABLE      desplazar e ir al estado 41
+    DIGITO        desplazar e ir al estado 43
+    PARENTESIS_A  desplazar e ir al estado 44
+
+    expresion  ir al estado 137
+    termino    ir al estado 46
+    factor     ir al estado 47
+
+
+estado 123
+
+   71 equmin: EQUMIN PARENTESIS_A expresion PUNTO_COMA CORCHETE_A . lista CORCHETE_C PARENTESIS_C
+
+    VARIABLE      desplazar e ir al estado 138
+    CONST_STRING  desplazar e ir al estado 139
+    CONST_INT     desplazar e ir al estado 140
+    CONST_REAL    desplazar e ir al estado 141
+
+    lista      ir al estado 142
+    expr_list  ir al estado 143
+
+
+estado 124
+
+   70 equmax: EQUMAX PARENTESIS_A expresion PUNTO_COMA CORCHETE_A . lista CORCHETE_C PARENTESIS_C
+
+    VARIABLE      desplazar e ir al estado 138
+    CONST_STRING  desplazar e ir al estado 139
+    CONST_INT     desplazar e ir al estado 140
+    CONST_REAL    desplazar e ir al estado 141
+
+    lista      ir al estado 144
+    expr_list  ir al estado 143
+
+
+estado 125
+
+   16 lista_asig: VARIABLE COMA lista_asig COMA . tipo
+
+    TYPE_INTEGER  desplazar e ir al estado 145
+    TYPE_FLOAT    desplazar e ir al estado 146
+    TYPE_STRING   desplazar e ir al estado 147
+
+    tipo  ir al estado 148
+
+
+estado 126
+
+   17 lista_asig: VARIABLE CORCHETE_C AS CORCHETE_A . tipo
+
+    TYPE_INTEGER  desplazar e ir al estado 145
+    TYPE_FLOAT    desplazar e ir al estado 146
+    TYPE_STRING   desplazar e ir al estado 147
+
+    tipo  ir al estado 149
+
+
+estado 127
+
+   40 while: WHILE PARENTESIS_A cond_final PARENTESIS_C sentencia ENDWHILE .
+
+    $default  reduce usando la regla 40 (while)
+
+
+estado 128
+
+   50 cond_final: PARENTESIS_A cond_final AND cond_final PARENTESIS_C .
+
+    $default  reduce usando la regla 50 (cond_final)
+
+
+estado 129
+
+   52 cond_final: PARENTESIS_A cond_final AND cond PARENTESIS_C .
+
+    $default  reduce usando la regla 52 (cond_final)
+
+
+estado 130
+
+   53 cond_final: PARENTESIS_A cond_final OR cond_final PARENTESIS_C .
+
+    $default  reduce usando la regla 53 (cond_final)
+
+
+estado 131
+
+   55 cond_final: PARENTESIS_A cond_final OR cond PARENTESIS_C .
+
+    $default  reduce usando la regla 55 (cond_final)
+
+
+estado 132
+
+   51 cond_final: PARENTESIS_A cond AND cond_final PARENTESIS_C .
+
+    $default  reduce usando la regla 51 (cond_final)
+
+
+estado 133
+
+   56 cond_final: PARENTESIS_A cond AND cond PARENTESIS_C .
+
+    $default  reduce usando la regla 56 (cond_final)
+
+
+estado 134
+
+   54 cond_final: PARENTESIS_A cond OR cond_final PARENTESIS_C .
+
+    $default  reduce usando la regla 54 (cond_final)
+
+
+estado 135
+
+   57 cond_final: PARENTESIS_A cond OR cond PARENTESIS_C .
+
+    $default  reduce usando la regla 57 (cond_final)
+
+
+estado 136
+
+   46 if: IF cond_final sentencia $@3 ELSE $@4 . sentencia $@5 ENDIF
+
+    DIM       desplazar e ir al estado 1
+    VARIABLE  desplazar e ir al estado 2
+    DISPLAY   desplazar e ir al estado 3
+    GET       desplazar e ir al estado 4
+    WHILE     desplazar e ir al estado 5
+    IF        desplazar e ir al estado 6
+    FOR       desplazar e ir al estado 7
+    EQUMIN    desplazar e ir al estado 8
+    EQUMAX    desplazar e ir al estado 9
+
+    sentencia     ir al estado 150
+    gramatica     ir al estado 58
+    dec_variable  ir al estado 14
+    asig          ir al estado 15
+    display       ir al estado 16
+    get           ir al estado 17
+    for           ir al estado 18
+    while         ir al estado 19
+    if            ir al estado 20
+    equmax        ir al estado 21
+    equmin        ir al estado 22
+
+
+estado 137
+
+   23 expresion: expresion . OP_SUMA termino
+   24          | expresion . OP_RESTA termino
+   37 for: FOR VARIABLE OP_ASIG expresion TO expresion . CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+
+    OP_RESTA    desplazar e ir al estado 67
+    CORCHETE_A  desplazar e ir al estado 151
+    OP_SUMA     desplazar e ir al estado 68
+
+
+estado 138
+
+   77 expr_list: VARIABLE .
+
+    $default  reduce usando la regla 77 (expr_list)
+
+
+estado 139
+
+   76 expr_list: CONST_STRING .
+
+    $default  reduce usando la regla 76 (expr_list)
+
+
+estado 140
+
+   74 expr_list: CONST_INT .
+
+    $default  reduce usando la regla 74 (expr_list)
+
+
+estado 141
+
+   75 expr_list: CONST_REAL .
+
+    $default  reduce usando la regla 75 (expr_list)
+
+
+estado 142
+
+   71 equmin: EQUMIN PARENTESIS_A expresion PUNTO_COMA CORCHETE_A lista . CORCHETE_C PARENTESIS_C
+   73 lista: lista . COMA expr_list
+
+    COMA        desplazar e ir al estado 152
+    CORCHETE_C  desplazar e ir al estado 153
+
+
+estado 143
+
+   72 lista: expr_list .
+
+    $default  reduce usando la regla 72 (lista)
+
+
+estado 144
+
+   70 equmax: EQUMAX PARENTESIS_A expresion PUNTO_COMA CORCHETE_A lista . CORCHETE_C PARENTESIS_C
+   73 lista: lista . COMA expr_list
+
+    COMA        desplazar e ir al estado 152
+    CORCHETE_C  desplazar e ir al estado 154
+
+
+estado 145
+
+   18 tipo: TYPE_INTEGER .
+
+    $default  reduce usando la regla 18 (tipo)
+
+
+estado 146
+
+   19 tipo: TYPE_FLOAT .
+
+    $default  reduce usando la regla 19 (tipo)
+
+
+estado 147
+
+   20 tipo: TYPE_STRING .
+
+    $default  reduce usando la regla 20 (tipo)
+
+
+estado 148
+
+   16 lista_asig: VARIABLE COMA lista_asig COMA tipo .
+
+    $default  reduce usando la regla 16 (lista_asig)
+
+
+estado 149
+
+   17 lista_asig: VARIABLE CORCHETE_C AS CORCHETE_A tipo .
+
+    $default  reduce usando la regla 17 (lista_asig)
+
+
+estado 150
+
+    4 sentencia: sentencia . gramatica PUNTO_COMA
+   46 if: IF cond_final sentencia $@3 ELSE $@4 sentencia . $@5 ENDIF
+
+    DIM       desplazar e ir al estado 1
+    VARIABLE  desplazar e ir al estado 2
+    DISPLAY   desplazar e ir al estado 3
+    GET       desplazar e ir al estado 4
+    WHILE     desplazar e ir al estado 5
+    IF        desplazar e ir al estado 6
+    FOR       desplazar e ir al estado 7
+    EQUMIN    desplazar e ir al estado 8
+    EQUMAX    desplazar e ir al estado 9
+
+    $default  reduce usando la regla 45 ($@5)
+
+    gramatica     ir al estado 89
+    dec_variable  ir al estado 14
+    asig          ir al estado 15
+    display       ir al estado 16
+    get           ir al estado 17
+    for           ir al estado 18
+    while         ir al estado 19
+    if            ir al estado 20
+    $@5           ir al estado 155
+    equmax        ir al estado 21
+    equmin        ir al estado 22
+
+
+estado 151
+
+   37 for: FOR VARIABLE OP_ASIG expresion TO expresion CORCHETE_A . step CORCHETE_C $@1 NEXT VARIABLE
+
+    CONST_INT  desplazar e ir al estado 156
+
+    $default  reduce usando la regla 39 (step)
+
+    step  ir al estado 157
+
+
+estado 152
+
+   73 lista: lista COMA . expr_list
+
+    VARIABLE      desplazar e ir al estado 138
+    CONST_STRING  desplazar e ir al estado 139
+    CONST_INT     desplazar e ir al estado 140
+    CONST_REAL    desplazar e ir al estado 141
+
+    expr_list  ir al estado 158
+
+
+estado 153
+
+   71 equmin: EQUMIN PARENTESIS_A expresion PUNTO_COMA CORCHETE_A lista CORCHETE_C . PARENTESIS_C
+
+    PARENTESIS_C  desplazar e ir al estado 159
+
+
+estado 154
+
+   70 equmax: EQUMAX PARENTESIS_A expresion PUNTO_COMA CORCHETE_A lista CORCHETE_C . PARENTESIS_C
+
+    PARENTESIS_C  desplazar e ir al estado 160
+
+
+estado 155
+
+   46 if: IF cond_final sentencia $@3 ELSE $@4 sentencia $@5 . ENDIF
+
+    ENDIF  desplazar e ir al estado 161
+
+
+estado 156
+
+   38 step: CONST_INT .
+
+    $default  reduce usando la regla 38 (step)
+
+
+estado 157
+
+   37 for: FOR VARIABLE OP_ASIG expresion TO expresion CORCHETE_A step . CORCHETE_C $@1 NEXT VARIABLE
+
+    CORCHETE_C  desplazar e ir al estado 162
+
+
+estado 158
+
+   73 lista: lista COMA expr_list .
+
+    $default  reduce usando la regla 73 (lista)
+
+
+estado 159
+
+   71 equmin: EQUMIN PARENTESIS_A expresion PUNTO_COMA CORCHETE_A lista CORCHETE_C PARENTESIS_C .
+
+    $default  reduce usando la regla 71 (equmin)
+
+
+estado 160
+
+   70 equmax: EQUMAX PARENTESIS_A expresion PUNTO_COMA CORCHETE_A lista CORCHETE_C PARENTESIS_C .
+
+    $default  reduce usando la regla 70 (equmax)
+
+
+estado 161
+
+   46 if: IF cond_final sentencia $@3 ELSE $@4 sentencia $@5 ENDIF .
+
+    $default  reduce usando la regla 46 (if)
+
+
+estado 162
+
+   37 for: FOR VARIABLE OP_ASIG expresion TO expresion CORCHETE_A step CORCHETE_C . $@1 NEXT VARIABLE
+
+    $default  reduce usando la regla 36 ($@1)
+
+    $@1  ir al estado 163
+
+
+estado 163
+
+   37 for: FOR VARIABLE OP_ASIG expresion TO expresion CORCHETE_A step CORCHETE_C $@1 . NEXT VARIABLE
+
+    NEXT  desplazar e ir al estado 164
+
+
+estado 164
+
+   37 for: FOR VARIABLE OP_ASIG expresion TO expresion CORCHETE_A step CORCHETE_C $@1 NEXT . VARIABLE
+
+    VARIABLE  desplazar e ir al estado 165
+
+
+estado 165
+
+   37 for: FOR VARIABLE OP_ASIG expresion TO expresion CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE .
+
+    $default  reduce usando la regla 37 (for)

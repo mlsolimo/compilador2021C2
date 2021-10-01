@@ -1,0 +1,95 @@
+*/Declaracion Variables/*
+
+DIM [flo1,flo2,flo3] AS [real,real,real]
+DIM [int1] AS [INTEGER]
+DIM [int2] AS [INTEGER]
+DIM [int3] AS [INTEGER]
+DIM [entero] AS [INTEGER]
+DIM [i,j] AS [INTEGER,INTEGER]
+DIM [var1] AS [INTEGER]
+DIM [str1] AS [STRING]
+DIM [str2] AS [STRING]
+DIM [str3] AS [STRING]
+DIM [base] AS [STRING]
+
+*/Asignaciones/*
+
+flo1:=5.5
+flo2:=7.333333
+flo3:=0.5432
+int1:=23
+int2:=1
+str1:="hola"
+str2:=3 */error/*
+str3:="hola  $%hola#"
+var1:=10
+
+*/Constantes/*
+
+a = 99999.99
+b = 99.
+c = .9999
+d = “@sdADaSjfla%dfg”
+e = “asldk fh sjf”
+
+
+*/Entrada y salida/*
+DISPLAY "ingrese el valor de base" */DISPLAY/*
+GET base */GET/*
+DISPLAY base */DISPLAY/*
+
+*/IF simple/*
+IF (int1 > 20)
+	DISPLAY "int1 es mayor a 20"
+ENDIF
+
+*/Condicion compuesta con AND/*
+*/IF sin else/*
+IF (int1 >= (5 + 5) AND (int1 <= 15))
+	DISPLAY "int1 esta entre 10 y 15"
+ENDIF
+
+*/Condicion con OR/*
+*/IF anidado con else/*
+IF (int1 > 20 OR (int1 > 25))
+	DISPLAY "int1 es mayor a 20 o a 25"
+	*/IF anidado/*
+	IF(id1 > 25)
+		DISPLAY "int1 es mayor a 25"
+	ELSE
+		DISPLAY "int1 es menor a 25"
+	ENDIF
+ENDIF
+
+
+*/Condicion con NOT/*
+*/WHILE/*
+WHILE NOT(int2 >= 5)
+	DISPLAY "Valor de id2:"
+	DISPLAY int2
+	int2 := int2 + 1
+ENDWHILE
+
+i:=0
+j:=5
+
+*/FOR/*
+FOR i TO j 
+	DISPLAY "Valor de i:"
+	DISPLAY i
+NEXT
+
+
+*/EQU/*
+int3=120
+IF EQUMAX(10+101; [100, 111, int3] )
+	DISPLAY "Equmax falso"
+
+IF EQUMAX(200; [100, 111, 200] )
+	DISPLAY "Equmax verdadero"
+
+IF EQUMIN(111; [100, 111, int3] )
+	DISPLAY "Equmin falso"
+
+IF EQUMIN(100; [100, 111, int3] )
+	DISPLAY "Equmin verdadero"
