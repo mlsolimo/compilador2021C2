@@ -1,7 +1,11 @@
 int3=120;
-IF (EQUMAX(10; [var] ))
-	DISPLAY "Equmax falso";
+IF (EQUMAX(10+101; [100, 111, var1] ))
 ENDIF;
+
+IF (EQUMIN(10+101; [100, 111, var1] ))
+ENDIF;
+
+EQUMAX (1+2);
 
 va2 ="Hola";
 var = 10;

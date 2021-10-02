@@ -561,12 +561,12 @@ static const yytype_uint8 yyrline[] =
        0,    71,    71,    74,    77,    78,    81,    82,    83,    84,
       85,    86,    87,    90,    91,    94,    98,   101,   105,   106,
      107,   110,   111,   112,   113,   117,   118,   119,   122,   123,
-     126,   129,   134,   135,   138,   138,   142,   143,   146,   145,
-     149,   150,   151,   148,   154,   153,   156,   160,   161,   162,
-     163,   164,   165,   166,   167,   168,   169,   170,   171,   172,
-     175,   178,   180,   182,   183,   186,   187,   188,   189,   192,
-     193,   194,   195,   196,   197,   198,   199,   200,   203,   219,
-     220,   224,   225,   226
+     126,   129,   134,   135,   138,   138,   142,   143,   147,   146,
+     150,   151,   152,   149,   155,   154,   157,   161,   162,   163,
+     164,   165,   166,   167,   168,   169,   170,   171,   172,   173,
+     176,   179,   181,   183,   184,   187,   188,   189,   190,   193,
+     194,   195,   196,   197,   198,   199,   200,   201,   204,   220,
+     221,   225,   226,   227
 };
 #endif
 
@@ -1810,287 +1810,287 @@ yyreduce:
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 146 "Sintactico.y"
+#line 147 "Sintactico.y"
     {;}
     break;
 
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 147 "Sintactico.y"
+#line 148 "Sintactico.y"
     {;}
     break;
 
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 149 "Sintactico.y"
+#line 150 "Sintactico.y"
     {;}
     break;
 
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 150 "Sintactico.y"
+#line 151 "Sintactico.y"
     {;}
     break;
 
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 151 "Sintactico.y"
+#line 152 "Sintactico.y"
     {;}
     break;
 
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 152 "Sintactico.y"
+#line 153 "Sintactico.y"
     {;}
     break;
 
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 154 "Sintactico.y"
+#line 155 "Sintactico.y"
     {;}
     break;
 
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 155 "Sintactico.y"
+#line 156 "Sintactico.y"
     {;}
     break;
 
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 157 "Sintactico.y"
+#line 158 "Sintactico.y"
     {;}
     break;
 
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 160 "Sintactico.y"
+#line 161 "Sintactico.y"
     {;}
     break;
 
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 161 "Sintactico.y"
+#line 162 "Sintactico.y"
     {;}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 162 "Sintactico.y"
+#line 163 "Sintactico.y"
     {;}
     break;
 
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 163 "Sintactico.y"
+#line 164 "Sintactico.y"
     {;}
     break;
 
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 164 "Sintactico.y"
+#line 165 "Sintactico.y"
     {;}
     break;
 
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 165 "Sintactico.y"
+#line 166 "Sintactico.y"
     {;}
     break;
 
   case 53:
 
 /* Line 1455 of yacc.c  */
-#line 166 "Sintactico.y"
+#line 167 "Sintactico.y"
     {;}
     break;
 
   case 54:
 
 /* Line 1455 of yacc.c  */
-#line 167 "Sintactico.y"
+#line 168 "Sintactico.y"
     {;}
     break;
 
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 168 "Sintactico.y"
+#line 169 "Sintactico.y"
     {;}
     break;
 
   case 56:
 
 /* Line 1455 of yacc.c  */
-#line 169 "Sintactico.y"
+#line 170 "Sintactico.y"
     {;}
     break;
 
   case 57:
 
 /* Line 1455 of yacc.c  */
-#line 170 "Sintactico.y"
+#line 171 "Sintactico.y"
     {;}
     break;
 
   case 58:
 
 /* Line 1455 of yacc.c  */
-#line 171 "Sintactico.y"
+#line 172 "Sintactico.y"
     {;}
     break;
 
   case 59:
 
 /* Line 1455 of yacc.c  */
-#line 172 "Sintactico.y"
+#line 173 "Sintactico.y"
     {;}
     break;
 
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 175 "Sintactico.y"
+#line 176 "Sintactico.y"
     {;}
     break;
 
   case 61:
 
 /* Line 1455 of yacc.c  */
-#line 178 "Sintactico.y"
+#line 179 "Sintactico.y"
     {;}
     break;
 
   case 62:
 
 /* Line 1455 of yacc.c  */
-#line 180 "Sintactico.y"
+#line 181 "Sintactico.y"
     {;}
     break;
 
   case 63:
 
 /* Line 1455 of yacc.c  */
-#line 182 "Sintactico.y"
+#line 183 "Sintactico.y"
     {;}
     break;
 
   case 64:
 
 /* Line 1455 of yacc.c  */
-#line 183 "Sintactico.y"
+#line 184 "Sintactico.y"
     {;}
     break;
 
   case 65:
 
 /* Line 1455 of yacc.c  */
-#line 186 "Sintactico.y"
+#line 187 "Sintactico.y"
     {;}
     break;
 
   case 66:
 
 /* Line 1455 of yacc.c  */
-#line 187 "Sintactico.y"
+#line 188 "Sintactico.y"
     {;}
     break;
 
   case 67:
 
 /* Line 1455 of yacc.c  */
-#line 188 "Sintactico.y"
+#line 189 "Sintactico.y"
     {;}
     break;
 
   case 68:
 
 /* Line 1455 of yacc.c  */
-#line 189 "Sintactico.y"
+#line 190 "Sintactico.y"
     {;}
     break;
 
   case 69:
 
 /* Line 1455 of yacc.c  */
-#line 192 "Sintactico.y"
+#line 193 "Sintactico.y"
     {;}
     break;
 
   case 70:
 
 /* Line 1455 of yacc.c  */
-#line 193 "Sintactico.y"
+#line 194 "Sintactico.y"
     {;}
     break;
 
   case 71:
 
 /* Line 1455 of yacc.c  */
-#line 194 "Sintactico.y"
+#line 195 "Sintactico.y"
     {;}
     break;
 
   case 72:
 
 /* Line 1455 of yacc.c  */
-#line 195 "Sintactico.y"
+#line 196 "Sintactico.y"
     {;}
     break;
 
   case 73:
 
 /* Line 1455 of yacc.c  */
-#line 196 "Sintactico.y"
+#line 197 "Sintactico.y"
     {;}
     break;
 
   case 74:
 
 /* Line 1455 of yacc.c  */
-#line 197 "Sintactico.y"
+#line 198 "Sintactico.y"
     {;}
     break;
 
   case 75:
 
 /* Line 1455 of yacc.c  */
-#line 198 "Sintactico.y"
+#line 199 "Sintactico.y"
     {;}
     break;
 
   case 76:
 
 /* Line 1455 of yacc.c  */
-#line 199 "Sintactico.y"
+#line 200 "Sintactico.y"
     {;}
     break;
 
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 200 "Sintactico.y"
+#line 201 "Sintactico.y"
     {;}
     break;
 
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 203 "Sintactico.y"
+#line 204 "Sintactico.y"
     {
                                         char dataType[100];
                                         char variable[100];
@@ -2110,35 +2110,35 @@ yyreduce:
   case 79:
 
 /* Line 1455 of yacc.c  */
-#line 219 "Sintactico.y"
+#line 220 "Sintactico.y"
     {pushStack(&stackVar,(yyvsp[(1) - (5)].strVal));}
     break;
 
   case 80:
 
 /* Line 1455 of yacc.c  */
-#line 220 "Sintactico.y"
+#line 221 "Sintactico.y"
     {pushStack(&stackVar,(yyvsp[(1) - (5)].strVal));}
     break;
 
   case 81:
 
 /* Line 1455 of yacc.c  */
-#line 224 "Sintactico.y"
+#line 225 "Sintactico.y"
     {pushStack(&stackDataTypeDecVar,"INTEGER");}
     break;
 
   case 82:
 
 /* Line 1455 of yacc.c  */
-#line 225 "Sintactico.y"
+#line 226 "Sintactico.y"
     {pushStack(&stackDataTypeDecVar,"FLOAT");}
     break;
 
   case 83:
 
 /* Line 1455 of yacc.c  */
-#line 226 "Sintactico.y"
+#line 227 "Sintactico.y"
     {pushStack(&stackDataTypeDecVar,"STRING");}
     break;
 
@@ -2357,7 +2357,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 229 "Sintactico.y"
+#line 230 "Sintactico.y"
 
 
 

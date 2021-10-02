@@ -81,7 +81,12 @@ NEXT            "NEXT"|"next"
 {ELSE}                    {return ELSE;}      
 {ENDIF}                   {return ENDIF;} 
 {WHILE}                   {return WHILE;}             
-{ENDWHILE}                {return ENDWHILE;}  
+{ENDWHILE}                {return ENDWHILE;}
+{EQU_MAX}                 {return EQU_MAX;}
+{EQU_MIN}                 {return EQU_MIN;}
+{FOR}                     {return FOR;} 
+{TO}                      {return TO;} 
+{NEXT}                    {return NEXT;}
 {REAL}                    {return REAL;}      
 {INT}                     {return INT;}    
 {GET}                     {return GET;}       
@@ -151,11 +156,6 @@ NEXT            "NEXT"|"next"
 {PARENTESIS_C}            {return PARENTESIS_C;}    
 {ESPACIO_EN_BLANCO}          {;} 
 {SALTO_LINEA}                {;} 
-{EQU_MAX}                   {return EQU_MAX;}
-{EQU_MIN}                   {return EQU_MIN;}
-{FOR}                       {return FOR;} 
-{TO}                        {return TO;} 
-{NEXT}                      {return NEXT;} 
 .                           {displayError("Error en Lexico - Token no valido");} 
 
 %%

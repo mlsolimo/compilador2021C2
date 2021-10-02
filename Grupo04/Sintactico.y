@@ -141,9 +141,10 @@ for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A step CORCHETE_C {;}
 
 step: CONST_INT {;}
       | {;}
-
+      ;
+      
 if: IF cond_completa 
-    sentencia               {;}
+    sentencia             {;}
     ENDIF                 {;}
     | IF cond_completa 
       sentencia             {;}
@@ -172,7 +173,7 @@ cond_completa: PARENTESIS_A cond_completa PARENTESIS_C                      {;}
              | PARENTESIS_A equmax PARENTESIS_C {;}
              ;
 
-equmax: EQU_MAX PARENTESIS_A cond_equ PARENTESIS_C 	{;}
+equmax: EQU_MAX PARENTESIS_A cond_equ PARENTESIS_C	{;}
         ;
 
 equmin: EQU_MIN PARENTESIS_A cond_equ PARENTESIS_C {;}

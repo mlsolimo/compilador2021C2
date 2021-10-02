@@ -293,36 +293,36 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 #define YY_END_OF_BUFFER 48
 static yyconst short int yy_acclist[275] =
     {   0,
-       48,   46,   47,   39,   46,   47,   40,   47,   31,   46,
-       47,   46,   47,   46,   47,   37,   46,   47,   38,   46,
-       47,   25,   46,   47,   23,   46,   47,   35,   46,   47,
-       24,   46,   47,   46,   47,   26,   46,   47,   19,   46,
-       47,   46,   47,   36,   46,   47,   27,   46,   47,   22,
-       46,   47,   28,   46,   47,   21,   46,   47,   21,   46,
-       47,   21,   46,   47,   21,   46,   47,   21,   46,   47,
-       21,   46,   47,   21,   46,   47,   21,   46,   47,   21,
-       46,   47,   21,   46,   47,   21,   46,   47,   21,   46,
-       47,   21,   46,   47,   12,   46,   47,   13,   46,   47,
+       48,   46,   47,   44,   46,   47,   45,   47,   36,   46,
+       47,   46,   47,   46,   47,   42,   46,   47,   43,   46,
+       47,   30,   46,   47,   28,   46,   47,   40,   46,   47,
+       29,   46,   47,   46,   47,   31,   46,   47,   24,   46,
+       47,   46,   47,   41,   46,   47,   32,   46,   47,   27,
+       46,   47,   33,   46,   47,   26,   46,   47,   26,   46,
+       47,   26,   46,   47,   26,   46,   47,   26,   46,   47,
+       26,   46,   47,   26,   46,   47,   26,   46,   47,   26,
+       46,   47,   26,   46,   47,   26,   46,   47,   26,   46,
+       47,   26,   46,   47,   17,   46,   47,   18,   46,   47,
 
-       21,   46,   47,   21,   46,   47,   21,   46,   47,   21,
-       46,   47,   21,   46,   47,   21,   46,   47,   21,   46,
-       47,   21,   46,   47,   21,   46,   47,   21,   46,   47,
-       21,   46,   47,   46,   47,   46,   47,   18,   18,   32,
-       15,   20,   16,   20,   19,   22,   29,   34,   30,   21,
-       21,    2,   21,   21,   21,   21,   21,   21,   21,   21,
-        3,   21,   21,   21,   21,   33,   21,   21,   21,   44,
-       21,   21,   21,   21,   21,   21,   21,   21,   21,   21,
-       21,   21,   21,   33,   20,   21,   32,    1,   21,   21,
-       21,   21,   21,   21,   21,   43,   10,   21,    9,   21,
+       26,   46,   47,   26,   46,   47,   26,   46,   47,   26,
+       46,   47,   26,   46,   47,   26,   46,   47,   26,   46,
+       47,   26,   46,   47,   26,   46,   47,   26,   46,   47,
+       26,   46,   47,   46,   47,   46,   47,   23,   23,   37,
+       20,   25,   21,   25,   24,   27,   34,   39,   35,   26,
+       26,    2,   26,   26,   26,   26,   26,   26,   26,   26,
+        3,   26,   26,   26,   26,   38,   26,   26,   11,   26,
+       26,   26,   26,   26,   26,   26,   26,   26,   26,   26,
+       26,   26,   26,   38,   25,   26,   37,    1,   26,   26,
+       26,   26,   26,   26,   10,   26,   15,   26,   14,   26,
 
-       21,   21,   21,   21,   21,   21,   21,   21,   21,    9,
-       21,   21,   21,   21,   21,   17,   21,    4,   21,   21,
-       21,   21,   21,   21,   21,   45,    8,   21,   21,   21,
-       21,   21,   21,   21,   21,   21,   21,   21,   21,    5,
-       21,   21,   21,   21,   21,   21,    6,   21,   21,   21,
-       21,   21,   21,   21,   21,   21,   21,   41,   21,   42,
-       21,   14,   21,   21,   21,   21,   11,   21,   21,    9,
-       21,   21,    7,   21
+       26,   26,   26,   26,   26,   26,   26,   26,   26,   14,
+       26,   26,   26,   26,   26,   22,   26,    4,   26,   26,
+       26,   26,   26,   26,   12,   26,   13,   26,   26,   26,
+       26,   26,   26,   26,   26,   26,   26,   26,   26,    5,
+       26,   26,   26,   26,   26,   26,    6,   26,   26,   26,
+       26,   26,   26,   26,   26,   26,    8,   26,    9,   26,
+       26,   19,   26,   26,   26,   26,   16,   26,   26,   14,
+       26,   26,    7,   26
     } ;
 
 static yyconst short int yy_accept[175] =
@@ -826,61 +826,86 @@ YY_RULE_SETUP
 case 7:
 YY_RULE_SETUP
 #line 84 "Lexico.l"
-{return ENDWHILE;}  
+{return ENDWHILE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 85 "Lexico.l"
-{return REAL;}      
+{return EQU_MAX;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 86 "Lexico.l"
-{return INT;}    
+{return EQU_MIN;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 87 "Lexico.l"
-{return GET;}       
+{return FOR;} 
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 88 "Lexico.l"
-{return DISPLAY;}   
+{return TO;} 
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 89 "Lexico.l"
-{return CORCHETE_A;}  
+{return NEXT;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 90 "Lexico.l"
-{return CORCHETE_C;}  
+{return REAL;}      
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 91 "Lexico.l"
-{return STRING;}    
+{return INT;}    
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 92 "Lexico.l"
-{;}
+{return GET;}       
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 93 "Lexico.l"
-{;}
+{return DISPLAY;}   
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 94 "Lexico.l"
-{;}
+{return CORCHETE_A;}  
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 95 "Lexico.l"
+{return CORCHETE_C;}  
+	YY_BREAK
+case 19:
+YY_RULE_SETUP
+#line 96 "Lexico.l"
+{return STRING;}    
+	YY_BREAK
+case 20:
+YY_RULE_SETUP
+#line 97 "Lexico.l"
+{;}
+	YY_BREAK
+case 21:
+YY_RULE_SETUP
+#line 98 "Lexico.l"
+{;}
+	YY_BREAK
+case 22:
+YY_RULE_SETUP
+#line 99 "Lexico.l"
+{;}
+	YY_BREAK
+case 23:
+YY_RULE_SETUP
+#line 100 "Lexico.l"
 {
                             if(strlen(yytext) > 30)
                             {
@@ -894,9 +919,9 @@ YY_RULE_SETUP
 
                           }
 	YY_BREAK
-case 19:
+case 24:
 YY_RULE_SETUP
-#line 108 "Lexico.l"
+#line 113 "Lexico.l"
 {   
                                 int value = atoi(strdup(yytext));
                                 if( value > MAX_INT_16 ) {
@@ -907,9 +932,9 @@ YY_RULE_SETUP
                                 }
                             }   
 	YY_BREAK
-case 20:
+case 25:
 YY_RULE_SETUP
-#line 118 "Lexico.l"
+#line 123 "Lexico.l"
 {  
                                 float value = atof(strdup(yytext));
                                 if ( value > MAX_FLOAT_32 ) 
@@ -923,133 +948,108 @@ YY_RULE_SETUP
                                 }
                             }   
 	YY_BREAK
-case 21:
+case 26:
 YY_RULE_SETUP
-#line 131 "Lexico.l"
+#line 136 "Lexico.l"
 {
                                 yylval.strVal = strdup(yytext);
                                 return VARIABLE;
                             }    
 	YY_BREAK
-case 22:
-YY_RULE_SETUP
-#line 135 "Lexico.l"
-{return OP_ASIG;}   
-	YY_BREAK
-case 23:
-YY_RULE_SETUP
-#line 136 "Lexico.l"
-{return OP_SUMA;}    
-	YY_BREAK
-case 24:
-YY_RULE_SETUP
-#line 137 "Lexico.l"
-{return OP_RESTA;}   
-	YY_BREAK
-case 25:
-YY_RULE_SETUP
-#line 138 "Lexico.l"
-{return OP_MULT;}   
-	YY_BREAK
-case 26:
-YY_RULE_SETUP
-#line 139 "Lexico.l"
-{return OP_DIV;}    
-	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 140 "Lexico.l"
-{return OP_MENOR;}      
+{return OP_ASIG;}   
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 141 "Lexico.l"
-{return OP_MAYOR;}      
+{return OP_SUMA;}    
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 142 "Lexico.l"
-{return OP_MEN_IGU;}  
+{return OP_RESTA;}   
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 143 "Lexico.l"
-{return OP_MAY_IGU;}  
+{return OP_MULT;}   
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 144 "Lexico.l"
-{return OP_NOT;}     
+{return OP_DIV;}    
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 145 "Lexico.l"
-{return OP_AND;}      
+{return OP_MENOR;}      
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 146 "Lexico.l"
-{return OP_OR;}            
+{return OP_MAYOR;}      
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 147 "Lexico.l"
-{return OP_COMP;}        
+{return OP_MEN_IGU;}  
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 148 "Lexico.l"
-{return COMA;}      
+{return OP_MAY_IGU;}  
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 149 "Lexico.l"
-{return PUNTO_COMA;}   
+{return OP_NOT;}     
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 150 "Lexico.l"
-{return PARENTESIS_A;}    
+{return OP_AND;}      
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 151 "Lexico.l"
-{return PARENTESIS_C;}    
+{return OP_OR;}            
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 152 "Lexico.l"
-{;} 
+{return OP_COMP;}        
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
 #line 153 "Lexico.l"
-{;} 
+{return COMA;}      
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 154 "Lexico.l"
-{return EQU_MAX;}
+{return PUNTO_COMA;}   
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 155 "Lexico.l"
-{return EQU_MIN;}
+{return PARENTESIS_A;}    
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 156 "Lexico.l"
-{return FOR;} 
+{return PARENTESIS_C;}    
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 157 "Lexico.l"
-{return TO;} 
+{;} 
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 158 "Lexico.l"
-{return NEXT;} 
+{;} 
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
