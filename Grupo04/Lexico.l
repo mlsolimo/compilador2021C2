@@ -148,9 +148,9 @@ COMA            ","
 {PUNTO_COMA}    {printf("\nPalabra reservada: %s\n", yytext); return PUNTO_COMA;}
 {COMA}          {printf("\nPalabra reservada: %s\n", yytext); return COMA;}
 {DIGITO}        {printf("\nPalabra reservada: %s\n", yytext); return DIGITO;}
-"\n"
-"\t"
-" "
+"\n"            {;}
+"\t"            {;}
+" "             {;}
 .				{printf("FLEX - No se encontro token\n"); errorLexico();}
 %%
 

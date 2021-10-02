@@ -70,13 +70,11 @@ extern int yylineno;
 
 programa_final: programa {;};
 
-programa: sentencia gramatica {;}
-        | gramatica           {;}
+programa: sentencia      {;}
         ;
 
 sentencia: sentencia gramatica PUNTO_COMA  {;}
         |  gramatica PUNTO_COMA            {;}
-        |  gramatica                       {;}
         ;
 
 gramatica: dec_variable       {;}
@@ -141,9 +139,9 @@ factor: PARENTESIS_A expresion PARENTESIS_C     {;}
       ;
 
 // display
-display: DISPLAY CONST_STRING    {insertString(&symbolTable,"STRING");}
-       | DISPLAY CONST_INT       {insertNumber(&symbolTable,"INTEGER");}    
-       | DISPLAY CONST_REAL      {insertNumber(&symbolTable,"FLOAT");}
+display: DISPLAY CONST_STRING      {;}
+       | DISPLAY CONST_REAL        {;}
+       | DISPLAY expresion         {;}        
        ;
 
 // get
@@ -167,7 +165,7 @@ while: WHILE PARENTESIS_A cond_final PARENTESIS_C
 
 //Ciclo if
 if: IF cond_final 
-    sentencia               {;}
+    sentencia              {;}
     ENDIF                 {;}
     | IF cond_final 
       sentencia             {;}

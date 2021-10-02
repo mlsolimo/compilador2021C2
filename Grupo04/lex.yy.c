@@ -1031,17 +1031,17 @@ YY_RULE_SETUP
 case 44:
 YY_RULE_SETUP
 #line 151 "Lexico.l"
-
+{;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 152 "Lexico.l"
-
+{;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 153 "Lexico.l"
-
+{;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
