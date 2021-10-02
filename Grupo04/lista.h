@@ -135,18 +135,18 @@ void deleteTable(tList *p)
     printf("\n_______________________________TABLA DE SIMBOLOS______________________________\n");
 
     printf("_______________________________________________________________________________\n");
-    printf("|%-25s|%-14s|%-25s|%-10s|\n", "NOMBRE", "TIPODATO", "VALOR", "LONGITUD");
+    printf("|%-25s|%-16s|%-25s|%-10s|\n", "NOMBRE", "TIPO DE DATO", "VALOR", "LONGITUD");
     printf("_______________________________________________________________________________\n");
 
     fprintf(pTable,"\n______________________________TABLA DE SIMBOLOS_______________________________\n");
     fprintf(pTable, "_______________________________________________________________________________\n");
-    fprintf(pTable, "|%-25s|%-14s|%-25s|%-10s|\n", "NOMBRE", "TIPODATO", "VALOR", "LONGITUD");
+    fprintf(pTable, "|%-25s|%-16s|%-25s|%-10s|\n", "NOMBRE", "TIPO DE DATO", "VALOR", "LONGITUD");
     fprintf(pTable, "_______________________________________________________________________________\n");
 
     while(*p)
     {
-        printf("|%-25s|%-14s|%-25s|%-10d|\n", (*p)->name, (*p)->dataType, (*p)->value, (*p)->length);
-        fprintf(pTable, "|%-25s|%-14s|%-25s|%-10d|\n", (*p)->name, (*p)->dataType, (*p)->value, (*p)->length);
+        printf("|%-25s|%-16s|%-25s|%-10d|\n", (*p)->name, (*p)->dataType, (*p)->value, (*p)->length);
+        fprintf(pTable, "|%-25s|%-16s|%-25s|%-10d|\n", (*p)->name, (*p)->dataType, (*p)->value, (*p)->length);
         p = &(*p)->next;
     }
 

@@ -126,13 +126,12 @@ display: DISPLAY CONST_STRING_R   {;}
 get: GET VARIABLE {;}
    ;
 
-while: WHILE PARENTESIS_A cond_completa PARENTESIS_C  
+while: WHILE  cond_completa 
        while_exp
        ENDWHILE
     ;
 
-while_exp: sentencia
-            | while
+while_exp: sentencia {;}
             ;
 
 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A step CORCHETE_C {;}
