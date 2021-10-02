@@ -1,15 +1,91 @@
+int3=120;
+IF (EQUMAX(10; [var] ))
+	DISPLAY "Equmax falso";
+ENDIF;
+
+va2 ="Hola";
+var = 10;
+vae = b;
+var = 5 + 10;
+var = 99999.99; */ comentario /*
+var = .9999;
+var1 = 99.;
+b = "asldk fh sjf";
+A:=B;
+B=c;
+
+*/ Error /*
+*/ La linea de abajo supera el limite del entero de 16 bits permitido /*
+*/a = 4154654564132;/*
+*/ La linea de abajo supera el limite del real de 32 bits permitido /*
+*/ a = 100000000000000000.654548; /*
+
+DIM [ a, b, z ] AS [ int, real, string ];
+DIM [ r ] AS [ string ];
+
+*/ Error 1 /*
+*/ DIM < r > AS < string >; /*
+*/ DIM < a, b, z > AS [ integer, real, string ]; /*
+
+DISPLAY 1;
+display 1247;
+
+*/ Error 2 /*
+*/ DISPLAI b; /*
+*/ DISPLAY; /*
+*/ display /*
+
+get asd4;
+GET a;
+
+*/ Error 2 /*
+*/ GET 2; /*
+*/ get; /*
+*/ get /*
 
 
+IF (a <= 30)
+b = "correcto"; */ Comentario /*
+ENDIF;
 
-*/Asignaciones/*
+IF (a <= 30 && b < 10)
+b = "correcto"; */ Comentario /*
+ENDIF;
 
-flo1:=5.5;
-flo2:=7.333333;
-flo3:=0.5432;
-int1:=23;
-int2:=1;
-str1:="hola";
-str2:=3; */error/*
-str3:="hola  $%hola#";
-var1:=10;
+IF (a <= 30 || b < 10)
+b = "correcto"; */ Comentario /*
+ENDIF;
 
+IF (a <= 30 || b < 10)
+b = "correcto"; */ Comentario /*
+ENDIF;
+
+IF (!a && b < 10)
+b = "correcto"; */ Comentario /*
+ENDIF;
+
+if (a <= 30 || !(a == b))
+b = a;
+endif;
+
+if (a <= 30 || !(a == b))
+endif;
+
+if (a <= 30 || !(a == b))
+else
+endif;
+
+IF (a <= 30)
+b = "correcto";
+ELSE
+pepe = "hola"; 
+ENDIF;
+
+
+*/ Error 4 /*
+*/ if; /*
+*/ if /*
+if(!a)
+else
+*/ comentar la linea de abajo /*
+endif;

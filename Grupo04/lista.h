@@ -126,7 +126,7 @@ int insertVariable(tList *p, char* lex, char* dataType)
 
 void deleteTable(tList *p)
 {
-    FILE *pTable = fopen("ts.txt", "w+");
+    FILE *pTable = fopen("ts.txt", "wt");
     if(!pTable) {
         printf("No se pudo abrir el archivo ts.txt \n");
         return;

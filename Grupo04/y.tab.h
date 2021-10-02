@@ -40,96 +40,96 @@
       know about them.  */
    enum yytokentype {
      DIM = 258,
-     AS = 259,
-     OP_MENOR = 260,
-     OP_MAYOR = 261,
-     OP_ASIG = 262,
-     OP_SUM = 263,
-     OP_DIVISION = 264,
-     OP_RESTA = 265,
-     OP_MULT = 266,
-     OP_COMP = 267,
-     OP_MAYORIGUAL = 268,
-     OP_MENORIGUAL = 269,
-     OP_DISTINTO = 270,
-     VARIABLE = 271,
+     WHILE = 259,
+     ENDWHILE = 260,
+     IF = 261,
+     ELSE = 262,
+     ENDIF = 263,
+     INT = 264,
+     REAL = 265,
+     STRING = 266,
+     GET = 267,
+     DISPLAY = 268,
+     AS = 269,
+     CORCHETE_A = 270,
+     CORCHETE_C = 271,
      COMA = 272,
-     TYPE_INTEGER = 273,
-     TYPE_FLOAT = 274,
-     TYPE_STRING = 275,
-     DISPLAY = 276,
-     CONST_STRING = 277,
-     CONST_INT = 278,
-     CONST_REAL = 279,
-     DIGITO = 280,
-     GET = 281,
-     WHILE = 282,
-     ENDWHILE = 283,
-     IF = 284,
-     ELSE = 285,
-     ENDIF = 286,
-     PUNTO_COMA = 287,
-     PARENTESIS_A = 288,
-     PARENTESIS_C = 289,
-     CORCHETE_A = 290,
-     CORCHETE_C = 291,
-     FOR = 292,
-     TO = 293,
+     PUNTO_COMA = 273,
+     PARENTESIS_A = 274,
+     PARENTESIS_C = 275,
+     OP_MENOR = 276,
+     OP_MAYOR = 277,
+     OP_MEN_IGU = 278,
+     OP_MAY_IGU = 279,
+     OP_NOT = 280,
+     OP_AND = 281,
+     OP_OR = 282,
+     OP_COMP = 283,
+     EQU_MAX = 284,
+     EQU_MIN = 285,
+     CONST_INT = 286,
+     CONST_REAL = 287,
+     VARIABLE = 288,
+     CONST_STRING = 289,
+     COMENTARIO_A = 290,
+     COMENTARIO_C = 291,
+     COMENTARIO = 292,
+     FOR = 293,
      NEXT = 294,
-     EQUMIN = 295,
-     EQUMAX = 296,
-     AND = 297,
-     OR = 298,
-     NOT = 299,
-     OP_SUMA = 300,
-     OP_DIVISIONISION = 301
+     TO = 295,
+     OP_SUMA = 297,
+     OP_RESTA = 298,
+     OP_DIV = 299,
+     OP_MULT = 300,
+     MENOS_UNARIO = 301,
+     OP_ASIG = 302
    };
 #endif
 /* Tokens.  */
 #define DIM 258
-#define AS 259
-#define OP_MENOR 260
-#define OP_MAYOR 261
-#define OP_ASIG 262
-#define OP_SUM 263
-#define OP_DIVISION 264
-#define OP_RESTA 265
-#define OP_MULT 266
-#define OP_COMP 267
-#define OP_MAYORIGUAL 268
-#define OP_MENORIGUAL 269
-#define OP_DISTINTO 270
-#define VARIABLE 271
+#define WHILE 259
+#define ENDWHILE 260
+#define IF 261
+#define ELSE 262
+#define ENDIF 263
+#define INT 264
+#define REAL 265
+#define STRING 266
+#define GET 267
+#define DISPLAY 268
+#define AS 269
+#define CORCHETE_A 270
+#define CORCHETE_C 271
 #define COMA 272
-#define TYPE_INTEGER 273
-#define TYPE_FLOAT 274
-#define TYPE_STRING 275
-#define DISPLAY 276
-#define CONST_STRING 277
-#define CONST_INT 278
-#define CONST_REAL 279
-#define DIGITO 280
-#define GET 281
-#define WHILE 282
-#define ENDWHILE 283
-#define IF 284
-#define ELSE 285
-#define ENDIF 286
-#define PUNTO_COMA 287
-#define PARENTESIS_A 288
-#define PARENTESIS_C 289
-#define CORCHETE_A 290
-#define CORCHETE_C 291
-#define FOR 292
-#define TO 293
+#define PUNTO_COMA 273
+#define PARENTESIS_A 274
+#define PARENTESIS_C 275
+#define OP_MENOR 276
+#define OP_MAYOR 277
+#define OP_MEN_IGU 278
+#define OP_MAY_IGU 279
+#define OP_NOT 280
+#define OP_AND 281
+#define OP_OR 282
+#define OP_COMP 283
+#define EQU_MAX 284
+#define EQU_MIN 285
+#define CONST_INT 286
+#define CONST_REAL 287
+#define VARIABLE 288
+#define CONST_STRING 289
+#define COMENTARIO_A 290
+#define COMENTARIO_C 291
+#define COMENTARIO 292
+#define FOR 293
 #define NEXT 294
-#define EQUMIN 295
-#define EQUMAX 296
-#define AND 297
-#define OR 298
-#define NOT 299
-#define OP_SUMA 300
-#define OP_DIVISIONISION 301
+#define TO 295
+#define OP_SUMA 297
+#define OP_RESTA 298
+#define OP_DIV 299
+#define OP_MULT 300
+#define MENOS_UNARIO 301
+#define OP_ASIG 302
 
 
 
@@ -139,7 +139,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 18 "Sintactico.y"
+#line 20 "Sintactico.y"
 
     char* strVal;
 

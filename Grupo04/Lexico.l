@@ -1,170 +1,176 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 #include <string.h>
 #include <limits.h>
 #include <math.h>
 #include "y.tab.h"
 
-FILE *yyin;
+#define MAX_CHARACTERS 30
+#define MAX_FLOAT_32 2147483647
+#define MAX_INT_16 65536
 
+FILE *yyin;
+FILE *ptTxt;
+
+void displayError(char* msg);
 int yyerror(void);
-int errorLexico(void);
+
 
 %}
 
 %option noyywrap
 %option yylineno
 
-DIGITO          [0-9]
-LETRA           [a-zA-Z]
-COMILLA         ["]
-LLAVE_A         "{"
-LLAVE_C         "}"
-PARENTESIS_A    "("
-PARENTESIS_C    ")"
-CORCHETE_A      "["
-CORCHETE_C      "]"
-WHILE           "WHILE"|"while"
-ENDWHILE        "ENDWHILE"|"endwhile"
-IF              "IF"|"if"
-ENDIF           "ENDIF"|"endif"
-ELSE            "ELSE"|"else"
-OP_ASIG         ":="
-CONST_ENTERA    {DIGITO}+
-CONST_REAL      {DIGITO}+"."{DIGITO}+|{DIGITO}+"."|"."{DIGITO}+
-CONST_STRING    {COMILLA}.(.)+.{COMILLA}
-VARIABLE		{LETRA}({LETRA}|{DIGITO})*
-COMENTARIO      "*/".(.)*."/*"
+COMENTARIO_A      "*/"
+COMENTARIO_C      "/*"
+COMENTARIO        {COMENTARIO_A}(.)*{COMENTARIO_C}
+OP_AND            "&&"|"AND"
+OP_OR             "||"|"OR"
+OP_NOT            "!"
+ESPACIO_EN_BLANCO [ \t\r\v\f]
+SALTO_LINEA       [\n]
+NUMERO            [0-9]
+LETRA             [a-zA-Z]
+VARIABLE          {LETRA}({LETRA}|{NUMERO}|"_")*
+COMA              ","
+PUNTO_COMA        ";"
+COMILLA           ["]
+COMILLA_A         [“]
+COMILLA_C         [”]
+CONST_REAL        {NUMERO}+"."{NUMERO}+|{NUMERO}+"."|"."{NUMERO}+
+CONST_INT         {NUMERO}+
+CONST_STRING      ({COMILLA}|{COMILLA_A}|{COMILLA_C}){1}(.)*({COMILLA}|{COMILLA_A}|{COMILLA_C}){1}
+AS                "AS"|"as"
+INT               "INT"|"int"|"INTEGER"|"integer"
+REAL              "REAL"|"real"|"FLOAT"|"float"
+STRING            "STRING"|"string"
+DIM               "DIM"|"dim"
+WHILE             "while"|"WHILE"
+ENDWHILE          "endwhile"|"ENDWHILE"
+IF                "IF"|"if"
+ELSE              "else"|"ELSE"
+ENDIF             "endif"|"ENDIF"
+GET               "GET"|"get"
 DISPLAY         "DISPLAY"|"display"
-GET             "GET"|"get"
-OP_COMP			"=""="
-OP_MAYORIGUAL	">""="
-OP_MAYOR		">"
-OP_MENOR		"<"
-OP_MENORIGUAL	"<""="
-OP_DISTINTO		"!""="
-OR			    "OR"|"||"
-AND			    "AND"|"&&"
-NOT 			"NOT"|"!"
-OP_DIVISION		"/"
-OP_SUMA			"+"
-OP_MULT			"*"
-OP_RESTA		"-"
-DIM             "DIM"|"dim"
-AS              "AS"|"as"         
-TYPE_INTEGER    "INTEGER"|"integer"
-TYPE_FLOAT      "REAL"|"real"
-TYPE_STRING      "STRING"|"string"
+CORCHETE_A        "["
+CORCHETE_C        "]"
+PARENTESIS_A      "("
+PARENTESIS_C      ")"
+OP_ASIG           ":="|"="
+OP_SUMA            "+"
+OP_RESTA           "-"
+OP_MENOR          "<"
+OP_MAYOR          ">"
+OP_COMP           "=="
+OP_MULT           "*"
+OP_DIV            "/"
+EQU_MAX           "EQUMAX"|"equmax"
+EQU_MIN           "EQUMIN"|"equmin"
+OP_MEN_IGU        {OP_MENOR}{OP_ASIG}
+OP_MAY_IGU        {OP_MAYOR}{OP_ASIG}
 FOR             "FOR"|"for"
 TO              "TO"|"to"
 NEXT            "NEXT"|"next"
-EQUMAX          "EQUMAX"|"equmax"
-EQUMIN          "EQUMIN"|"equmin"
-PUNTO_COMA      ";"
-COMA            ","
-
-
 
 %%
-{WHILE}         {printf("\nPalabra reservada: %s\n", yytext); return WHILE;}
-{ENDWHILE}      {printf("\nPalabra reservada: %s\n", yytext); return ENDWHILE;}
-{IF}            {printf("\nPalabra reservada: %s\n", yytext); return IF;}
-{ELSE}          {printf("\nPalabra reservada: %s\n", yytext); return ELSE;}
-{ENDIF}         {printf("\nPalabra reservada: %s\n", yytext); return ENDIF;}
-{OP_ASIG}       {printf("\nPalabra reservada: %s\n", yytext); return OP_ASIG;}
-{CONST_REAL}    {
-                        printf("\nConstante real: %s\n", yytext);
-                        float num = atof(strdup(yytext));
-						if (num < -2147483648 && num > 2147483647) {
-							printf("Valor numerico menor a -2147483648 o mayor a 2147483647\n");
-							errorLexico();
-						} else {
-                            //printf("\nPalabra reservada: %s\n", yytext);
-                            yylval.strVal = strdup(yytext);
-					 		return CONST_REAL;
-						}
 
-                }
-{CONST_ENTERA}  {
-                        printf("\nConstante entera: %s\n", yytext);
-                        int num = atoi(strdup(yytext));
-						if (num > 65535) {
-							printf("Valor numerico mayor a 65535 %d\n",num);
-							errorLexico();
-						} else {
-                            //printf("\nPalabra reservada: %s\n", yytext);
-                            yylval.strVal = strdup(yytext);
-					 		return CONST_INT;
-						}
-                }
+{DIM}                     {return DIM;}    
+{AS}                      {return AS;}        
+{IF}                      {return IF;}        
+{ELSE}                    {return ELSE;}      
+{ENDIF}                   {return ENDIF;} 
+{WHILE}                   {return WHILE;}             
+{ENDWHILE}                {return ENDWHILE;}  
+{REAL}                    {return REAL;}      
+{INT}                     {return INT;}    
+{GET}                     {return GET;}       
+{DISPLAY}                 {return DISPLAY;}   
+{CORCHETE_A}              {return CORCHETE_A;}  
+{CORCHETE_C}              {return CORCHETE_C;}  
+{STRING}                  {return STRING;}    
+{COMENTARIO_A}            {;}
+{COMENTARIO_C}            {;}
+{COMENTARIO}              {;}
+{CONST_STRING}            {
+                            if(strlen(yytext) > 30)
+                            {
+                                    displayError("Constante String supera el maximo de caracteres permitido");
+                            } 
+                            else 
+                                {
+                                    yylval.strVal = strdup(yytext);
+                                    return CONST_STRING;
+                                }
 
-{CONST_STRING}  {
-                    printf("\nConstante string: %s\n", yytext);
-                    if(strlen(yytext)<=30)
-                    {
-                        printf("\nPalabra reservada: %s\n", yytext);
-                        yylval.strVal = strdup(yytext);
-						return CONST_STRING;
-                    }
-					else
-                    {
-						printf("Longitud de la cadena mayor a 30\n");
-						errorLexico();
-                    }
-                }
-{VARIABLE}      {printf("\nPalabra reservada: %s\n", yytext); return VARIABLE;}
-{COMENTARIO}    
-{DISPLAY}       {printf("\nPalabra reservada: %s\n", yytext); return DISPLAY;}
-{GET}           {printf("\nPalabra reservada: %s\n", yytext); return GET;}
-{OP_COMP}       {printf("\nPalabra reservada: %s\n", yytext); return OP_COMP;}
-{OP_MAYORIGUAL} {printf("\nPalabra reservada: %s\n", yytext); return OP_MAYORIGUAL;}
-{OP_MAYOR}      {printf("\nPalabra reservada: %s\n", yytext); return OP_MAYOR;}
-{OP_MENOR}      {printf("\nPalabra reservada: %s\n", yytext); return OP_MENOR;}
-{OP_MENORIGUAL} {printf("\nPalabra reservada: %s\n", yytext); return OP_MENORIGUAL;}
-{OP_DISTINTO}	{printf("\nPalabra reservada: %s\n", yytext); return OP_DISTINTO;}
-{OR}            {printf("\nPalabra reservada: %s\n", yytext); return OR;}
-{AND}           {printf("\nPalabra reservada: %s\n", yytext); return AND;}
-{NOT}           {printf("\nPalabra reservada: %s\n", yytext); return NOT;}
-{OP_DIVISION}   {printf("\nPalabra reservada: %s\n", yytext); return OP_DIVISION;}
-{OP_SUMA}       {printf("\nPalabra reservada: %s\n", yytext); return OP_SUMA;}
-{OP_MULT}       {printf("\nPalabra reservada: %s\n", yytext); return OP_MULT;}
-{OP_RESTA}      {printf("\nPalabra reservada: %s\n", yytext); return OP_RESTA;}
-{PARENTESIS_A}  {printf("\nPalabra reservada: %s\n", yytext); return PARENTESIS_A;}    
-{PARENTESIS_C}  {printf("\nPalabra reservada: %s\n", yytext); return PARENTESIS_C;}    
-{CORCHETE_A}    {printf("\nPalabra reservada: %s\n", yytext); return CORCHETE_A;}  
-{CORCHETE_C}    {printf("\nPalabra reservada: %s\n", yytext); return CORCHETE_C;}  
-{DIM}           {printf("\nPalabra reservada: %s\n", yytext); return DIM;}  
-{AS}            {printf("\nPalabra reservada: %s\n", yytext); return AS;}  
-{TYPE_INTEGER}  {printf("\nPalabra reservada: %s\n", yytext); return TYPE_INTEGER;}  
-{TYPE_FLOAT}    {printf("\nPalabra reservada: %s\n", yytext); return TYPE_FLOAT;}  
-{TYPE_STRING}    {printf("\nPalabra reservada: %s\n", yytext); return TYPE_STRING;}
-{FOR}           {printf("\nPalabra reservada: %s\n", yytext); return FOR;}
-{TO}            {printf("\nPalabra reservada: %s\n", yytext); return TO;}
-{NEXT}          {printf("\nPalabra reservada: %s\n", yytext); return NEXT;}
-{EQUMAX}        {printf("\nPalabra reservada: %s\n", yytext); return EQUMAX;}
-{EQUMIN}        {printf("\nPalabra reservada: %s\n", yytext); return EQUMIN;}
-{PUNTO_COMA}    {printf("\nPalabra reservada: %s\n", yytext); return PUNTO_COMA;}
-{COMA}          {printf("\nPalabra reservada: %s\n", yytext); return COMA;}
-{DIGITO}        {printf("\nPalabra reservada: %s\n", yytext); return DIGITO;}
-"\n"            {;}
-"\t"            {;}
-" "             {;}
-.				{printf("FLEX - No se encontro token\n"); errorLexico();}
+                          }
+
+{CONST_INT}                 {   
+                                int value = atoi(strdup(yytext));
+                                if( value > MAX_INT_16 ) {
+                                    displayError("Entero supera los 16 bits");
+                                } else {
+                                     yylval.strVal = strdup(yytext);
+                                     return CONST_INT;
+                                }
+                            }   
+
+{CONST_REAL}                 {  
+                                float value = atof(strdup(yytext));
+                                if ( value > MAX_FLOAT_32 ) 
+                                {
+                                    displayError("Numero real supera los 32 bits");
+                                } 
+                                else 
+                                {
+                                     yylval.strVal = strdup(yytext);
+                                     return CONST_REAL;
+                                }
+                            }   
+    
+{VARIABLE}                  {
+                                yylval.strVal = strdup(yytext);
+                                return VARIABLE;
+                            }    
+{OP_ASIG}                 {return OP_ASIG;}   
+{OP_SUMA}                  {return OP_SUMA;}    
+{OP_RESTA}                 {return OP_RESTA;}   
+{OP_MULT}                 {return OP_MULT;}   
+{OP_DIV}                  {return OP_DIV;}    
+{OP_MENOR}                {return OP_MENOR;}      
+{OP_MAYOR}                {return OP_MAYOR;}      
+{OP_MEN_IGU}              {return OP_MEN_IGU;}  
+{OP_MAY_IGU}              {return OP_MAY_IGU;}  
+{OP_NOT}                  {return OP_NOT;}     
+{OP_AND}                  {return OP_AND;}      
+{OP_OR}                   {return OP_OR;}            
+{OP_COMP}                 {return OP_COMP;}        
+{COMA}                  {return COMA;}      
+{PUNTO_COMA}              {return PUNTO_COMA;}   
+{PARENTESIS_A}            {return PARENTESIS_A;}    
+{PARENTESIS_C}            {return PARENTESIS_C;}    
+{ESPACIO_EN_BLANCO}          {;} 
+{SALTO_LINEA}                {;} 
+{EQU_MAX}                   {return EQU_MAX;}
+{EQU_MIN}                   {return EQU_MIN;}
+{FOR}                       {return FOR;} 
+{TO}                        {return TO;} 
+{NEXT}                      {return NEXT;} 
+.                           {displayError("Error en Lexico - Token no valido");} 
+
 %%
 
-int errorLexico(void)
+
+void displayError(char* msg)
 {
-    printf("Error de lexico\n");
+    printf("%s - linea del archivo analizado: %d\n", msg, yylineno); 
     system("Pause");
     exit(1);
 }
 
-int yyerror(void)
-{
-    printf("Error de sintasix\n");
-    printf("ERROR SINTACTICO EN LA LINEA: %d\n", yylineno);
-    system("Pause");
-    exit(1);
+int yyerror(void){
+
+	printf("Error en analizador sintactico en la linea del archivo analizado: %d\n", yylineno);
+	system("Pause");
+	exit(1);
 }
