@@ -9,6 +9,6 @@ Debe correrse el archivo Script.bat que se encuentra dentro de la carpeta Grupo0
 
 ## Entrega 3
 
-##Alumnos que realizan el trabajo
--Pretto Francisco
--Sólimo Martín Leandro
+## Alumnos que realizan el trabajo
+- Pretto Francisco
+- Sólimo Martín Leandro
