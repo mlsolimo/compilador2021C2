@@ -33,7 +33,7 @@ ENDIF           "ENDIF"|"endif"
 ELSE            "ELSE"|"else"
 OP_ASIG         ":="
 CONST_ENTERA    {DIGITO}+
-CONST_REAL      "-"?{DIGITO}+.".".{DIGITO}+
+CONST_REAL      {DIGITO}+"."{DIGITO}+|{DIGITO}+"."|"."{DIGITO}+
 CONST_STRING    {COMILLA}.(.)+.{COMILLA}
 VARIABLE		{LETRA}({LETRA}|{DIGITO})*
 COMENTARIO      "*/".(.)*."/*"
@@ -74,18 +74,6 @@ COMA            ","
 {ELSE}          {printf("\nPalabra reservada: %s\n", yytext); return ELSE;}
 {ENDIF}         {printf("\nPalabra reservada: %s\n", yytext); return ENDIF;}
 {OP_ASIG}       {printf("\nPalabra reservada: %s\n", yytext); return OP_ASIG;}
-{CONST_ENTERA}  {
-                        printf("\nConstante entera: %s\n", yytext);
-                        int num = atoi(strdup(yytext));
-						if (num > 65535) {
-							printf("Valor numerico mayor a 65535 %d\n",num);
-							errorLexico();
-						} else {
-                            printf("\nPalabra reservada: %s\n", yytext);
-                            yylval.strVal = strdup(yytext);
-					 		return CONST_INT;
-						}
-                }
 {CONST_REAL}    {
                         printf("\nConstante real: %s\n", yytext);
                         float num = atof(strdup(yytext));
@@ -93,12 +81,25 @@ COMA            ","
 							printf("Valor numerico menor a -2147483648 o mayor a 2147483647\n");
 							errorLexico();
 						} else {
-                            printf("\nPalabra reservada: %s\n", yytext);
+                            //printf("\nPalabra reservada: %s\n", yytext);
                             yylval.strVal = strdup(yytext);
 					 		return CONST_REAL;
 						}
 
                 }
+{CONST_ENTERA}  {
+                        printf("\nConstante entera: %s\n", yytext);
+                        int num = atoi(strdup(yytext));
+						if (num > 65535) {
+							printf("Valor numerico mayor a 65535 %d\n",num);
+							errorLexico();
+						} else {
+                            //printf("\nPalabra reservada: %s\n", yytext);
+                            yylval.strVal = strdup(yytext);
+					 		return CONST_INT;
+						}
+                }
+
 {CONST_STRING}  {
                     printf("\nConstante string: %s\n", yytext);
                     if(strlen(yytext)<=30)

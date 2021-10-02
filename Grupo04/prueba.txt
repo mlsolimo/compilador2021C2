@@ -1,7 +1,22 @@
+*/Asignaciones/*
+
+flo1:=5.5;
+flo2:=7.333333;
+flo3:=0.5432;
+int1:=23;
+int2:=1;
+str1:="hola";
+str2:=3; */error/*
+str3:="hola  $%hola#";
+var1:=10;
+
 */Declaracion Variables/*
 
-DIM [flo1,flo2,flo3] AS [real,real,real]
-DIM [int1] AS [INTEGER]
+flo1:=5.5;
+
+
+DIM [a] AS [INTEGER];
+
 DIM [int2] AS [INTEGER]
 DIM [int3] AS [INTEGER]
 DIM [entero] AS [INTEGER]
@@ -12,17 +27,7 @@ DIM [str2] AS [STRING]
 DIM [str3] AS [STRING]
 DIM [base] AS [STRING]
 
-*/Asignaciones/*
 
-flo1:=5.5
-flo2:=7.333333
-flo3:=0.5432
-int1:=23
-int2:=1
-str1:="hola"
-str2:=3 */error/*
-str3:="hola  $%hola#"
-var1:=10
 
 */Constantes/*
 
@@ -33,10 +38,7 @@ d = “@sdADaSjfla%dfg”
 e = “asldk fh sjf”
 
 
-*/Entrada y salida/*
-DISPLAY "ingrese el valor de base" */DISPLAY/*
-GET base */GET/*
-DISPLAY base */DISPLAY/*
+
 
 */IF simple/*
 IF (int1 > 20)

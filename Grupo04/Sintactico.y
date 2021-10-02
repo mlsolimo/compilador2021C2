@@ -108,7 +108,7 @@ dec_variable: DIM CORCHETE_A lista_asig CORCHETE_C {
                                                 };
 
 lista_asig: VARIABLE COMA lista_asig COMA tipo            {pushStack(&stackVar,$1);}
-        |   VARIABLE CORCHETE_C AS CORCHETE_A tipo        {pushStack(&stackVar,$1);}
+        |   VARIABLE CORCHETE_A AS CORCHETE_A tipo        {pushStack(&stackVar,$1);}
         ;
 
 tipo:   TYPE_INTEGER                            {pushStack(&stackDataTypeDecVar,"INTEGER");}
@@ -121,6 +121,8 @@ tipo:   TYPE_INTEGER                            {pushStack(&stackDataTypeDecVar,
 
 asig:   VARIABLE OP_ASIG expresion          {;}
     |   VARIABLE OP_ASIG CONST_STRING       {;}
+    |   VARIABLE OP_ASIG CONST_REAL         {;}
+    |   VARIABLE OP_ASIG CONST_INT          {;}
     ;
 
 expresion:  expresion OP_SUMA termino         {;}
