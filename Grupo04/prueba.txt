@@ -1,10 +1,3 @@
-int3=120;
-IF (EQUMAX(10+101; [100, 111, var1] ))
-ENDIF;
-
-IF (EQUMIN(10+101; [100, 111, var1] ))
-ENDIF;
-
 WHILE ( 1 > 2 )
 	DISPLAY 1;
 	WHILE (1 > 3)
@@ -12,89 +5,127 @@ WHILE ( 1 > 2 )
 		ENDWHILE;
 ENDWHILE;
 
-va2 ="Hola";
+while ( a > 2)
+	display a;
+endwhile;
+
+a ="hello world";
 var = 10;
-vae = b;
-var = 5 + 10;
-var = 99999.99; */ comentario /*
+var = b;
+var = 2 + 5;
+var = 99999.99; */ es un real o flotante /*
 var = .9999;
 var1 = 99.;
-b = "asldk fh sjf";
+b = "abcde ed gih";
 A:=B;
 B=c;
 
-*/ Error /*
-*/ La linea de abajo supera el limite del entero de 16 bits permitido /*
-*/a = 4154654564132;/*
-*/ La linea de abajo supera el limite del real de 32 bits permitido /*
-*/ a = 100000000000000000.654548; /*
+*/ Error 0/*
+*/ Se supera el max de 16 bits para un entero /*
+*/ intVar = 655351;/*
+*/  Se supera el max de 32 bits para un flotante  /*
+*/ floatVar = 21474836444.654548; /*
 
 DIM [ a, b, z ] AS [ int, real, string ];
 DIM [ r ] AS [ string ];
 
 */ Error 1 /*
-*/ DIM < r > AS < string >; /*
-*/ DIM < a, b, z > AS [ integer, real, string ]; /*
+*/ DIM < a > AS < integer >; /*
+*/ DIM < a, b, c > AS [ integer, real, string ]; /*
 
 DISPLAY 1;
 display 1247;
 
 */ Error 2 /*
-*/ DISPLAI b; /*
 */ DISPLAY; /*
 */ display /*
 
-get asd4;
+get a;
 GET a;
 
-*/ Error 2 /*
+*/ Error 3 /*
 */ GET 2; /*
 */ get; /*
 */ get /*
 
 
-IF (a <= 30)
-b = "correcto"; */ Comentario /*
-ENDIF;
-
-IF (a <= 30 && b < 10)
-b = "correcto"; */ Comentario /*
-ENDIF;
-
-IF (a <= 30 || b < 10)
-b = "correcto"; */ Comentario /*
-ENDIF;
-
-IF (a <= 30 || b < 10)
-b = "correcto"; */ Comentario /*
+IF (a <= 10)
+b = "verdadero"; */ Entro /*
 ENDIF;
 
 IF (!a && b < 10)
-b = "correcto"; */ Comentario /*
+c = "verdadero"; */ Comentario /*
 ENDIF;
 
-if (a <= 30 || !(a == b))
+IF (a <= 10 && b < 10)
+c = "verdadero"; */ Entro /*
+ENDIF;
+
+IF (a <= 10 || b < 10)
+c = "verdadero"; */ Entro /*
+ENDIF;
+
+IF (a <= 10 || b < 10)
+c = "verdadero"; */ Entro /*
+ENDIF;
+
+if (a <= 10 || !(a == b))
 b = a;
 endif;
 
-if (a <= 30 || !(a == b))
+if (a <= 10 || !(a == b))
 endif;
 
-if (a <= 30 || !(a == b))
+if (a <= 10 || !(a == b))
 else
 endif;
 
-IF (a <= 30)
-b = "correcto";
+IF (a <= 10)
+b = "verdadero";
 ELSE
-pepe = "hola"; 
+b = "falso"; 
 ENDIF;
 
 
 */ Error 4 /*
 */ if; /*
 */ if /*
+
 if(!a)
 else
 */ comentar la linea de abajo /*
 endif;
+
+*/ Tema especial FOR/*
+FOR j = 0 to 4 [2]
+	display j;
+NEXT j;
+
+FOR j = 0 to 4
+	display j;
+NEXT j;
+
+FOR j = 0 to 4 [2]
+	display j;
+	FOR i = 0 to 2
+		display j;
+	NEXT i;
+NEXT j;
+
+*/ Error 5 /*
+*/FOR j = 0 to 4 []/*
+*/display j;/*
+*/NEXT j;/*
+
+*/ TEMA ESPECIAL EQUMAX Y EQUMIN /*
+
+IF (EQUMAX(10+101; [100, 111, var1] ))
+ENDIF;
+
+*/ Error 6/*
+*/IF (EQUMAX(10+101, [100, 111, var1] ))/*
+*/ENDIF;/*
+
+IF (EQUMIN(10+101; [100, 111, var1] ))
+ENDIF;
+

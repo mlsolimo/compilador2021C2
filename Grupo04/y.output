@@ -57,26 +57,27 @@ Gramática
 
    32 $@1: /* vacío */
 
-   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C $@1 sentencia NEXT VARIABLE
 
-   34 step: CONST_INT
-   35     | /* vacío */
+   34 $@2: /* vacío */
 
-   36 $@2: /* vacío */
+   35 for: FOR VARIABLE OP_ASIG expr TO expr $@2 sentencia NEXT VARIABLE
 
-   37 if: IF cond_completa sentencia $@2 ENDIF
+   36 $@3: /* vacío */
 
-   38 $@3: /* vacío */
+   37 if: IF cond_completa sentencia $@3 ENDIF
 
-   39 $@4: /* vacío */
+   38 $@4: /* vacío */
 
-   40 $@5: /* vacío */
+   39 $@5: /* vacío */
 
-   41 if: IF cond_completa sentencia $@3 ELSE $@4 sentencia $@5 ENDIF
+   40 $@6: /* vacío */
 
-   42 $@6: /* vacío */
+   41 if: IF cond_completa sentencia $@4 ELSE $@5 sentencia $@6 ENDIF
 
-   43 if: IF cond_completa ELSE $@6 ENDIF
+   42 $@7: /* vacío */
+
+   43 if: IF cond_completa ELSE $@7 ENDIF
    44   | IF cond_completa ENDIF
 
    45 cond_completa: PARENTESIS_A cond_completa PARENTESIS_C
@@ -160,23 +161,23 @@ OP_OR (282) 46 48 51 54 73
 OP_COMP (283) 67
 EQU_MAX (284) 58
 EQU_MIN (285) 59
-CONST_INT (286) 15 34 63
+CONST_INT (286) 15 33 63
 CONST_REAL (287) 16 64
-VARIABLE (288) 12 13 26 29 33 66 75 77 78
+VARIABLE (288) 12 13 26 29 33 35 66 75 77 78
 CONST_STRING (289) 14 65
 COMENTARIO_A (290)
 COMENTARIO_C (291)
 COMENTARIO (292)
-FOR (293) 33
-NEXT (294) 33
-TO (295) 33
+FOR (293) 33 35
+NEXT (294) 33 35
+TO (295) 33 35
 . (296)
 OP_SUMA (297) 17
 OP_RESTA (298) 18
 OP_DIV (299) 21
 OP_MULT (300) 20
 MENOS_UNARIO (301)
-OP_ASIG (302) 12 13 33
+OP_ASIG (302) 12 13 33 35
 
 
 No terminales con las reglas donde aparecen
@@ -188,7 +189,7 @@ programa (50)
 prog (51)
     en la izquierda: 2, en la derecha: 1
 sentencia (52)
-    en la izquierda: 3 4, en la derecha: 2 3 31 37 41
+    en la izquierda: 3 4, en la derecha: 2 3 31 33 35 37 41
 grammar (53)
     en la izquierda: 5 6 7 8 9 10 11, en la derecha: 3 4
 asig (54)
@@ -198,8 +199,8 @@ CONST_STRING_R (55)
 NUMERO (56)
     en la izquierda: 15 16, en la derecha: 25
 expr (57)
-    en la izquierda: 17 18 19, en la derecha: 12 17 18 24 28 33 60
-    67 68 69 70 71 72 73 74
+    en la izquierda: 17 18 19, en la derecha: 12 17 18 24 28 33 35
+    60 67 68 69 70 71 72 73 74
 termino (58)
     en la izquierda: 20 21 22 23, en la derecha: 17 18 19 20 21 22
     74
@@ -214,22 +215,22 @@ while (62)
 while_exp (63)
     en la izquierda: 31, en la derecha: 30
 for (64)
-    en la izquierda: 33, en la derecha: 11
+    en la izquierda: 33 35, en la derecha: 11
 $@1 (65)
     en la izquierda: 32, en la derecha: 33
-step (66)
-    en la izquierda: 34 35, en la derecha: 33
+$@2 (66)
+    en la izquierda: 34, en la derecha: 35
 if (67)
     en la izquierda: 37 41 43 44, en la derecha: 9
-$@2 (68)
+$@3 (68)
     en la izquierda: 36, en la derecha: 37
-$@3 (69)
+$@4 (69)
     en la izquierda: 38, en la derecha: 41
-$@4 (70)
+$@5 (70)
     en la izquierda: 39, en la derecha: 41
-$@5 (71)
+$@6 (71)
     en la izquierda: 40, en la derecha: 41
-$@6 (72)
+$@7 (72)
     en la izquierda: 42, en la derecha: 43
 cond_completa (73)
     en la izquierda: 45 46 47 48 49 50 51 52 53 54 55 56 57, en la derecha:
@@ -299,9 +300,9 @@ estado 2
 
 estado 3
 
-   37 if: IF . cond_completa sentencia $@2 ENDIF
-   41   | IF . cond_completa sentencia $@3 ELSE $@4 sentencia $@5 ENDIF
-   43   | IF . cond_completa ELSE $@6 ENDIF
+   37 if: IF . cond_completa sentencia $@3 ENDIF
+   41   | IF . cond_completa sentencia $@4 ELSE $@5 sentencia $@6 ENDIF
+   43   | IF . cond_completa ELSE $@7 ENDIF
    44   | IF . cond_completa ENDIF
 
     PARENTESIS_A  desplazar e ir al estado 20
@@ -346,7 +347,8 @@ estado 6
 
 estado 7
 
-   33 for: FOR . VARIABLE OP_ASIG expr TO expr CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+   33 for: FOR . VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C $@1 sentencia NEXT VARIABLE
+   35    | FOR . VARIABLE OP_ASIG expr TO expr $@2 sentencia NEXT VARIABLE
 
     VARIABLE  desplazar e ir al estado 37
 
@@ -525,9 +527,9 @@ estado 22
 
 estado 23
 
-   37 if: IF cond_completa . sentencia $@2 ENDIF
-   41   | IF cond_completa . sentencia $@3 ELSE $@4 sentencia $@5 ENDIF
-   43   | IF cond_completa . ELSE $@6 ENDIF
+   37 if: IF cond_completa . sentencia $@3 ENDIF
+   41   | IF cond_completa . sentencia $@4 ELSE $@5 sentencia $@6 ENDIF
+   43   | IF cond_completa . ELSE $@7 ENDIF
    44   | IF cond_completa . ENDIF
 
     DIM       desplazar e ir al estado 1
@@ -683,7 +685,8 @@ estado 36
 
 estado 37
 
-   33 for: FOR VARIABLE . OP_ASIG expr TO expr CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+   33 for: FOR VARIABLE . OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C $@1 sentencia NEXT VARIABLE
+   35    | FOR VARIABLE . OP_ASIG expr TO expr $@2 sentencia NEXT VARIABLE
 
     OP_ASIG  desplazar e ir al estado 66
 
@@ -892,11 +895,11 @@ estado 54
 
 estado 55
 
-   43 if: IF cond_completa ELSE . $@6 ENDIF
+   43 if: IF cond_completa ELSE . $@7 ENDIF
 
-    $default  reduce usando la regla 42 ($@6)
+    $default  reduce usando la regla 42 ($@7)
 
-    $@6  ir al estado 92
+    $@7  ir al estado 92
 
 
 estado 56
@@ -909,8 +912,8 @@ estado 56
 estado 57
 
     3 sentencia: sentencia . grammar PUNTO_COMA
-   37 if: IF cond_completa sentencia . $@2 ENDIF
-   41   | IF cond_completa sentencia . $@3 ELSE $@4 sentencia $@5 ENDIF
+   37 if: IF cond_completa sentencia . $@3 ENDIF
+   41   | IF cond_completa sentencia . $@4 ELSE $@5 sentencia $@6 ENDIF
 
     DIM       desplazar e ir al estado 1
     WHILE     desplazar e ir al estado 2
@@ -920,8 +923,8 @@ estado 57
     VARIABLE  desplazar e ir al estado 6
     FOR       desplazar e ir al estado 7
 
-    ELSE      reduce usando la regla 38 ($@3)
-    $default  reduce usando la regla 36 ($@2)
+    ELSE      reduce usando la regla 38 ($@4)
+    $default  reduce usando la regla 36 ($@3)
 
     grammar  ir al estado 39
     asig     ir al estado 12
@@ -930,8 +933,8 @@ estado 57
     while    ir al estado 15
     for      ir al estado 16
     if       ir al estado 17
-    $@2      ir al estado 93
-    $@3      ir al estado 94
+    $@3      ir al estado 93
+    $@4      ir al estado 94
     dec_var  ir al estado 18
 
 
@@ -1032,7 +1035,8 @@ estado 65
 
 estado 66
 
-   33 for: FOR VARIABLE OP_ASIG . expr TO expr CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+   33 for: FOR VARIABLE OP_ASIG . expr TO expr CORCHETE_A CONST_INT CORCHETE_C $@1 sentencia NEXT VARIABLE
+   35    | FOR VARIABLE OP_ASIG . expr TO expr $@2 sentencia NEXT VARIABLE
 
     PARENTESIS_A  desplazar e ir al estado 25
     CONST_INT     desplazar e ir al estado 26
@@ -1388,21 +1392,21 @@ estado 91
 
 estado 92
 
-   43 if: IF cond_completa ELSE $@6 . ENDIF
+   43 if: IF cond_completa ELSE $@7 . ENDIF
 
     ENDIF  desplazar e ir al estado 122
 
 
 estado 93
 
-   37 if: IF cond_completa sentencia $@2 . ENDIF
+   37 if: IF cond_completa sentencia $@3 . ENDIF
 
     ENDIF  desplazar e ir al estado 123
 
 
 estado 94
 
-   41 if: IF cond_completa sentencia $@3 . ELSE $@4 sentencia $@5 ENDIF
+   41 if: IF cond_completa sentencia $@4 . ELSE $@5 sentencia $@6 ENDIF
 
     ELSE  desplazar e ir al estado 124
 
@@ -1456,7 +1460,8 @@ estado 100
 
    17 expr: expr . OP_SUMA termino
    18     | expr . OP_RESTA termino
-   33 for: FOR VARIABLE OP_ASIG expr . TO expr CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+   33 for: FOR VARIABLE OP_ASIG expr . TO expr CORCHETE_A CONST_INT CORCHETE_C $@1 sentencia NEXT VARIABLE
+   35    | FOR VARIABLE OP_ASIG expr . TO expr $@2 sentencia NEXT VARIABLE
 
     TO        desplazar e ir al estado 125
     OP_SUMA   desplazar e ir al estado 60
@@ -1656,30 +1661,31 @@ estado 121
 
 estado 122
 
-   43 if: IF cond_completa ELSE $@6 ENDIF .
+   43 if: IF cond_completa ELSE $@7 ENDIF .
 
     $default  reduce usando la regla 43 (if)
 
 
 estado 123
 
-   37 if: IF cond_completa sentencia $@2 ENDIF .
+   37 if: IF cond_completa sentencia $@3 ENDIF .
 
     $default  reduce usando la regla 37 (if)
 
 
 estado 124
 
-   41 if: IF cond_completa sentencia $@3 ELSE . $@4 sentencia $@5 ENDIF
+   41 if: IF cond_completa sentencia $@4 ELSE . $@5 sentencia $@6 ENDIF
 
-    $default  reduce usando la regla 39 ($@4)
+    $default  reduce usando la regla 39 ($@5)
 
-    $@4  ir al estado 139
+    $@5  ir al estado 139
 
 
 estado 125
 
-   33 for: FOR VARIABLE OP_ASIG expr TO . expr CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+   33 for: FOR VARIABLE OP_ASIG expr TO . expr CORCHETE_A CONST_INT CORCHETE_C $@1 sentencia NEXT VARIABLE
+   35    | FOR VARIABLE OP_ASIG expr TO . expr $@2 sentencia NEXT VARIABLE
 
     PARENTESIS_A  desplazar e ir al estado 25
     CONST_INT     desplazar e ir al estado 26
@@ -1794,7 +1800,7 @@ estado 138
 
 estado 139
 
-   41 if: IF cond_completa sentencia $@3 ELSE $@4 . sentencia $@5 ENDIF
+   41 if: IF cond_completa sentencia $@4 ELSE $@5 . sentencia $@6 ENDIF
 
     DIM       desplazar e ir al estado 1
     WHILE     desplazar e ir al estado 2
@@ -1819,11 +1825,16 @@ estado 140
 
    17 expr: expr . OP_SUMA termino
    18     | expr . OP_RESTA termino
-   33 for: FOR VARIABLE OP_ASIG expr TO expr . CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE
+   33 for: FOR VARIABLE OP_ASIG expr TO expr . CORCHETE_A CONST_INT CORCHETE_C $@1 sentencia NEXT VARIABLE
+   35    | FOR VARIABLE OP_ASIG expr TO expr . $@2 sentencia NEXT VARIABLE
 
     CORCHETE_A  desplazar e ir al estado 148
     OP_SUMA     desplazar e ir al estado 60
     OP_RESTA    desplazar e ir al estado 61
+
+    $default  reduce usando la regla 34 ($@2)
+
+    $@2  ir al estado 149
 
 
 estado 141
@@ -1865,19 +1876,19 @@ estado 146
 
    60 cond_equ: expr PUNTO_COMA CORCHETE_A . lista CORCHETE_C
 
-    CONST_INT     desplazar e ir al estado 149
-    CONST_REAL    desplazar e ir al estado 150
-    VARIABLE      desplazar e ir al estado 151
-    CONST_STRING  desplazar e ir al estado 152
+    CONST_INT     desplazar e ir al estado 150
+    CONST_REAL    desplazar e ir al estado 151
+    VARIABLE      desplazar e ir al estado 152
+    CONST_STRING  desplazar e ir al estado 153
 
-    lista      ir al estado 153
-    expr_list  ir al estado 154
+    lista      ir al estado 154
+    expr_list  ir al estado 155
 
 
 estado 147
 
     3 sentencia: sentencia . grammar PUNTO_COMA
-   41 if: IF cond_completa sentencia $@3 ELSE $@4 sentencia . $@5 ENDIF
+   41 if: IF cond_completa sentencia $@4 ELSE $@5 sentencia . $@6 ENDIF
 
     DIM       desplazar e ir al estado 1
     WHILE     desplazar e ir al estado 2
@@ -1887,7 +1898,7 @@ estado 147
     VARIABLE  desplazar e ir al estado 6
     FOR       desplazar e ir al estado 7
 
-    $default  reduce usando la regla 40 ($@5)
+    $default  reduce usando la regla 40 ($@6)
 
     grammar  ir al estado 39
     asig     ir al estado 12
@@ -1896,144 +1907,234 @@ estado 147
     while    ir al estado 15
     for      ir al estado 16
     if       ir al estado 17
-    $@5      ir al estado 155
+    $@6      ir al estado 156
     dec_var  ir al estado 18
 
 
 estado 148
 
-   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A . step CORCHETE_C $@1 NEXT VARIABLE
+   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A . CONST_INT CORCHETE_C $@1 sentencia NEXT VARIABLE
 
-    CONST_INT  desplazar e ir al estado 156
-
-    $default  reduce usando la regla 35 (step)
-
-    step  ir al estado 157
+    CONST_INT  desplazar e ir al estado 157
 
 
 estado 149
+
+   35 for: FOR VARIABLE OP_ASIG expr TO expr $@2 . sentencia NEXT VARIABLE
+
+    DIM       desplazar e ir al estado 1
+    WHILE     desplazar e ir al estado 2
+    IF        desplazar e ir al estado 3
+    GET       desplazar e ir al estado 4
+    DISPLAY   desplazar e ir al estado 5
+    VARIABLE  desplazar e ir al estado 6
+    FOR       desplazar e ir al estado 7
+
+    sentencia  ir al estado 158
+    grammar    ir al estado 11
+    asig       ir al estado 12
+    display    ir al estado 13
+    get        ir al estado 14
+    while      ir al estado 15
+    for        ir al estado 16
+    if         ir al estado 17
+    dec_var    ir al estado 18
+
+
+estado 150
 
    63 expr_list: CONST_INT .
 
     $default  reduce usando la regla 63 (expr_list)
 
 
-estado 150
+estado 151
 
    64 expr_list: CONST_REAL .
 
     $default  reduce usando la regla 64 (expr_list)
 
 
-estado 151
+estado 152
 
    66 expr_list: VARIABLE .
 
     $default  reduce usando la regla 66 (expr_list)
 
 
-estado 152
+estado 153
 
    65 expr_list: CONST_STRING .
 
     $default  reduce usando la regla 65 (expr_list)
 
 
-estado 153
+estado 154
 
    60 cond_equ: expr PUNTO_COMA CORCHETE_A lista . CORCHETE_C
    62 lista: lista . COMA expr_list
 
-    CORCHETE_C  desplazar e ir al estado 158
-    COMA        desplazar e ir al estado 159
+    CORCHETE_C  desplazar e ir al estado 159
+    COMA        desplazar e ir al estado 160
 
 
-estado 154
+estado 155
 
    61 lista: expr_list .
 
     $default  reduce usando la regla 61 (lista)
 
 
-estado 155
-
-   41 if: IF cond_completa sentencia $@3 ELSE $@4 sentencia $@5 . ENDIF
-
-    ENDIF  desplazar e ir al estado 160
-
-
 estado 156
 
-   34 step: CONST_INT .
+   41 if: IF cond_completa sentencia $@4 ELSE $@5 sentencia $@6 . ENDIF
 
-    $default  reduce usando la regla 34 (step)
+    ENDIF  desplazar e ir al estado 161
 
 
 estado 157
 
-   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A step . CORCHETE_C $@1 NEXT VARIABLE
+   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT . CORCHETE_C $@1 sentencia NEXT VARIABLE
 
-    CORCHETE_C  desplazar e ir al estado 161
+    CORCHETE_C  desplazar e ir al estado 162
 
 
 estado 158
+
+    3 sentencia: sentencia . grammar PUNTO_COMA
+   35 for: FOR VARIABLE OP_ASIG expr TO expr $@2 sentencia . NEXT VARIABLE
+
+    DIM       desplazar e ir al estado 1
+    WHILE     desplazar e ir al estado 2
+    IF        desplazar e ir al estado 3
+    GET       desplazar e ir al estado 4
+    DISPLAY   desplazar e ir al estado 5
+    VARIABLE  desplazar e ir al estado 6
+    FOR       desplazar e ir al estado 7
+    NEXT      desplazar e ir al estado 163
+
+    grammar  ir al estado 39
+    asig     ir al estado 12
+    display  ir al estado 13
+    get      ir al estado 14
+    while    ir al estado 15
+    for      ir al estado 16
+    if       ir al estado 17
+    dec_var  ir al estado 18
+
+
+estado 159
 
    60 cond_equ: expr PUNTO_COMA CORCHETE_A lista CORCHETE_C .
 
     $default  reduce usando la regla 60 (cond_equ)
 
 
-estado 159
+estado 160
 
    62 lista: lista COMA . expr_list
 
-    CONST_INT     desplazar e ir al estado 149
-    CONST_REAL    desplazar e ir al estado 150
-    VARIABLE      desplazar e ir al estado 151
-    CONST_STRING  desplazar e ir al estado 152
+    CONST_INT     desplazar e ir al estado 150
+    CONST_REAL    desplazar e ir al estado 151
+    VARIABLE      desplazar e ir al estado 152
+    CONST_STRING  desplazar e ir al estado 153
 
-    expr_list  ir al estado 162
-
-
-estado 160
-
-   41 if: IF cond_completa sentencia $@3 ELSE $@4 sentencia $@5 ENDIF .
-
-    $default  reduce usando la regla 41 (if)
+    expr_list  ir al estado 164
 
 
 estado 161
 
-   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A step CORCHETE_C . $@1 NEXT VARIABLE
+   41 if: IF cond_completa sentencia $@4 ELSE $@5 sentencia $@6 ENDIF .
 
-    $default  reduce usando la regla 32 ($@1)
-
-    $@1  ir al estado 163
+    $default  reduce usando la regla 41 (if)
 
 
 estado 162
+
+   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C . $@1 sentencia NEXT VARIABLE
+
+    $default  reduce usando la regla 32 ($@1)
+
+    $@1  ir al estado 165
+
+
+estado 163
+
+   35 for: FOR VARIABLE OP_ASIG expr TO expr $@2 sentencia NEXT . VARIABLE
+
+    VARIABLE  desplazar e ir al estado 166
+
+
+estado 164
 
    62 lista: lista COMA expr_list .
 
     $default  reduce usando la regla 62 (lista)
 
 
-estado 163
-
-   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A step CORCHETE_C $@1 . NEXT VARIABLE
-
-    NEXT  desplazar e ir al estado 164
-
-
-estado 164
-
-   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A step CORCHETE_C $@1 NEXT . VARIABLE
-
-    VARIABLE  desplazar e ir al estado 165
-
-
 estado 165
 
-   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A step CORCHETE_C $@1 NEXT VARIABLE .
+   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C $@1 . sentencia NEXT VARIABLE
+
+    DIM       desplazar e ir al estado 1
+    WHILE     desplazar e ir al estado 2
+    IF        desplazar e ir al estado 3
+    GET       desplazar e ir al estado 4
+    DISPLAY   desplazar e ir al estado 5
+    VARIABLE  desplazar e ir al estado 6
+    FOR       desplazar e ir al estado 7
+
+    sentencia  ir al estado 167
+    grammar    ir al estado 11
+    asig       ir al estado 12
+    display    ir al estado 13
+    get        ir al estado 14
+    while      ir al estado 15
+    for        ir al estado 16
+    if         ir al estado 17
+    dec_var    ir al estado 18
+
+
+estado 166
+
+   35 for: FOR VARIABLE OP_ASIG expr TO expr $@2 sentencia NEXT VARIABLE .
+
+    $default  reduce usando la regla 35 (for)
+
+
+estado 167
+
+    3 sentencia: sentencia . grammar PUNTO_COMA
+   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C $@1 sentencia . NEXT VARIABLE
+
+    DIM       desplazar e ir al estado 1
+    WHILE     desplazar e ir al estado 2
+    IF        desplazar e ir al estado 3
+    GET       desplazar e ir al estado 4
+    DISPLAY   desplazar e ir al estado 5
+    VARIABLE  desplazar e ir al estado 6
+    FOR       desplazar e ir al estado 7
+    NEXT      desplazar e ir al estado 168
+
+    grammar  ir al estado 39
+    asig     ir al estado 12
+    display  ir al estado 13
+    get      ir al estado 14
+    while    ir al estado 15
+    for      ir al estado 16
+    if       ir al estado 17
+    dec_var  ir al estado 18
+
+
+estado 168
+
+   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C $@1 sentencia NEXT . VARIABLE
+
+    VARIABLE  desplazar e ir al estado 169
+
+
+estado 169
+
+   33 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C $@1 sentencia NEXT VARIABLE .
 
     $default  reduce usando la regla 33 (for)

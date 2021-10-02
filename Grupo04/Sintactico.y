@@ -134,14 +134,14 @@ while: WHILE  cond_completa
 while_exp: sentencia {;}
             ;
 
-for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A step CORCHETE_C {;}
+for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C {;}
+     sentencia
      NEXT VARIABLE
-;
+    | FOR VARIABLE OP_ASIG expr TO expr {;}
+      sentencia
+      NEXT VARIABLE
+    ;
 
-step: CONST_INT {;}
-      | {;}
-      ;
-      
 if: IF cond_completa 
     sentencia             {;}
     ENDIF                 {;}
