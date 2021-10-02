@@ -10,39 +10,16 @@ str2:=3; */error/*
 str3:="hola  $%hola#";
 var1:=10;
 
-*/Declaracion Variables/*
-
-flo1:=5.5;
-
-
-DIM [a] AS [INTEGER];
-
-DIM [int2] AS [INTEGER]
-DIM [int3] AS [INTEGER]
-DIM [entero] AS [INTEGER]
-DIM [i,j] AS [INTEGER,INTEGER]
-DIM [var1] AS [INTEGER]
-DIM [str1] AS [STRING]
-DIM [str2] AS [STRING]
-DIM [str3] AS [STRING]
-DIM [base] AS [STRING]
-
-
-
 */Constantes/*
-
-a = 99999.99
-b = 99.
-c = .9999
-d = “@sdADaSjfla%dfg”
-e = “asldk fh sjf”
-
-
-
+a := 99999.99;
+b := 99.;
+c := .9999;
+d := "@sdADaSjfla%dfg";
+e := "asldk fh sjf";
 
 */IF simple/*
 IF (int1 > 20)
-	DISPLAY "int1 es mayor a 20"
+	DISPLAY "int1 es mayor a 20";
 ENDIF
 
 */Condicion compuesta con AND/*
@@ -95,3 +72,18 @@ IF EQUMIN(111; [100, 111, int3] )
 
 IF EQUMIN(100; [100, 111, int3] )
 	DISPLAY "Equmin verdadero"
+
+
+*/Declaracion Variables/*
+
+DIM [a] AS [INTEGER];
+
+DIM [int2] AS [INTEGER]
+DIM [int3] AS [INTEGER]
+DIM [entero] AS [INTEGER]
+DIM [i,j] AS [INTEGER,INTEGER]
+DIM [var1] AS [INTEGER]
+DIM [str1] AS [STRING]
+DIM [str2] AS [STRING]
+DIM [str3] AS [STRING]
+DIM [base] AS [STRING]

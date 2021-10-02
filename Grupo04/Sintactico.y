@@ -76,6 +76,7 @@ programa: sentencia gramatica {;}
 
 sentencia: sentencia gramatica PUNTO_COMA  {;}
         |  gramatica PUNTO_COMA            {;}
+        |  gramatica                       {;}
         ;
 
 gramatica: dec_variable       {;}
@@ -122,22 +123,21 @@ tipo:   TYPE_INTEGER                            {pushStack(&stackDataTypeDecVar,
 asig:   VARIABLE OP_ASIG expresion          {;}
     |   VARIABLE OP_ASIG CONST_STRING       {;}
     |   VARIABLE OP_ASIG CONST_REAL         {;}
-    |   VARIABLE OP_ASIG CONST_INT          {;}
     ;
 
-expresion:  expresion OP_SUMA termino         {;}
+expresion:  expresion OP_SUMA termino   {;}
 	| expresion OP_RESTA termino        {;} 
-	| termino                       {;}
+	| termino                           {;}
     ;
 
-termino: termino OP_MULT factor   {;}
-	   | termino OP_DIVISION factor    {;}
-	   | factor                     {;}
+termino: termino OP_MULT factor         {;}
+	   | termino OP_DIVISION factor     {;}
+	   | factor                         {;}
        ;
             
 factor: PARENTESIS_A expresion PARENTESIS_C     {;}
-      | DIGITO                          {;}
-	  | VARIABLE                        {;}
+      | CONST_INT                               {;}
+	  | VARIABLE                                {;}
       ;
 
 // display
@@ -182,17 +182,17 @@ if: IF cond_final
     ;
 
 
-cond_final: PARENTESIS_A cond_final AND cond_final PARENTESIS_C
-			| PARENTESIS_A cond AND cond_final PARENTESIS_C
-			| PARENTESIS_A cond_final AND cond PARENTESIS_C
-			| PARENTESIS_A cond_final OR cond_final  PARENTESIS_C 
-			| PARENTESIS_A cond OR cond_final PARENTESIS_C 
-			| PARENTESIS_A cond_final OR cond PARENTESIS_C 
-		    | PARENTESIS_A cond AND cond PARENTESIS_C
-			| PARENTESIS_A cond OR cond PARENTESIS_C 
-		    | PARENTESIS_A cond PARENTESIS_C
-		    | NOT cond_final
-		    | PARENTESIS_A cond_final PARENTESIS_C
+cond_final: PARENTESIS_A cond_final AND cond_final PARENTESIS_C     {;}
+			| PARENTESIS_A cond AND cond_final PARENTESIS_C         {;}
+			| PARENTESIS_A cond_final AND cond PARENTESIS_C         {;}
+			| PARENTESIS_A cond_final OR cond_final  PARENTESIS_C   {;}
+			| PARENTESIS_A cond OR cond_final PARENTESIS_C          {;}
+			| PARENTESIS_A cond_final OR cond PARENTESIS_C          {;}
+		    | PARENTESIS_A cond AND cond PARENTESIS_C               {;}
+			| PARENTESIS_A cond OR cond PARENTESIS_C                {;}
+		    | NOT cond_final                                        {;}
+		    | PARENTESIS_A cond_final PARENTESIS_C                  {;}
+            | PARENTESIS_A cond PARENTESIS_C                        {;}
 		  ;
 
 cond: expresion OP_COMP expresion  {;}
