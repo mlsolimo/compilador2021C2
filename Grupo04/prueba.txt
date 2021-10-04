@@ -11,6 +11,7 @@ endwhile;
 
 a ="hello world";
 var = 10;
+var = 19;
 var = b;
 var = 2 + 5;
 var = 99999.99; */ es un real o flotante /*
@@ -53,6 +54,10 @@ IF (a <= 10)
 b = "verdadero"; */ Entro /*
 ENDIF;
 
+*/ Error 4 /*
+*/ if; /*
+*/ if /*
+
 IF (!a && b < 10)
 c = "verdadero"; */ Comentario /*
 ENDIF;
@@ -87,15 +92,6 @@ b = "falso";
 ENDIF;
 
 
-*/ Error 4 /*
-*/ if; /*
-*/ if /*
-
-if(!a)
-else
-*/ comentar la linea de abajo /*
-endif;
-
 */ Tema especial FOR/*
 FOR j = 0 to 4 [2]
 	display j;
@@ -124,6 +120,10 @@ ENDIF;
 
 */ Error 6/*
 */IF (EQUMAX(10+101, [100, 111, var1] ))/*
+*/ENDIF;/*
+
+*/ Error 7/*
+*/IF (EQUMIN(10+10, [100, 111, var1] ))/*
 */ENDIF;/*
 
 IF (EQUMIN(10+101; [100, 111, var1] ))

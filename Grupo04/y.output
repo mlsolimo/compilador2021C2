@@ -118,10 +118,10 @@ Gramática
    74     | expr OP_NOT termino
    75     | OP_NOT VARIABLE
 
-   76 dec_var: DIM CORCHETE_A dupla_asig CORCHETE_C
+   76 dec_var: DIM CORCHETE_A seg_asig CORCHETE_C
 
-   77 dupla_asig: VARIABLE COMA dupla_asig COMA tipo
-   78           | VARIABLE CORCHETE_C AS CORCHETE_A tipo
+   77 seg_asig: VARIABLE COMA seg_asig COMA tipo
+   78         | VARIABLE CORCHETE_C AS CORCHETE_A tipo
 
    79 tipo: INT
    80     | REAL
@@ -250,7 +250,7 @@ cond (79)
     49 51 52 53 54 55
 dec_var (80)
     en la izquierda: 76, en la derecha: 5
-dupla_asig (81)
+seg_asig (81)
     en la izquierda: 77 78, en la derecha: 76 77
 tipo (82)
     en la izquierda: 79 80 81, en la derecha: 77 78
@@ -283,7 +283,7 @@ estado 0
 
 estado 1
 
-   76 dec_var: DIM . CORCHETE_A dupla_asig CORCHETE_C
+   76 dec_var: DIM . CORCHETE_A seg_asig CORCHETE_C
 
     CORCHETE_A  desplazar e ir al estado 19
 
@@ -450,11 +450,11 @@ estado 18
 
 estado 19
 
-   76 dec_var: DIM CORCHETE_A . dupla_asig CORCHETE_C
+   76 dec_var: DIM CORCHETE_A . seg_asig CORCHETE_C
 
     VARIABLE  desplazar e ir al estado 41
 
-    dupla_asig  ir al estado 42
+    seg_asig  ir al estado 42
 
 
 estado 20
@@ -714,8 +714,8 @@ estado 40
 
 estado 41
 
-   77 dupla_asig: VARIABLE . COMA dupla_asig COMA tipo
-   78           | VARIABLE . CORCHETE_C AS CORCHETE_A tipo
+   77 seg_asig: VARIABLE . COMA seg_asig COMA tipo
+   78         | VARIABLE . CORCHETE_C AS CORCHETE_A tipo
 
     CORCHETE_C  desplazar e ir al estado 68
     COMA        desplazar e ir al estado 69
@@ -723,7 +723,7 @@ estado 41
 
 estado 42
 
-   76 dec_var: DIM CORCHETE_A dupla_asig . CORCHETE_C
+   76 dec_var: DIM CORCHETE_A seg_asig . CORCHETE_C
 
     CORCHETE_C  desplazar e ir al estado 70
 
@@ -1059,23 +1059,23 @@ estado 67
 
 estado 68
 
-   78 dupla_asig: VARIABLE CORCHETE_C . AS CORCHETE_A tipo
+   78 seg_asig: VARIABLE CORCHETE_C . AS CORCHETE_A tipo
 
     AS  desplazar e ir al estado 101
 
 
 estado 69
 
-   77 dupla_asig: VARIABLE COMA . dupla_asig COMA tipo
+   77 seg_asig: VARIABLE COMA . seg_asig COMA tipo
 
     VARIABLE  desplazar e ir al estado 41
 
-    dupla_asig  ir al estado 102
+    seg_asig  ir al estado 102
 
 
 estado 70
 
-   76 dec_var: DIM CORCHETE_A dupla_asig CORCHETE_C .
+   76 dec_var: DIM CORCHETE_A seg_asig CORCHETE_C .
 
     $default  reduce usando la regla 76 (dec_var)
 
@@ -1470,14 +1470,14 @@ estado 100
 
 estado 101
 
-   78 dupla_asig: VARIABLE CORCHETE_C AS . CORCHETE_A tipo
+   78 seg_asig: VARIABLE CORCHETE_C AS . CORCHETE_A tipo
 
     CORCHETE_A  desplazar e ir al estado 126
 
 
 estado 102
 
-   77 dupla_asig: VARIABLE COMA dupla_asig . COMA tipo
+   77 seg_asig: VARIABLE COMA seg_asig . COMA tipo
 
     COMA  desplazar e ir al estado 127
 
@@ -1701,7 +1701,7 @@ estado 125
 
 estado 126
 
-   78 dupla_asig: VARIABLE CORCHETE_C AS CORCHETE_A . tipo
+   78 seg_asig: VARIABLE CORCHETE_C AS CORCHETE_A . tipo
 
     INT     desplazar e ir al estado 141
     REAL    desplazar e ir al estado 142
@@ -1712,7 +1712,7 @@ estado 126
 
 estado 127
 
-   77 dupla_asig: VARIABLE COMA dupla_asig COMA . tipo
+   77 seg_asig: VARIABLE COMA seg_asig COMA . tipo
 
     INT     desplazar e ir al estado 141
     REAL    desplazar e ir al estado 142
@@ -1860,16 +1860,16 @@ estado 143
 
 estado 144
 
-   78 dupla_asig: VARIABLE CORCHETE_C AS CORCHETE_A tipo .
+   78 seg_asig: VARIABLE CORCHETE_C AS CORCHETE_A tipo .
 
-    $default  reduce usando la regla 78 (dupla_asig)
+    $default  reduce usando la regla 78 (seg_asig)
 
 
 estado 145
 
-   77 dupla_asig: VARIABLE COMA dupla_asig COMA tipo .
+   77 seg_asig: VARIABLE COMA seg_asig COMA tipo .
 
-    $default  reduce usando la regla 77 (dupla_asig)
+    $default  reduce usando la regla 77 (seg_asig)
 
 
 estado 146

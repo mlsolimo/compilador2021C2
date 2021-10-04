@@ -67,7 +67,7 @@ int insertNumber(tList *p, char* lex)
     result = insertOrder(p, name, " ", lex, 0);
 
     if(result == DUPLICATE){
-        printf("Lexema %s ya se ingreso en la tabla de simbolos\n",lex);
+        printf("La constante numerica %s ya se ingreso en la tabla de simbolos\n",lex);
         return DUPLICATE;
     }
 
@@ -87,7 +87,7 @@ int insertString(tList *p, char* lex)
     result = insertOrder(p, name, " ", newName, strlen(newName));
 
     if(result == DUPLICATE){
-        printf("Lexema %s ya se ingreso en la tabla de simbolos\n",lex);
+        printf("La constante string %s ya se ingreso en la tabla de simbolos\n",lex);
         return DUPLICATE;
     }
 
@@ -117,7 +117,7 @@ int insertVariable(tList *p, char* lex, char* dataType)
 
     result = insertOrder(p, lex, dataType, " ", 0);
     if(result == DUPLICATE){
-        printf("Lexema %s ya se ingreso en la tabla de simbolos\n",lex);
+        printf("La variable %s ya se ingreso en la tabla de simbolos\n",lex);
         return DUPLICATE;
     }
 
@@ -126,31 +126,31 @@ int insertVariable(tList *p, char* lex, char* dataType)
 
 void deleteTable(tList *p)
 {
-    FILE *pTable = fopen("ts.txt", "wt");
+    FILE *pTable = fopen("ts.txt", "w+");
     if(!pTable) {
         printf("No se pudo abrir el archivo ts.txt \n");
         return;
     }
 
-    printf("\n_______________________________TABLA DE SIMBOLOS______________________________\n");
+    printf("\n                           TABLA DE SIMBOLOS                              \n");
 
-    printf("_______________________________________________________________________________\n");
-    printf("|%-25s|%-16s|%-25s|%-10s|\n", "NOMBRE", "TIPO DE DATO", "VALOR", "LONGITUD");
-    printf("_______________________________________________________________________________\n");
+    printf("+---------------------------------------------------------------------------------+\n");
+    printf("|%-25s|%-16s|%-30s|%-10s|\n", "NOMBRE", "TIPO DE DATO", "VALOR", "LONGITUD");
+    printf("+---------------------------------------------------------------------------------+\n");
 
-    fprintf(pTable,"\n______________________________TABLA DE SIMBOLOS_______________________________\n");
-    fprintf(pTable, "_______________________________________________________________________________\n");
-    fprintf(pTable, "|%-25s|%-16s|%-25s|%-10s|\n", "NOMBRE", "TIPO DE DATO", "VALOR", "LONGITUD");
-    fprintf(pTable, "_______________________________________________________________________________\n");
+    fprintf(pTable,"\n                           TABLA DE SIMBOLOS                           \n");
+    fprintf(pTable, "+---------------------------------------------------------------------------------+\n");
+    fprintf(pTable, "|%-25s|%-16s|%-30s|%-10s|\n", "NOMBRE", "TIPO DE DATO", "VALOR", "LONGITUD");
+    fprintf(pTable, "+---------------------------------------------------------------------------------+\n");
 
     while(*p)
     {
-        printf("|%-25s|%-16s|%-25s|%-10d|\n", (*p)->name, (*p)->dataType, (*p)->value, (*p)->length);
-        fprintf(pTable, "|%-25s|%-16s|%-25s|%-10d|\n", (*p)->name, (*p)->dataType, (*p)->value, (*p)->length);
+        printf("|%-25s|%-16s|%-30s|%-10d|\n", (*p)->name, (*p)->dataType, (*p)->value, (*p)->length);
+        fprintf(pTable, "|%-25s|%-16s|%-30s|%-10d|\n", (*p)->name, (*p)->dataType, (*p)->value, (*p)->length);
         p = &(*p)->next;
     }
 
-    printf("_______________________________________________________________________________\n");
-    fprintf(pTable, "_______________________________________________________________________________\n");
+    printf("+---------------------------------------------------------------------------------+\n");
+    fprintf(pTable, "+---------------------------------------------------------------------------------+\n");
     fclose(pTable);
 }

@@ -200,7 +200,7 @@ cond: expr OP_COMP expr  {;}
     | OP_NOT VARIABLE {;}
     ;
 
-dec_var: DIM CORCHETE_A dupla_asig CORCHETE_C {
+dec_var: DIM CORCHETE_A seg_asig CORCHETE_C {
                                         char dataType[100];
                                         char variable[100];
                                         while(!emptyStack(&stackDataTypeDecVar)){
@@ -216,7 +216,7 @@ dec_var: DIM CORCHETE_A dupla_asig CORCHETE_C {
 };
 
 
-dupla_asig:  VARIABLE COMA dupla_asig COMA tipo             {pushStack(&stackVar,$1);}
+seg_asig:  VARIABLE COMA seg_asig COMA tipo                 {pushStack(&stackVar,$1);}
           |  VARIABLE CORCHETE_C AS CORCHETE_A tipo         {pushStack(&stackVar,$1);}
           ;
 			 

@@ -588,7 +588,7 @@ static const char *const yytname[] =
   "termino", "factor", "display", "get", "while", "while_exp", "for",
   "$@1", "$@2", "if", "$@3", "$@4", "$@5", "$@6", "$@7", "cond_completa",
   "equmax", "equmin", "cond_equ", "lista", "expr_list", "cond", "dec_var",
-  "dupla_asig", "tipo", 0
+  "seg_asig", "tipo", 0
 };
 #endif
 
