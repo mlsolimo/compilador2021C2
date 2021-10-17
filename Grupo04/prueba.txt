@@ -23,9 +23,9 @@ B=c;
 
 */ Error 0/*
 */ Se supera el max de 16 bits para un entero /*
-*/ intVar = 655351;/*
+*/ intVar = 655351; /*
 */  Se supera el max de 32 bits para un flotante  /*
-*/ floatVar = 21474836444.654548; /*
+*/floatVar = 21474836444.654548;/*
 
 DIM [ a, b, z ] AS [ int, real, string ];
 DIM [ r ] AS [ string ];

@@ -68,7 +68,7 @@ extern int yylineno;
 
 %%
 
-programa:   prog             {;}
+programa:   prog             
         ;
 
 prog: sentencia                 {;}
@@ -78,17 +78,17 @@ sentencia: sentencia grammar PUNTO_COMA  {;}
         | grammar PUNTO_COMA             {;}
         ;
 
-grammar:   dec_var                    {;}
-       |   asig                       {;}
-       |   display                    {;}
-       |   get                        {;}
-       |   if                         {;}
-       |   while                      {;}
-       |   for                        {;}
+grammar:   dec_var                    {printf("Regla - fin de Sentencia de declaracion de variable\n\n");}
+       |   asig                       {printf("Regla - fin de Sentencia de asignacion \n\n");}
+       |   display                    {printf("Regla - fin de Sentencia de Display \n\n");}
+       |   get                        {printf("Regla - fin de Sentencia de Get \n\n");}
+       |   if                         {printf("Regla - fin de Sentencia de IF \n\n");}
+       |   while                      {printf("Regla - fin de Sentencia de While \n\n");}
+       |   for                        {printf("Regla - fin de Sentencia de Tema especial - For \n\n");}
        ;
 
-asig:   VARIABLE OP_ASIG expr             {;}
-    |   VARIABLE OP_ASIG CONST_STRING_R     {;}
+asig:   VARIABLE OP_ASIG expr             {printf("Regla - Sentencia de asignacion por expresion \n");}
+    |   VARIABLE OP_ASIG CONST_STRING_R     {printf("Regla - Sentencia de asignacion por constante string \n");}
     ;
 
 CONST_STRING_R: CONST_STRING {
@@ -99,16 +99,16 @@ NUMERO: CONST_INT{
         insertNumber(&symbolTable,$1);
       }    
       | CONST_REAL {
-        insertNumber(&symbolTable,$1);
+        insertFloat(&symbolTable,$1);
       };
 
-expr: expr OP_SUMA termino         {;}
-	| expr OP_RESTA termino        {;} 
+expr: expr OP_SUMA termino         {printf("Regla - Sentencia de suma \n");}
+	| expr OP_RESTA termino          {printf("Regla - Sentencia de resta \n");} 
 	| termino                       {;}
     ;
 
-termino: termino OP_MULT factor   {;}
-	   | termino OP_DIV factor    {;}
+termino: termino OP_MULT factor   {printf("Regla - Sentencia de multiplicacion\n");}
+	   | termino OP_DIV factor    {printf("Regla - Sentencia de division\n");}
      | '-' termino %prec MENOS_UNARIO
 	   | factor                     {;}
        ;
@@ -119,14 +119,14 @@ factor: PARENTESIS_A expr PARENTESIS_C    {;}
 	    | VARIABLE                  {;}
       ;
 
-display: DISPLAY CONST_STRING_R   {;}
-       | DISPLAY expr             {;}
+display: DISPLAY CONST_STRING_R   {printf("Regla - Sentencia de display con constante string\n");}
+       | DISPLAY expr             {printf("Regla - Sentencia de display con expresion\n");}
        ;
 
-get: GET VARIABLE {;}
+get: GET VARIABLE {printf("Regla - Sentencia de Get con variable\n");}
    ;
 
-while: WHILE  cond_completa 
+while: WHILE  cond_completa {printf("Regla - Sentencia de while con condicion\n");}
        while_exp
        ENDWHILE
     ;
@@ -134,50 +134,50 @@ while: WHILE  cond_completa
 while_exp: sentencia {;}
             ;
 
-for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C {;}
+for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C {printf("Regla - Sentencia de FOR con valor en corchete\n");}
      sentencia
      NEXT VARIABLE
-    | FOR VARIABLE OP_ASIG expr TO expr {;}
+    | FOR VARIABLE OP_ASIG expr TO expr {printf("Regla - Sentencia de FOR sin valor en corchete\n");}
       sentencia
       NEXT VARIABLE
     ;
 
-if: IF cond_completa 
+if: IF cond_completa      
     sentencia             {;}
     ENDIF                 {;}
-    | IF cond_completa 
-      sentencia             {;}
+    | IF cond_completa    
+      sentencia           
+      ELSE                
+      sentencia           
+      ENDIF               
+    | IF cond_completa    {printf("Regla - if y else sin sentencia\n");}
       ELSE                {;}
-      sentencia             {;}
       ENDIF               {;}
-    | IF cond_completa 
-      ELSE                {;}
-      ENDIF               {;}
-    | IF cond_completa 
-      ENDIF               {;}
+    | IF cond_completa    {printf("Regla - if sin sentencia\n");}
+      ENDIF               {printf("Regla - fin de if sin sentencia\n");}
     ;
 
 cond_completa: PARENTESIS_A cond_completa PARENTESIS_C                      {;}
-             | PARENTESIS_A cond_completa OP_OR cond_completa PARENTESIS_C {;}
-             | PARENTESIS_A cond_completa OP_AND cond_completa PARENTESIS_C {;}
-             | PARENTESIS_A cond_completa OP_OR cond PARENTESIS_C {;}
-             | PARENTESIS_A cond_completa OP_AND cond PARENTESIS_C {;}
-             | OP_NOT cond_completa                       {;}
-             | PARENTESIS_A cond OP_OR cond_completa PARENTESIS_C {;}
-             | PARENTESIS_A cond OP_AND cond_completa PARENTESIS_C {;}
-             | PARENTESIS_A cond OP_AND cond PARENTESIS_C {;}
-             | PARENTESIS_A cond OP_OR cond PARENTESIS_C  {;} 
-             | PARENTESIS_A cond PARENTESIS_C {;}
-             | PARENTESIS_A equmin PARENTESIS_C {;}
-             | PARENTESIS_A equmax PARENTESIS_C {;}
+             | PARENTESIS_A cond_completa OP_OR cond_completa PARENTESIS_C {printf("Regla - Sentencia de condicion OR multiple\n");}
+             | PARENTESIS_A cond_completa OP_AND cond_completa PARENTESIS_C {printf("Regla - Sentencia de condicion AND multiple\n");}
+             | PARENTESIS_A cond_completa OP_OR cond PARENTESIS_C {printf("Regla - Sentencia de condicion OR multiple\n");}
+             | PARENTESIS_A cond_completa OP_AND cond PARENTESIS_C {printf("Regla - Sentencia de condicion AND multiple\n");}
+             | OP_NOT cond_completa                       {printf("Regla - Sentencia de condicion negada\n");}
+             | PARENTESIS_A cond OP_OR cond_completa PARENTESIS_C {printf("Regla - Sentencia de condicion OR multiple\n");}
+             | PARENTESIS_A cond OP_AND cond_completa PARENTESIS_C {printf("Regla - Sentencia de condicion AND multiple\n");}
+             | PARENTESIS_A cond OP_AND cond PARENTESIS_C {printf("Regla - Sentencia de condicion AND multiple\n");}
+             | PARENTESIS_A cond OP_OR cond PARENTESIS_C  {printf("Regla - Sentencia de condicion OR multiple\n");} 
+             | PARENTESIS_A cond PARENTESIS_C {printf("Regla - Sentencia de condicion simple\n");}
+             | PARENTESIS_A equmin PARENTESIS_C {printf("Regla - Sentencia de condicion equmin\n");}
+             | PARENTESIS_A equmax PARENTESIS_C {printf("Regla - Sentencia de condicion equmax\n");}
              ;
 
-equmax: EQU_MAX PARENTESIS_A cond_equ PARENTESIS_C	{;}
+equmax: EQU_MAX PARENTESIS_A cond_equ PARENTESIS_C	{printf("Regla - Sentencia de EQUMAX\n");}
         ;
 
-equmin: EQU_MIN PARENTESIS_A cond_equ PARENTESIS_C {;}
+equmin: EQU_MIN PARENTESIS_A cond_equ PARENTESIS_C {printf("Regla - Sentencia de EQUMIN\n");}
         ;
-cond_equ: expr PUNTO_COMA CORCHETE_A lista CORCHETE_C {;}
+cond_equ: expr PUNTO_COMA CORCHETE_A lista CORCHETE_C {printf("Regla - Sentencia de Expresion y Listado de variables o constantes en EQUMIN/EQUMAX\n");}
         ;
 lista: expr_list 							{;}
       | lista COMA expr_list  				{;}
@@ -201,6 +201,7 @@ cond: expr OP_COMP expr  {;}
     ;
 
 dec_var: DIM CORCHETE_A seg_asig CORCHETE_C {
+                                        printf("Regla - Sentencia de declaracion de variable\n");
                                         char dataType[100];
                                         char variable[100];
                                         while(!emptyStack(&stackDataTypeDecVar)){
@@ -216,8 +217,14 @@ dec_var: DIM CORCHETE_A seg_asig CORCHETE_C {
 };
 
 
-seg_asig:  VARIABLE COMA seg_asig COMA tipo                 {pushStack(&stackVar,$1);}
-          |  VARIABLE CORCHETE_C AS CORCHETE_A tipo         {pushStack(&stackVar,$1);}
+seg_asig:  VARIABLE COMA seg_asig COMA tipo                 {
+                                                              printf("Regla - sentencia declaracion de variable\n");
+                                                              pushStack(&stackVar,$1);
+                                                            }
+          |  VARIABLE CORCHETE_C AS CORCHETE_A tipo         {
+                                                              printf("Regla - sentencia de declaracion de tipo\n");
+                                                              pushStack(&stackVar,$1);
+                                                            }
           ;
 			 
  

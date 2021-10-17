@@ -924,6 +924,7 @@ YY_RULE_SETUP
 #line 113 "Lexico.l"
 {   
                                 int value = atoi(strdup(yytext));
+                                // printf("Valor entero: %d, Valor de MAX_INT_16: %d", value, MAX_INT_16);
                                 if( value > MAX_INT_16 ) {
                                     displayError("Entero supera los 16 bits");
                                 } else {
@@ -934,7 +935,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 123 "Lexico.l"
+#line 124 "Lexico.l"
 {  
                                 float value = atof(strdup(yytext));
                                 if ( value > MAX_FLOAT_32 ) 
@@ -950,7 +951,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 136 "Lexico.l"
+#line 137 "Lexico.l"
 {
                                 yylval.strVal = strdup(yytext);
                                 return VARIABLE;
@@ -958,110 +959,110 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 140 "Lexico.l"
+#line 141 "Lexico.l"
 {return OP_ASIG;}   
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 141 "Lexico.l"
+#line 142 "Lexico.l"
 {return OP_SUMA;}    
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 142 "Lexico.l"
+#line 143 "Lexico.l"
 {return OP_RESTA;}   
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 143 "Lexico.l"
+#line 144 "Lexico.l"
 {return OP_MULT;}   
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 144 "Lexico.l"
+#line 145 "Lexico.l"
 {return OP_DIV;}    
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 145 "Lexico.l"
+#line 146 "Lexico.l"
 {return OP_MENOR;}      
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 146 "Lexico.l"
+#line 147 "Lexico.l"
 {return OP_MAYOR;}      
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 147 "Lexico.l"
+#line 148 "Lexico.l"
 {return OP_MEN_IGU;}  
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 148 "Lexico.l"
+#line 149 "Lexico.l"
 {return OP_MAY_IGU;}  
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 149 "Lexico.l"
+#line 150 "Lexico.l"
 {return OP_NOT;}     
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 150 "Lexico.l"
+#line 151 "Lexico.l"
 {return OP_AND;}      
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 151 "Lexico.l"
+#line 152 "Lexico.l"
 {return OP_OR;}            
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 152 "Lexico.l"
+#line 153 "Lexico.l"
 {return OP_COMP;}        
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 153 "Lexico.l"
+#line 154 "Lexico.l"
 {return COMA;}      
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 154 "Lexico.l"
+#line 155 "Lexico.l"
 {return PUNTO_COMA;}   
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 155 "Lexico.l"
+#line 156 "Lexico.l"
 {return PARENTESIS_A;}    
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 156 "Lexico.l"
+#line 157 "Lexico.l"
 {return PARENTESIS_C;}    
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 157 "Lexico.l"
+#line 158 "Lexico.l"
 {;} 
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 158 "Lexico.l"
+#line 159 "Lexico.l"
 {;} 
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 159 "Lexico.l"
+#line 160 "Lexico.l"
 {displayError("Error en Lexico - Token no valido");} 
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 161 "Lexico.l"
+#line 162 "Lexico.l"
 ECHO;
 	YY_BREAK
-#line 1065 "lex.yy.c"
+#line 1066 "lex.yy.c"
 			case YY_STATE_EOF(INITIAL):
 				yyterminate();
 
@@ -1945,7 +1946,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 161 "Lexico.l"
+#line 162 "Lexico.l"
 
 
 

@@ -64,7 +64,25 @@ int insertNumber(tList *p, char* lex)
     strcpy(name, "_");
     strcat(name, lex); 
 
-    result = insertOrder(p, name, " ", lex, 0);
+    result = insertOrder(p, name, "CONST_INTEGER", lex, 0);
+
+    if(result == DUPLICATE){
+        printf("La constante numerica %s ya se ingreso en la tabla de simbolos\n",lex);
+        return DUPLICATE;
+    }
+
+    return SUCCESS;
+}
+
+int insertFloat(tList *p, char* lex) 
+{
+    int result = -1;
+    char name[100];
+
+    strcpy(name, "_");
+    strcat(name, lex); 
+
+    result = insertOrder(p, name, "CONST_FLOAT", lex, 0);
 
     if(result == DUPLICATE){
         printf("La constante numerica %s ya se ingreso en la tabla de simbolos\n",lex);
@@ -84,7 +102,7 @@ int insertString(tList *p, char* lex)
     strcpy(name, "_");
     strcat(name, newName);
 
-    result = insertOrder(p, name, " ", newName, strlen(newName));
+    result = insertOrder(p, name, "CONST_STRING", newName, strlen(newName));
 
     if(result == DUPLICATE){
         printf("La constante string %s ya se ingreso en la tabla de simbolos\n",lex);
@@ -126,7 +144,8 @@ int insertVariable(tList *p, char* lex, char* dataType)
 
 void deleteTable(tList *p)
 {
-    FILE *pTable = fopen("ts.txt", "w+");
+    FILE *pTable = fopen("ts.txt", "wt");
+    
     if(!pTable) {
         printf("No se pudo abrir el archivo ts.txt \n");
         return;
@@ -134,14 +153,14 @@ void deleteTable(tList *p)
 
     printf("\n                           TABLA DE SIMBOLOS                              \n");
 
-    printf("+---------------------------------------------------------------------------------+\n");
+    printf("+------------------------------------------------------------------------------------+\n");
     printf("|%-25s|%-16s|%-30s|%-10s|\n", "NOMBRE", "TIPO DE DATO", "VALOR", "LONGITUD");
-    printf("+---------------------------------------------------------------------------------+\n");
+    printf("+------------------------------------------------------------------------------------+\n");
 
     fprintf(pTable,"\n                           TABLA DE SIMBOLOS                           \n");
-    fprintf(pTable, "+---------------------------------------------------------------------------------+\n");
+    fprintf(pTable, "+------------------------------------------------------------------------------------+\n");
     fprintf(pTable, "|%-25s|%-16s|%-30s|%-10s|\n", "NOMBRE", "TIPO DE DATO", "VALOR", "LONGITUD");
-    fprintf(pTable, "+---------------------------------------------------------------------------------+\n");
+    fprintf(pTable, "+------------------------------------------------------------------------------------+\n");
 
     while(*p)
     {
@@ -150,7 +169,7 @@ void deleteTable(tList *p)
         p = &(*p)->next;
     }
 
-    printf("+---------------------------------------------------------------------------------+\n");
-    fprintf(pTable, "+---------------------------------------------------------------------------------+\n");
+    printf("+------------------------------------------------------------------------------------+\n");
+    fprintf(pTable, "+------------------------------------------------------------------------------------+\n");
     fclose(pTable);
 }

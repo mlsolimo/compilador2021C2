@@ -52,7 +52,7 @@ IF                "IF"|"if"
 ELSE              "else"|"ELSE"
 ENDIF             "endif"|"ENDIF"
 GET               "GET"|"get"
-DISPLAY         "DISPLAY"|"display"
+DISPLAY           "DISPLAY"|"display"
 CORCHETE_A        "["
 CORCHETE_C        "]"
 PARENTESIS_A      "("
@@ -69,9 +69,9 @@ EQU_MAX           "EQUMAX"|"equmax"
 EQU_MIN           "EQUMIN"|"equmin"
 OP_MEN_IGU        {OP_MENOR}{OP_ASIG}
 OP_MAY_IGU        {OP_MAYOR}{OP_ASIG}
-FOR             "FOR"|"for"
-TO              "TO"|"to"
-NEXT            "NEXT"|"next"
+FOR               "FOR"|"for"
+TO                "TO"|"to"
+NEXT              "NEXT"|"next"
 
 %%
 
@@ -112,6 +112,7 @@ NEXT            "NEXT"|"next"
 
 {CONST_INT}                 {   
                                 int value = atoi(strdup(yytext));
+                                // printf("Valor entero: %d, Valor de MAX_INT_16: %d", value, MAX_INT_16);
                                 if( value > MAX_INT_16 ) {
                                     displayError("Entero supera los 16 bits");
                                 } else {
