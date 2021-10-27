@@ -17,8 +17,10 @@ extern char* yytext;
 extern int yylineno;
 
 
-t_NodoArbol* Nptr;
-
+t_NodoArbol* numeroPtr;
+t_NodoArbol* getPtr;
+t_NodoArbol* displayPtr;
+t_NodoArbol* constStringPtr;
 %}
 
 %union{
@@ -95,41 +97,43 @@ asig:   VARIABLE OP_ASIG expr             {printf("Regla - Sentencia de asignaci
     |   VARIABLE OP_ASIG CONST_STRING_R     {printf("Regla - Sentencia de asignacion por constante string \n");}
     ;
 
-CONST_STRING_R: CONST_STRING {
-	    insertString(&symbolTable, $1);
-	};
+CONST_STRING_R: CONST_STRING { constStringPtr = crear_hoja($1);
+	                              insertString(&symbolTable, $1);
+	                            };
 
 NUMERO: CONST_INT{
         insertNumber(&symbolTable,$1);
-        Nptr = crear_hoja($1);
+        numeroPtr = crear_hoja($1);
       }    
       | CONST_REAL {
         insertFloat(&symbolTable,$1);
-        Nptr = crear_hoja($1);
+        numeroPtr = crear_hoja($1);
       };
 
-expr: expr OP_SUMA termino         {printf("Regla - Sentencia de suma \n");}
-	| expr OP_RESTA termino          {printf("Regla - Sentencia de resta \n");} 
-	| termino                       {;}
+expr: expr OP_SUMA termino         {exprPtr = crear_nodo('+', exprPtr, terminoPtr); printf("Regla - Sentencia de suma \n");}
+	| expr OP_RESTA termino          {exprPtr = crear_nodo('-', exprPtr, terminoPtr); printf("Regla - Sentencia de resta \n");} 
+	| termino                        {exprPtr = terminoPtr;}
     ;
 
-termino: termino OP_MULT factor   {printf("Regla - Sentencia de multiplicacion\n");}
-	   | termino OP_DIV factor    {printf("Regla - Sentencia de division\n");}
+termino: termino OP_MULT factor   {terminoPtr = crear_nodo('*', terminoPtr, factorPtr); printf("Regla - Sentencia de multiplicacion\n");}
+	   | termino OP_DIV factor      {terminoPtr = crear_nodo('/', terminoPtr, factorPtr);   printf("Regla - Sentencia de division\n");}
      | '-' termino %prec MENOS_UNARIO
-	   | factor                     {;}
+	   | factor                     {terminoPtr = factorPtr;}
        ;
 
                     
 factor: PARENTESIS_A expr PARENTESIS_C    {;}
-      | NUMERO                    {;}
-	    | VARIABLE                  {;}
+      | NUMERO                    {factorPtr = numeroPtr;}
+	    | VARIABLE                  {factorPtr = crear_hoja($1);}
       ;
 
-display: DISPLAY CONST_STRING_R   {printf("Regla - Sentencia de display con constante string\n");}
-       | DISPLAY expr             {printf("Regla - Sentencia de display con expresion\n");}
+display: DISPLAY CONST_STRING_R   {displayPtr = crear_nodo("DISPLAY", NULL, constStringPtr);   printf("Regla - Sentencia de display con constante string\n");}
+       | DISPLAY expr             {displayPtr = crear_nodo("DISPLAY", NULL, exprPtr) printf("Regla - Sentencia de display con expresion\n");}
        ;
 
-get: GET VARIABLE {printf("Regla - Sentencia de Get con variable\n");}
+get: GET VARIABLE { getPtr = crear_nodo("GET", NULL, crear_hoja($1));
+                    printf("Regla - Sentencia de Get con variable\n");
+                  }
    ;
 
 while: WHILE  cond_completa {printf("Regla - Sentencia de while con condicion\n");}
@@ -189,10 +193,10 @@ lista: expr_list 							{;}
       | lista COMA expr_list  				{;}
 	    ;
 
-expr_list: CONST_INT      {;}
-        |  CONST_REAL     {;}
-        |  CONST_STRING   {;}
-        |  VARIABLE       {;}
+expr_list: CONST_INT      {exprListPtr = crear_hoja($1);}
+        |  CONST_REAL     {exprListPtr = crear_hoja($1);}
+        |  CONST_STRING   {exprListPtr = crear_hoja($1);}
+        |  VARIABLE       {exprListPtr = crear_hoja($1);}
         ;
 
 cond: expr OP_COMP expr  {;}
