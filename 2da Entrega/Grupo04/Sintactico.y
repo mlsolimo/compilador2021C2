@@ -93,8 +93,8 @@ grammar:   dec_var                    {printf("Regla - fin de Sentencia de decla
        |   for                        {printf("Regla - fin de Sentencia de Tema especial - For \n\n");}
        ;
 
-asig:   VARIABLE OP_ASIG expr             {printf("Regla - Sentencia de asignacion por expresion \n");}
-    |   VARIABLE OP_ASIG CONST_STRING_R     {printf("Regla - Sentencia de asignacion por constante string \n");}
+asig:   VARIABLE OP_ASIG expr             {asigPtr = crear_nodo("=", crear_hoja($1), expPtr); printf("Regla - Sentencia de asignacion por expresion \n");}
+    |   VARIABLE OP_ASIG CONST_STRING_R     {asigPtr = crear_nodo("=", crear_hoja($1), constStringPtr); printf("Regla - Sentencia de asignacion por constante string \n");}
     ;
 
 CONST_STRING_R: CONST_STRING { constStringPtr = crear_hoja($1);
@@ -122,7 +122,7 @@ termino: termino OP_MULT factor   {terminoPtr = crear_nodo('*', terminoPtr, fact
        ;
 
                     
-factor: PARENTESIS_A expr PARENTESIS_C    {;}
+factor: PARENTESIS_A expr PARENTESIS_C    {factorPtr = expPtr;}
       | NUMERO                    {factorPtr = numeroPtr;}
 	    | VARIABLE                  {factorPtr = crear_hoja($1);}
       ;
@@ -136,12 +136,12 @@ get: GET VARIABLE { getPtr = crear_nodo("GET", NULL, crear_hoja($1));
                   }
    ;
 
-while: WHILE  cond_completa {printf("Regla - Sentencia de while con condicion\n");}
+while: WHILE {isWhile = 1} cond_completa {printf("Regla - Sentencia de while con condicion\n");}
        while_exp
        ENDWHILE
     ;
 
-while_exp: sentencia {;}
+while_exp: sentencia {whileExpPtr = sentenciaPtr;}
             ;
 
 for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C {printf("Regla - Sentencia de FOR con valor en corchete\n");}
@@ -182,15 +182,31 @@ cond_completa: PARENTESIS_A cond_completa PARENTESIS_C                      {;}
              | PARENTESIS_A equmax PARENTESIS_C {printf("Regla - Sentencia de condicion equmax\n");}
              ;
 
-equmax: EQU_MAX PARENTESIS_A cond_equ PARENTESIS_C	{printf("Regla - Sentencia de EQUMAX\n");}
+equmax: EQU_MAX PARENTESIS_A cond_equ {isEqumax = 1;} PARENTESIS_C	{isEqumin=0; equmaxPtr = condEquPtr;
+                                                                    printf("Regla - Sentencia de EQUMAX\n");}
         ;
 
-equmin: EQU_MIN PARENTESIS_A cond_equ PARENTESIS_C {printf("Regla - Sentencia de EQUMIN\n");}
+equmin: EQU_MIN PARENTESIS_A cond_equ {isEqumin = 1;} PARENTESIS_C {isEqumax=0; equminPtr = condEquptr; printf("Regla - Sentencia de EQUMIN\n");}
         ;
-cond_equ: expr PUNTO_COMA CORCHETE_A lista CORCHETE_C {printf("Regla - Sentencia de Expresion y Listado de variables o constantes en EQUMIN/EQUMAX\n");}
+cond_equ: expr { Auxptr=crearNodo("=",crearHoja("@aux"),exprPtr);} PUNTO_COMA CORCHETE_A lista CORCHETE_C { condEquptr = crearNodo("IF",crearNodo("==",listaPtr,Auxptr),crearHoja("Cuerpo")); printf("Regla - Sentencia de Expresion y Listado de variables o constantes en EQUMIN/EQUMAX\n");}
         ;
-lista: expr_list 							{;}
-      | lista COMA expr_list  				{;}
+lista: expr_list 							{ 
+                                if (isEqumin)
+                                  listaPtr=crearNodo("=",crearHoja("@min"),exprListPtr);
+											          
+                                if (isEqumax)
+                                  listaPtr=crearNodo("=",crearHoja("@max"),exprListPtr);
+                              }
+      | lista COMA expr_list  				{
+                          if(isEqumin)
+	   											{
+													  listaPtr=crearNodo("IF",crearNodo("<",exprListPtr,listaPtr),crearNodo("=",crearHoja("@min"),exprListPtr));
+												  }
+													   
+											    if(isEqumax)
+                          {
+                            listaPtr=crearNodo("IF",crearNodo(">",exprListPtr,listaPtr)),crearNodo("=",crearHoja("@max"),exprListPtr));
+                          };}
 	    ;
 
 expr_list: CONST_INT      {exprListPtr = crear_hoja($1);}
@@ -199,15 +215,15 @@ expr_list: CONST_INT      {exprListPtr = crear_hoja($1);}
         |  VARIABLE       {exprListPtr = crear_hoja($1);}
         ;
 
-cond: expr OP_COMP expr  {;}
-    | expr OP_MAY_IGU expr {;}
-    | expr OP_MEN_IGU expr {;}
-    | expr OP_MENOR expr {;}
-    | expr OP_MAYOR expr {;}
-    | expr OP_AND expr {;}
-    | expr OP_OR expr {;}
-    | expr OP_NOT termino {;}
-    | OP_NOT VARIABLE {;}
+cond: expr OP_COMP termino  {condPtr = crear_nodo("==", expPtr, terminoPtr);}
+    | expr OP_MAY_IGU termino {condPtr = crear_nodo(">=",expPtr, terminoPtr);}
+    | expr OP_MEN_IGU termino {condPtr = crear_nodo("<=",expPtr, terminoPtr);}
+    | expr OP_MENOR termino {condPtr = crear_nodo("<",expPtr, terminoPtr);}
+    | expr OP_MAYOR termino {condPtr = crear_nodo(">",expPtr, terminoPtr);}
+    | expr OP_AND termino {condPtr = crear_nodo("&&", expPtr, terminoPtr);}
+    | expr OP_OR termino {condPtr = crear_nodo("||", exprPtr, terminoPtr);}
+    | expr OP_NOT termino {condPtr = crear_nodo("!", exprPtr, terminoPtr);}
+    | OP_NOT VARIABLE {condPtr = crear_nodo("!", NULL, crear_hoja($1));}
     ;
 
 dec_var: DIM CORCHETE_A seg_asig CORCHETE_C {
