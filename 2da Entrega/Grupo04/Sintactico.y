@@ -200,9 +200,9 @@ for: FOR VARIABLE OP_ASIG expr TO expr CORCHETE_A CONST_INT CORCHETE_C {printf("
 if: IF cond_completa      {ifPtr=crear_nodo("IF",condComPtr, sentenciaPtr);}
     sentencia             {;}
     ENDIF                 {;}
-    | IF cond_completa     
+    | IF cond_completa    {;}
       sentencia           {truePtr = sentenciaPtr;}
-      ELSE  
+      ELSE                {;}
       sentencia           {falsePtr = sentenciaPtr;} 
       ENDIF               {bodyPtr=crear_nodo("BODY",truePtr,falsePtr); ifPtr=crear_nodo("IF",condComPtr,bodyPtr); }
     | IF cond_completa    {printf("Regla - if y else sin sentencia\n");}
@@ -212,7 +212,9 @@ if: IF cond_completa      {ifPtr=crear_nodo("IF",condComPtr, sentenciaPtr);}
       ENDIF               {;}
     ;
 
-cond_completa: PARENTESIS_A cond PARENTESIS_C                      {condComPtr=condPtr;}
+cond_completa: 
+
+             | PARENTESIS_A cond PARENTESIS_C                      {condComPtr=condPtr;}
              | PARENTESIS_A cond_completa OP_OR cond PARENTESIS_C {condComPtr=crear_nodo("OR", condCompPtr, condPtr);}
              | PARENTESIS_A cond_completa OP_AND cond PARENTESIS_C {condComPtr=crear_nodo("AND", condCompPtr, condPtr);}
              | OP_NOT cond_completa                                {condComPtr=crear_nodo("NOT", condCompPtr, NULL);}

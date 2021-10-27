@@ -85,13 +85,6 @@ if (a <= 10 || !(a == b))
 else
 endif;
 
-IF (a <= 10)
-b = "verdadero";
-ELSE
-b = "falso"; 
-ENDIF;
-
-
 */ Tema especial FOR/*
 FOR j = 0 to 4 [2]
 	display j;
