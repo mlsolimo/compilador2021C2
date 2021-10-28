@@ -118,6 +118,12 @@ t_NodoArbol* exprPtr;
 t_NodoArbol* exprListPtr;
 t_NodoArbol* auxPtr;
 
+t_NodoArbol* Tptr;
+t_NodoArbol* DEFptr;
+t_NodoArbol* ListaDEFptr;
+t_NodoArbol* DIMptr;
+
+
 int min;
 int aux;
 int max;
@@ -128,7 +134,7 @@ int isWhile=0;
 
 
 /* Line 189 of yacc.c  */
-#line 132 "y.tab.c"
+#line 138 "y.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -255,14 +261,14 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 59 "Sintactico.y"
+#line 65 "Sintactico.y"
 
     char* strVal;
 
 
 
 /* Line 214 of yacc.c  */
-#line 266 "y.tab.c"
+#line 272 "y.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -274,7 +280,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 278 "y.tab.c"
+#line 284 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -598,15 +604,15 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   110,   110,   113,   116,   122,   125,   126,   127,   128,
-     129,   130,   131,   134,   135,   138,   142,   146,   151,   152,
-     153,   156,   157,   158,   159,   163,   164,   165,   168,   169,
-     172,   177,   177,   177,   189,   192,   192,   195,   195,   200,
-     201,   200,   203,   204,   205,   206,   203,   208,   209,   208,
-     211,   211,   215,   217,   218,   219,   220,   221,   222,   223,
-     224,   225,   226,   229,   229,   233,   233,   235,   235,   237,
-     244,   257,   258,   259,   260,   263,   264,   265,   266,   267,
-     268,   269,   270,   271,   274,   291,   295,   302,   303,   304
+       0,   116,   116,   119,   122,   128,   131,   132,   133,   134,
+     135,   136,   137,   140,   141,   144,   148,   152,   157,   158,
+     159,   162,   163,   164,   165,   169,   170,   171,   174,   175,
+     178,   183,   183,   183,   195,   198,   198,   201,   201,   206,
+     207,   206,   209,   210,   211,   212,   209,   214,   215,   214,
+     217,   217,   221,   223,   224,   225,   226,   227,   228,   229,
+     230,   231,   232,   235,   235,   239,   239,   241,   241,   243,
+     250,   263,   264,   265,   266,   269,   270,   271,   272,   273,
+     274,   275,   276,   277,   280,   299,   305,   313,   315,   317
 };
 #endif
 
@@ -1633,14 +1639,14 @@ yyreduce:
         case 3:
 
 /* Line 1455 of yacc.c  */
-#line 113 "Sintactico.y"
+#line 119 "Sintactico.y"
     {;}
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
-#line 116 "Sintactico.y"
+#line 122 "Sintactico.y"
     { 
                                             if(isWhile==1) {
 																              swPtr=crear_nodo("BODY",sentenciaPtr,grammarPtr); 
@@ -1652,77 +1658,77 @@ yyreduce:
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 122 "Sintactico.y"
+#line 128 "Sintactico.y"
     {sentenciaPtr = grammarPtr;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 125 "Sintactico.y"
-    {printf("Regla - Declaracion de variable\n");}
+#line 131 "Sintactico.y"
+    {printf("Regla - Declaracion de variable\n"); guardarEnArchivoInorden(&DIMptr, pIntermedia);fprintf(pIntermedia, "\n");grammarPtr=DIMptr;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 126 "Sintactico.y"
+#line 132 "Sintactico.y"
     {printf("Regla - Asignacion\n"); guardarEnArchivoInorden(&asigPtr, pIntermedia); fprintf(pIntermedia, "\n"); grammarPtr=asigPtr;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 127 "Sintactico.y"
+#line 133 "Sintactico.y"
     {printf("Regla - Display\n"); grammarPtr=displayPtr; guardarEnArchivoInorden(&grammarPtr, pIntermedia); fprintf(pIntermedia, "\n");}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 128 "Sintactico.y"
+#line 134 "Sintactico.y"
     {printf("Regla - Get\n"); grammarPtr=getPtr; guardarEnArchivoInorden(&grammarPtr, pIntermedia); fprintf(pIntermedia, "\n");}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 129 "Sintactico.y"
+#line 135 "Sintactico.y"
     {printf("Regla - IF \n"); guardarEnArchivoInorden(&ifPtr, pIntermedia); fprintf(pIntermedia, "\n");}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 130 "Sintactico.y"
+#line 136 "Sintactico.y"
     {printf("Regla - While \n"); guardarEnArchivoInorden(&whilePtr, pIntermedia); fprintf(pIntermedia, "\n"); grammarPtr=whilePtr;}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 131 "Sintactico.y"
+#line 137 "Sintactico.y"
     {printf("Regla - For \n");}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 134 "Sintactico.y"
+#line 140 "Sintactico.y"
     {asigPtr = crear_nodo("=", crear_hoja((yyvsp[(1) - (3)].strVal)), expPtr); printf("Regla - Sentencia de asignacion por expresion \n");}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 135 "Sintactico.y"
+#line 141 "Sintactico.y"
     {asigPtr = crear_nodo("=", crear_hoja((yyvsp[(1) - (3)].strVal)), constStringPtr); printf("Regla - Sentencia de asignacion por constante string \n");}
     break;
 
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 138 "Sintactico.y"
+#line 144 "Sintactico.y"
     { constStringPtr = crear_hoja((yyvsp[(1) - (1)].strVal));
 	                              insertString(&symbolTable, (yyvsp[(1) - (1)].strVal));
 	                            }
@@ -1731,7 +1737,7 @@ yyreduce:
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 142 "Sintactico.y"
+#line 148 "Sintactico.y"
     {
         insertNumber(&symbolTable,(yyvsp[(1) - (1)].strVal));
         numeroPtr = crear_hoja((yyvsp[(1) - (1)].strVal));
@@ -1741,7 +1747,7 @@ yyreduce:
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 146 "Sintactico.y"
+#line 152 "Sintactico.y"
     {
         insertFloat(&symbolTable,(yyvsp[(1) - (1)].strVal));
         numeroPtr = crear_hoja((yyvsp[(1) - (1)].strVal));
@@ -1751,84 +1757,84 @@ yyreduce:
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 151 "Sintactico.y"
+#line 157 "Sintactico.y"
     {exprPtr = crear_nodo("+", exprPtr, terminoPtr); printf("Regla - Sentencia de suma \n");}
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 152 "Sintactico.y"
+#line 158 "Sintactico.y"
     {exprPtr = crear_nodo("-", exprPtr, terminoPtr); printf("Regla - Sentencia de resta \n");}
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 153 "Sintactico.y"
+#line 159 "Sintactico.y"
     {exprPtr = terminoPtr;}
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 156 "Sintactico.y"
+#line 162 "Sintactico.y"
     {terminoPtr = crear_nodo("*", terminoPtr, factorPtr); printf("Regla - Sentencia de multiplicacion\n");}
     break;
 
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 157 "Sintactico.y"
+#line 163 "Sintactico.y"
     {terminoPtr = crear_nodo("/", terminoPtr, factorPtr);   printf("Regla - Sentencia de division\n");}
     break;
 
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 159 "Sintactico.y"
+#line 165 "Sintactico.y"
     {terminoPtr = factorPtr;}
     break;
 
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 163 "Sintactico.y"
+#line 169 "Sintactico.y"
     {factorPtr = expPtr;}
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 164 "Sintactico.y"
+#line 170 "Sintactico.y"
     {factorPtr = numeroPtr;}
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 165 "Sintactico.y"
+#line 171 "Sintactico.y"
     {factorPtr = crear_hoja((yyvsp[(1) - (1)].strVal));}
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 168 "Sintactico.y"
+#line 174 "Sintactico.y"
     {displayPtr = crear_nodo("DISPLAY", NULL, constStringPtr);   printf("Regla - Sentencia de display con constante string\n");}
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 169 "Sintactico.y"
+#line 175 "Sintactico.y"
     {displayPtr = crear_nodo("DISPLAY", NULL, exprPtr); printf("Regla - Sentencia de display con expresion\n");}
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 172 "Sintactico.y"
+#line 178 "Sintactico.y"
     { getPtr = crear_nodo("GET", NULL, crear_hoja((yyvsp[(2) - (2)].strVal)));
                     printf("Regla - Sentencia de Get con variable\n");
                   }
@@ -1837,14 +1843,14 @@ yyreduce:
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 177 "Sintactico.y"
+#line 183 "Sintactico.y"
     {isWhile = 1;}
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 177 "Sintactico.y"
+#line 183 "Sintactico.y"
     { 
                                           if(swPtr) {
 																	          whilePtr = crear_nodo("WHILE", condComPtr, swPtr);
@@ -1858,196 +1864,196 @@ yyreduce:
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 189 "Sintactico.y"
+#line 195 "Sintactico.y"
     {whileExpPtr = sentenciaPtr;}
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 192 "Sintactico.y"
+#line 198 "Sintactico.y"
     {printf("Regla - Sentencia de FOR con valor en corchete\n");}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 195 "Sintactico.y"
+#line 201 "Sintactico.y"
     {printf("Regla - Sentencia de FOR sin valor en corchete\n");}
     break;
 
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 200 "Sintactico.y"
+#line 206 "Sintactico.y"
     {ifPtr=crear_nodo("IF",condComPtr, sentenciaPtr);}
     break;
 
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 201 "Sintactico.y"
+#line 207 "Sintactico.y"
     {;}
     break;
 
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 202 "Sintactico.y"
+#line 208 "Sintactico.y"
     {;}
     break;
 
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 203 "Sintactico.y"
+#line 209 "Sintactico.y"
     {;}
     break;
 
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 204 "Sintactico.y"
+#line 210 "Sintactico.y"
     {truePtr = sentenciaPtr;}
     break;
 
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 205 "Sintactico.y"
+#line 211 "Sintactico.y"
     {;}
     break;
 
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 206 "Sintactico.y"
+#line 212 "Sintactico.y"
     {falsePtr = sentenciaPtr;}
     break;
 
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 207 "Sintactico.y"
+#line 213 "Sintactico.y"
     {bodyPtr=crear_nodo("BODY",truePtr,falsePtr); ifPtr=crear_nodo("IF",condComPtr,bodyPtr); }
     break;
 
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 208 "Sintactico.y"
+#line 214 "Sintactico.y"
     {printf("Regla - if y else sin sentencia\n");}
     break;
 
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 209 "Sintactico.y"
+#line 215 "Sintactico.y"
     {bodyPtr=crear_hoja("BODY"); ifPtr=crear_nodo("IF",condComPtr,bodyPtr);}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 210 "Sintactico.y"
+#line 216 "Sintactico.y"
     {;}
     break;
 
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 211 "Sintactico.y"
+#line 217 "Sintactico.y"
     {ifPtr=crear_nodo("IF",condComPtr, NULL); printf("Regla - if sin sentencia\n");}
     break;
 
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 212 "Sintactico.y"
+#line 218 "Sintactico.y"
     {;}
     break;
 
   case 53:
 
 /* Line 1455 of yacc.c  */
-#line 217 "Sintactico.y"
+#line 223 "Sintactico.y"
     {condComPtr=condPtr;}
     break;
 
   case 54:
 
 /* Line 1455 of yacc.c  */
-#line 218 "Sintactico.y"
+#line 224 "Sintactico.y"
     {condComPtr=crear_nodo("OR", condCompPtr, condPtr);}
     break;
 
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 219 "Sintactico.y"
+#line 225 "Sintactico.y"
     {condComPtr=crear_nodo("AND", condCompPtr, condPtr);}
     break;
 
   case 56:
 
 /* Line 1455 of yacc.c  */
-#line 220 "Sintactico.y"
+#line 226 "Sintactico.y"
     {condComPtr=crear_nodo("NOT", condCompPtr, NULL);}
     break;
 
   case 57:
 
 /* Line 1455 of yacc.c  */
-#line 221 "Sintactico.y"
+#line 227 "Sintactico.y"
     {;}
     break;
 
   case 58:
 
 /* Line 1455 of yacc.c  */
-#line 222 "Sintactico.y"
+#line 228 "Sintactico.y"
     {;}
     break;
 
   case 59:
 
 /* Line 1455 of yacc.c  */
-#line 223 "Sintactico.y"
+#line 229 "Sintactico.y"
     {;}
     break;
 
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 224 "Sintactico.y"
+#line 230 "Sintactico.y"
     {;}
     break;
 
   case 61:
 
 /* Line 1455 of yacc.c  */
-#line 225 "Sintactico.y"
+#line 231 "Sintactico.y"
     {condComPtr=equminPtr;}
     break;
 
   case 62:
 
 /* Line 1455 of yacc.c  */
-#line 226 "Sintactico.y"
+#line 232 "Sintactico.y"
     {condComPtr=equmaxPtr;}
     break;
 
   case 63:
 
 /* Line 1455 of yacc.c  */
-#line 229 "Sintactico.y"
+#line 235 "Sintactico.y"
     {isEqumax = 1;}
     break;
 
   case 64:
 
 /* Line 1455 of yacc.c  */
-#line 229 "Sintactico.y"
+#line 235 "Sintactico.y"
     {isEqumin=0; equmaxPtr = condEquPtr;
                                                                     printf("Regla - Sentencia de EQUMAX\n");}
     break;
@@ -2055,35 +2061,35 @@ yyreduce:
   case 65:
 
 /* Line 1455 of yacc.c  */
-#line 233 "Sintactico.y"
+#line 239 "Sintactico.y"
     {isEqumin = 1;}
     break;
 
   case 66:
 
 /* Line 1455 of yacc.c  */
-#line 233 "Sintactico.y"
+#line 239 "Sintactico.y"
     {isEqumax=0; equminPtr = condEquPtr; printf("Regla - Sentencia de EQUMIN\n");}
     break;
 
   case 67:
 
 /* Line 1455 of yacc.c  */
-#line 235 "Sintactico.y"
+#line 241 "Sintactico.y"
     { auxPtr=crear_nodo("=",crear_hoja("@aux"),exprPtr);}
     break;
 
   case 68:
 
 /* Line 1455 of yacc.c  */
-#line 235 "Sintactico.y"
+#line 241 "Sintactico.y"
     { condEquPtr = crear_nodo("IF",crear_nodo("==",listaPtr,auxPtr),crear_hoja("Cuerpo")); printf("Regla - Sentencia de Expresion y Listado de variables o constantes en EQUMIN/EQUMAX\n");}
     break;
 
   case 69:
 
 /* Line 1455 of yacc.c  */
-#line 237 "Sintactico.y"
+#line 243 "Sintactico.y"
     { 
                                 if (isEqumin)
                                   listaPtr=crear_nodo("=",crear_hoja("@min"),exprListPtr);
@@ -2096,7 +2102,7 @@ yyreduce:
   case 70:
 
 /* Line 1455 of yacc.c  */
-#line 244 "Sintactico.y"
+#line 250 "Sintactico.y"
     {
                           if(isEqumin)
 	   											{
@@ -2114,100 +2120,100 @@ yyreduce:
   case 71:
 
 /* Line 1455 of yacc.c  */
-#line 257 "Sintactico.y"
+#line 263 "Sintactico.y"
     {exprListPtr = crear_hoja((yyvsp[(1) - (1)].strVal));}
     break;
 
   case 72:
 
 /* Line 1455 of yacc.c  */
-#line 258 "Sintactico.y"
+#line 264 "Sintactico.y"
     {exprListPtr = crear_hoja((yyvsp[(1) - (1)].strVal));}
     break;
 
   case 73:
 
 /* Line 1455 of yacc.c  */
-#line 259 "Sintactico.y"
+#line 265 "Sintactico.y"
     {exprListPtr = crear_hoja((yyvsp[(1) - (1)].strVal));}
     break;
 
   case 74:
 
 /* Line 1455 of yacc.c  */
-#line 260 "Sintactico.y"
+#line 266 "Sintactico.y"
     {exprListPtr = crear_hoja((yyvsp[(1) - (1)].strVal));}
     break;
 
   case 75:
 
 /* Line 1455 of yacc.c  */
-#line 263 "Sintactico.y"
+#line 269 "Sintactico.y"
     {condPtr = crear_nodo("==", expPtr, terminoPtr);}
     break;
 
   case 76:
 
 /* Line 1455 of yacc.c  */
-#line 264 "Sintactico.y"
+#line 270 "Sintactico.y"
     {condPtr = crear_nodo(">=",expPtr, terminoPtr);}
     break;
 
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 265 "Sintactico.y"
+#line 271 "Sintactico.y"
     {condPtr = crear_nodo("<=",expPtr, terminoPtr);}
     break;
 
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 266 "Sintactico.y"
+#line 272 "Sintactico.y"
     {condPtr = crear_nodo("<",expPtr, terminoPtr);}
     break;
 
   case 79:
 
 /* Line 1455 of yacc.c  */
-#line 267 "Sintactico.y"
+#line 273 "Sintactico.y"
     {condPtr = crear_nodo(">",expPtr, terminoPtr);}
     break;
 
   case 80:
 
 /* Line 1455 of yacc.c  */
-#line 268 "Sintactico.y"
+#line 274 "Sintactico.y"
     {condPtr = crear_nodo("&&", expPtr, terminoPtr);}
     break;
 
   case 81:
 
 /* Line 1455 of yacc.c  */
-#line 269 "Sintactico.y"
+#line 275 "Sintactico.y"
     {condPtr = crear_nodo("||", exprPtr, terminoPtr);}
     break;
 
   case 82:
 
 /* Line 1455 of yacc.c  */
-#line 270 "Sintactico.y"
+#line 276 "Sintactico.y"
     {condPtr = crear_nodo("!", exprPtr, terminoPtr);}
     break;
 
   case 83:
 
 /* Line 1455 of yacc.c  */
-#line 271 "Sintactico.y"
+#line 277 "Sintactico.y"
     {condPtr = crear_nodo("!", NULL, crear_hoja((yyvsp[(2) - (2)].strVal)));}
     break;
 
   case 84:
 
 /* Line 1455 of yacc.c  */
-#line 274 "Sintactico.y"
+#line 280 "Sintactico.y"
     {
-                                        printf("Regla - Sentencia de declaracion de variable\n");
+                                        //printf("Regla - Sentencia de declaracion de variable\n");
                                         char dataType[100];
                                         char variable[100];
                                         while(!emptyStack(&stackDataTypeDecVar)){
@@ -2219,6 +2225,8 @@ yyreduce:
                                             popStack(&stackVar,variable);
                                             insertVariable(&symbolTable,variable,dataType);
                                         }
+                                        //DIMptr = crear_nodo("DIM",NULL,ListaDEFptr);
+                                         DIMptr = crear_nodo("DIM",NULL,DEFptr);
 
 }
     break;
@@ -2226,48 +2234,54 @@ yyreduce:
   case 85:
 
 /* Line 1455 of yacc.c  */
-#line 291 "Sintactico.y"
+#line 299 "Sintactico.y"
     {
                                                               printf("Regla - sentencia declaracion de variable\n");
                                                               pushStack(&stackVar,(yyvsp[(1) - (5)].strVal));
+                                                              DEFptr = crear_nodo("LIST_DEF",DEFptr,crear_nodo("DEF",Tptr,crear_hoja((yyvsp[(1) - (5)].strVal))));
+                                                              //ODEFptr=crear_nodo("DEF",Tptr,crear_hoja($1));
                                                             }
     break;
 
   case 86:
 
 /* Line 1455 of yacc.c  */
-#line 295 "Sintactico.y"
+#line 305 "Sintactico.y"
     {
                                                               printf("Regla - sentencia de declaracion de tipo\n");
                                                               pushStack(&stackVar,(yyvsp[(1) - (5)].strVal));
+                                                              DEFptr = crear_nodo("DEF",Tptr,crear_hoja((yyvsp[(1) - (5)].strVal)));
                                                             }
     break;
 
   case 87:
 
 /* Line 1455 of yacc.c  */
-#line 302 "Sintactico.y"
-    {pushStack(&stackDataTypeDecVar,"INTEGER");}
+#line 313 "Sintactico.y"
+    {pushStack(&stackDataTypeDecVar,"INTEGER");
+                    Tptr = crear_hoja("INT");}
     break;
 
   case 88:
 
 /* Line 1455 of yacc.c  */
-#line 303 "Sintactico.y"
-    {pushStack(&stackDataTypeDecVar,"FLOAT");}
+#line 315 "Sintactico.y"
+    {pushStack(&stackDataTypeDecVar,"FLOAT");
+                     Tptr = crear_hoja("REAL");}
     break;
 
   case 89:
 
 /* Line 1455 of yacc.c  */
-#line 304 "Sintactico.y"
-    {pushStack(&stackDataTypeDecVar,"STRING");}
+#line 317 "Sintactico.y"
+    {pushStack(&stackDataTypeDecVar,"STRING");
+                    Tptr = crear_hoja("STRING");}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 2271 "y.tab.c"
+#line 2285 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2479,7 +2493,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 307 "Sintactico.y"
+#line 321 "Sintactico.y"
 
 
 

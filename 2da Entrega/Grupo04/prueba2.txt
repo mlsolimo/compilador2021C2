@@ -1,0 +1,1 @@
+DIM [ a, b, z ] AS [ int, real, string ];

@@ -47,6 +47,12 @@ t_NodoArbol* exprPtr;
 t_NodoArbol* exprListPtr;
 t_NodoArbol* auxPtr;
 
+t_NodoArbol* Tptr;
+t_NodoArbol* DEFptr;
+t_NodoArbol* ListaDEFptr;
+t_NodoArbol* DIMptr;
+
+
 int min;
 int aux;
 int max;
@@ -122,7 +128,7 @@ sentencia: sentencia grammar PUNTO_COMA  {
         | grammar PUNTO_COMA             {sentenciaPtr = grammarPtr;}
         ;
 
-grammar:   dec_var                    {printf("Regla - Declaracion de variable\n");}
+grammar:   dec_var                    {printf("Regla - Declaracion de variable\n"); guardarEnArchivoInorden(&DIMptr, pIntermedia);fprintf(pIntermedia, "\n");grammarPtr=DIMptr;}
        |   asig                       {printf("Regla - Asignacion\n"); guardarEnArchivoInorden(&asigPtr, pIntermedia); fprintf(pIntermedia, "\n"); grammarPtr=asigPtr;}
        |   display                    {printf("Regla - Display\n"); grammarPtr=displayPtr; guardarEnArchivoInorden(&grammarPtr, pIntermedia); fprintf(pIntermedia, "\n");}
        |   get                        {printf("Regla - Get\n"); grammarPtr=getPtr; guardarEnArchivoInorden(&grammarPtr, pIntermedia); fprintf(pIntermedia, "\n");}
@@ -272,7 +278,7 @@ cond: expr OP_COMP termino  {condPtr = crear_nodo("==", expPtr, terminoPtr);}
     ;
 
 dec_var: DIM CORCHETE_A seg_asig CORCHETE_C {
-                                        printf("Regla - Sentencia de declaracion de variable\n");
+                                        //printf("Regla - Sentencia de declaracion de variable\n");
                                         char dataType[100];
                                         char variable[100];
                                         while(!emptyStack(&stackDataTypeDecVar)){
@@ -284,6 +290,8 @@ dec_var: DIM CORCHETE_A seg_asig CORCHETE_C {
                                             popStack(&stackVar,variable);
                                             insertVariable(&symbolTable,variable,dataType);
                                         }
+                                        //DIMptr = crear_nodo("DIM",NULL,ListaDEFptr);
+                                         DIMptr = crear_nodo("DIM",NULL,DEFptr);
 
 };
 
@@ -291,17 +299,23 @@ dec_var: DIM CORCHETE_A seg_asig CORCHETE_C {
 seg_asig:  VARIABLE COMA seg_asig COMA tipo                 {
                                                               printf("Regla - sentencia declaracion de variable\n");
                                                               pushStack(&stackVar,$1);
+                                                              DEFptr = crear_nodo("LIST_DEF",DEFptr,crear_nodo("DEF",Tptr,crear_hoja($1)));
+                                                              //ODEFptr=crear_nodo("DEF",Tptr,crear_hoja($1));
                                                             }
           |  VARIABLE CORCHETE_C AS CORCHETE_A tipo         {
                                                               printf("Regla - sentencia de declaracion de tipo\n");
                                                               pushStack(&stackVar,$1);
+                                                              DEFptr = crear_nodo("DEF",Tptr,crear_hoja($1));
                                                             }
           ;
 			 
  
-tipo: 	INT 	    {pushStack(&stackDataTypeDecVar,"INTEGER");}
-      | REAL      {pushStack(&stackDataTypeDecVar,"FLOAT");}	
-      | STRING  	{pushStack(&stackDataTypeDecVar,"STRING");}
+tipo: 	INT 	    {pushStack(&stackDataTypeDecVar,"INTEGER");
+                    Tptr = crear_hoja("INT");}
+      | REAL      {pushStack(&stackDataTypeDecVar,"FLOAT");
+                     Tptr = crear_hoja("REAL");}	
+      | STRING  	{pushStack(&stackDataTypeDecVar,"STRING");
+                    Tptr = crear_hoja("STRING");}
       ;
 
 %%
