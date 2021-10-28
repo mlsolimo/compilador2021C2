@@ -6,6 +6,7 @@
 Debe correrse el archivo Script.bat que se encuentra dentro de la carpeta Grupo04
 
 ## Entrega 2
+Debe correrse el archivo Script.bat que se encuentra dentro de la carpeta Grupo04
 
 ## Entrega 3
 
