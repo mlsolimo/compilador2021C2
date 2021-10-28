@@ -3,7 +3,24 @@
 +------------------------------------------------------------------------------------+
 |NOMBRE                   |TIPO DE DATO    |VALOR                         |LONGITUD  |
 +------------------------------------------------------------------------------------+
+|_.9999                   |CONST_FLOAT     |.9999                         |0         |
+|_0                       |CONST_INTEGER   |0                             |0         |
+|_1                       |CONST_INTEGER   |1                             |0         |
+|_10                      |CONST_INTEGER   |10                            |0         |
+|_101                     |CONST_INTEGER   |101                           |0         |
+|_1247                    |CONST_INTEGER   |1247                          |0         |
+|_19                      |CONST_INTEGER   |19                            |0         |
+|_2                       |CONST_INTEGER   |2                             |0         |
+|_3                       |CONST_INTEGER   |3                             |0         |
+|_4                       |CONST_INTEGER   |4                             |0         |
+|_5                       |CONST_INTEGER   |5                             |0         |
+|_99.                     |CONST_FLOAT     |99.                           |0         |
+|_99999.99                |CONST_FLOAT     |99999.99                      |0         |
+|_abcde ed gih            |CONST_STRING    |abcde ed gih                  |12        |
+|_hello world             |CONST_STRING    |hello world                   |11        |
+|_verdadero               |CONST_STRING    |verdadero                     |9         |
 |a                        |INTEGER         |                              |0         |
 |b                        |FLOAT           |                              |0         |
+|r                        |STRING          |                              |0         |
 |z                        |STRING          |                              |0         |
 +------------------------------------------------------------------------------------+
