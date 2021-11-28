@@ -130,7 +130,7 @@ sentencia: sentencia grammar PUNTO_COMA  {
 
 grammar:   dec_var                    {printf("Regla - Declaracion de variable\n"); guardarEnArchivoInorden(&DIMptr, pIntermedia);fprintf(pIntermedia, "\n");grammarPtr=DIMptr;}
        |   asig                       {printf("Regla - Asignacion\n"); guardarEnArchivoInorden(&asigPtr, pIntermedia); fprintf(pIntermedia, "\n"); grammarPtr=asigPtr;}
-       |   display                    {printf("Regla - Display\n"); grammarPtr=displayPtr; guardarEnArchivoInorden(&grammarPtr, pIntermedia); fprintf(pIntermedia, "\n");}
+       |   display                    {printf("Regla - Display\n"); grammarPtr=crear_nodo("DISPLAY",displayPtr, NULL); guardarEnArchivoInorden(&grammarPtr, pIntermedia); fprintf(pIntermedia, "\n");}
        |   get                        {printf("Regla - Get\n"); grammarPtr=getPtr; guardarEnArchivoInorden(&grammarPtr, pIntermedia); fprintf(pIntermedia, "\n");}
        |   if                         {printf("Regla - IF \n"); guardarEnArchivoInorden(&ifPtr, pIntermedia); fprintf(pIntermedia, "\n");}
        |   while                      {printf("Regla - While \n"); guardarEnArchivoInorden(&whilePtr, pIntermedia); fprintf(pIntermedia, "\n"); grammarPtr=whilePtr;}
@@ -171,8 +171,8 @@ factor: PARENTESIS_A expr PARENTESIS_C    {factorPtr = expPtr;}
 	    | VARIABLE                  {factorPtr = crear_hoja($1);}
       ;
 
-display: DISPLAY CONST_STRING_R   {displayPtr = crear_nodo("DISPLAY", NULL, constStringPtr);   printf("Regla - Sentencia de display con constante string\n");}
-       | DISPLAY expr             {displayPtr = crear_nodo("DISPLAY", NULL, exprPtr); printf("Regla - Sentencia de display con expresion\n");}
+display: DISPLAY CONST_STRING_R   {displayPtr = constStringPtr;   printf("Regla - Sentencia de display con constante string\n");}
+       | DISPLAY expr             {displayPtr = exprPtr; printf("Regla - Sentencia de display con expresion\n");}
        ;
 
 get: GET VARIABLE { getPtr = crear_nodo("GET", NULL, crear_hoja($2));
