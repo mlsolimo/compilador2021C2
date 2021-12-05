@@ -463,6 +463,10 @@ void generarAssembler(t_arbol* pArbol)
 
 	pAssembler = fopen("Final.asm", "wt");
 
+	if(!pAssembler) {
+		printf("No se pudo abrir Final.asm\n\n");
+	}
+
 	printf("Direccion de pArbol: %x\n", pArbol);
 
 	while(recorrerArbol(pArbol,pCode, &listaAux) != pArbol){

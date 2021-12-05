@@ -6,20 +6,27 @@ include number.asm
 
 .DATA 
 
-_1                            dd                            1                             ;Constante  Const_Int
-_12                           dd                            12                            ;Constante  Const_Int
+_100                          dd                            100                           ;Constante  Const_Int
+_111                          dd                            111                           ;Constante  Const_Int
 _2                            dd                            2                             ;Constante  Const_Int
+_20                           dd                            20                            ;Constante  Const_Int
+_3                            dd                            3                             ;Constante  Const_Int
 _30                           dd                            30                            ;Constante  Const_Int
 _7                            dd                            7                             ;Constante  Const_Int
-_Entrega final                dd                            Entrega final                 ;Constante  Const_String
-cad                           dd                            ?                             ;Variable String
+_Entrega                      db                            "Entrega" ,'$', 7 dup(?)
+a                             dd                            ?                             ;Variable Int
+c                             dd                            ?                             ;Variable Int
+maximo                        dd                            ?                             ;Variable Int
+minimo                        dd                            ?                             ;Variable Int
 var                           dd                            ?                             ;Variable Int
 var1                          dd                            ?                             ;Variable Int
-var2                          dd                            ?                             ;Variable Int
 @Aux1                         dd                            ?                             ;Variable Float
 @Aux2                         dd                            ?                             ;Variable Float
-@Aux3                         dd                            ?                             ;Variable Float
-@Aux4                         dd                            ?                             ;Variable Float
+@aux                          dd                            ?                             ;Variable Float
+@emax                         dd                            ?                             ;Variable Float
+@emin                         dd                            ?                             ;Variable Float
+@max                          dd                            ?                             ;Variable Float
+@min                          dd                            ?                             ;Variable Float
 
 
 .CODE
@@ -28,68 +35,57 @@ mov AX,@DATA    ; Se inicializa el segmento de datos
 mov DS,AX
 mov es,ax ;
 
-FLD var1
-FSTP var
+FLD _20
+FSTP a
 FFREE
-FLD var3
-FLD 7
+FLD _2
+FSTP c
+FFREE
+FLD a
+FLD _7
 FMUL 
 FSTP @Aux1
 FFREE
 FLD @Aux1
-FSTP var
+FSTP a
 FFREE
-FLD id2
-FLD cte1
-FMUL 
-FSTP @Aux2
-FFREE
-FLD @Aux2
-FLD cte2
-FADD 
-FSTP @Aux3
-FFREE
-FLD @Aux3
-FSTP id1
-FFREE
-FLD var1
-FCOMP var2
+FLD a
+FCOMP c
 FSTSW ax
 SAHF
 JNA saltoelse1
-FLD 30
-FSTP var2
+FLD _30
+FSTP var
 FFREE
-saltoelse1
+saltoelse1:
 FFREE
-FLD var2
-FLD 2
+FLD a
+FLD _3
 FMUL 
-FSTP @Aux4
+FSTP @Aux2
 FFREE
-FLD var1
-FCOMP @Aux4
+FLD a
+FCOMP @Aux2
 FSTSW ax
 SAHF
 JNBE saltoelse2
 FLD a
-FSTP var4
+FSTP var1
 FFREE
 JMP fin_if1
-saltoelse2
-FLD var2
-FSTP var4
+saltoelse2:
+FLD a
+FSTP var1
 FFREE
-fin_if1
-displayString Entrega final
-displayString cad
+fin_if1:
+displayString _Entrega
 FLD var
 FSTP @emax
 FFREE
-FLD 1
+FLD _100
 FSTP @max
 FFREE
-FLD 12
+FLD _111
 FSTP @aux
 FFREE
 FLD @aux
@@ -100,7 +96,7 @@ JNA saltoelse5
 FLD @aux
 FSTP @max
 FFREE
-saltoelse5
+saltoelse5:
 FFREE
 FLD var1
 FSTP @aux
@@ -113,25 +109,25 @@ JNA saltoelse6
 FLD @aux
 FSTP @max
 FFREE
-saltoelse6
+saltoelse6:
 FFREE
 FLD @emax
 FCOMP @max
 FSTSW ax
 SAHF
 JNE saltoelse7
-FLD var1
+FLD var
 FSTP maximo
 FFREE
-saltoelse7
+saltoelse7:
 FFREE
 FLD var
 FSTP @emin
 FFREE
-FLD 1
+FLD _100
 FSTP @min
 FFREE
-FLD 12
+FLD _111
 FSTP @aux
 FFREE
 FLD @aux
@@ -142,7 +138,7 @@ JNB saltoelse8
 FLD @aux
 FSTP @min
 FFREE
-saltoelse8
+saltoelse8:
 FFREE
 FLD var1
 FSTP @aux
@@ -155,17 +151,17 @@ JNB saltoelse9
 FLD @aux
 FSTP @min
 FFREE
-saltoelse9
+saltoelse9:
 FFREE
 FLD @emin
 FCOMP @min
 FSTSW ax
 SAHF
 JNE saltoelse10
-FLD var1
+FLD var
 FSTP minimo
 FFREE
-saltoelse10
+saltoelse10:
 FFREE
 
 

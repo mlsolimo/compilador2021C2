@@ -192,6 +192,9 @@ void grabarListaEnAssembler(tLista *p, FILE *pAssembler)
             strcat((*p)->valor, ".00");
             fprintf(pAssembler, "%-30s%-30s%-30s%-s %-s\n", (*p)->nombre, "dd", (*p)->valor, ";Constante ", (*p)->tipo);
         }
+        else if(!strncmp((*p)->nombre, "_", 1) && (strcmp((*p)->tipo, "Const_String") == 0)) {
+             fprintf(pAssembler, "%-30s%-30s%c%-s%c %-s %d dup(?)\n",(*p)->nombre, "db", '"', (*p)->valor,'"', ",'$',", (*p)->longitud);
+        }  
         else if(!strncmp((*p)->nombre, "_", 1)) // Es CTE
             fprintf(pAssembler, "%-30s%-30s%-30s%-s %-s\n", (*p)->nombre, "dd", (*p)->valor, ";Constante ", (*p)->tipo);
         else if(strncmp((*p)->nombre, "_", 1)) //Es variable

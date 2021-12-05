@@ -142,7 +142,7 @@ void traduccionIf(t_arbol* pArbol,FILE* pAssembler, char* salto){
      if(!*pArbol)
         return;
     if(contCuerp==0){
-    fprintf(pAssembler,"%s\n",salto);
+    fprintf(pAssembler,"%s:\n",salto);
     fprintf(pAssembler,"FFREE\n"); 
     
     }
@@ -185,7 +185,7 @@ void traduccionCuerpoIf(t_arbol* pArbol,FILE* pAssembler, char* salto){
          return;
      }
      else  if(contCuerp==2){
-         sprintf(str_FinIf, "fin_if%d", contFinIf);
+         sprintf(str_FinIf, "fin_if%d:", contFinIf);
          fprintf(pAssembler,"%s\n", str_FinIf);
          contFinIf++;
          free((*pArbol)->izq);
@@ -269,7 +269,7 @@ void traduccionAssembler(t_arbol* pArbol, FILE* pAssembler, tLista* listaAux){
         } else if (strcmp((*pArbol)->info, "CUERPO")==0 ){
             contCuerp++;
             //printf("Contador cuerpo: %d\n", contCuerp);
-            sprintf(str_Salto, "saltoelse%d\0", contSalto);
+            sprintf(str_Salto, "saltoelse%d:\0", contSalto);
             contSalto++;
             strcat(cadena, str_Salto);
             traduccionCuerpoIf(pArbol,pAssembler,cadena);
@@ -287,7 +287,7 @@ void traduccionAssembler(t_arbol* pArbol, FILE* pAssembler, tLista* listaAux){
         }
 
         if (strcmp((*pArbol)->info, "DISPLAY")==0 ){
-            fprintf(pAssembler,"displayString %s\n",(*pArbol)->izq->info);
+            fprintf(pAssembler,"displayString _%s\n",(*pArbol)->izq->info);
             free((*pArbol)->izq);
             (*pArbol)->izq = NULL;
              return;
@@ -305,7 +305,10 @@ void traduccionAssembler(t_arbol* pArbol, FILE* pAssembler, tLista* listaAux){
             printf("Empieza Traduccion: %s \n",(*pArbol)->info);
             if(strcmp((*pArbol)->info,":=")!=0)//si no son iguales
                 fprintf(pAssembler,"FLD %s\n",((*pArbol)->izq)->info);
-            fprintf(pAssembler,"FLD %s\n",((*pArbol)->der)->info);
+            if(strspn(((*pArbol)->der)->info, "1234567890"))
+                 fprintf(pAssembler,"FLD _%s\n",((*pArbol)->der)->info);
+            else
+                fprintf(pAssembler,"FLD %s\n",((*pArbol)->der)->info);
         
             if(strcmp((*pArbol)->info, "+")==0)
             fprintf(pAssembler,"FADD \n");
@@ -318,7 +321,17 @@ void traduccionAssembler(t_arbol* pArbol, FILE* pAssembler, tLista* listaAux){
             
             if(strcmp((*pArbol)->info,":=")==0){
                 //printf("Operador igual : %s\n",(*pArbol)->info);
-                fprintf(pAssembler,"FSTP %s\n",((*pArbol)->izq)->info);    
+                fprintf(pAssembler,"FSTP %s\n",((*pArbol)->izq)->info);
+
+                printf("%s Que hay aca??\n\n", ((*pArbol)->izq)->info); 
+                if (strchr(((*pArbol)->izq)->info, '@')!= NULL) {
+                    strcpy(str_Aux, ((*pArbol)->izq)->info);
+                    insertarID(listaAux, str_Aux, "Float");
+                    printf("Entro\n\n");
+                }
+
+               
+                  
             }
             else{
                 sprintf(str_Aux,"@Aux%d",++contAux);

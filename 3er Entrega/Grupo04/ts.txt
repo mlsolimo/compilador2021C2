@@ -3,14 +3,18 @@
 _____________________________________________________________________________________________
 |NOMBRE                        |TIPO DE DATO  |VALOR                         |LONGITUD      |
 ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
-|_1                            |Const_Int     |1                             |0             |
-|_12                           |Const_Int     |12                            |0             |
+|_100                          |Const_Int     |100                           |0             |
+|_111                          |Const_Int     |111                           |0             |
 |_2                            |Const_Int     |2                             |0             |
+|_20                           |Const_Int     |20                            |0             |
+|_3                            |Const_Int     |3                             |0             |
 |_30                           |Const_Int     |30                            |0             |
 |_7                            |Const_Int     |7                             |0             |
-|_Entrega final                |Const_String  |Entrega final                 |13            |
-|cad                           |String        |                              |0             |
+|_Entrega                      |Const_String  |Entrega                       |7             |
+|a                             |Int           |                              |0             |
+|c                             |Int           |                              |0             |
+|maximo                        |Int           |                              |0             |
+|minimo                        |Int           |                              |0             |
 |var                           |Int           |                              |0             |
 |var1                          |Int           |                              |0             |
-|var2                          |Int           |                              |0             |
 ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
