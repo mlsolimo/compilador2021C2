@@ -10,6 +10,7 @@ Debe correrse el archivo Script.bat que se encuentra dentro de la carpeta Grupo0
 
 ## Entrega 3
 Debe correrse el archivo script.bat que se encuentra dentro de la carpeta Grupo04
-Se agrego imagen del arbol generado, puede verse en el archivo Arbol.PNG
+
+Se agrego imagen del arbol generado, puede verse en el archivo Imagen del Arbol.PNG
 ## Alumnos que realizan el trabajo
 - Sólimo Martín Leandro
