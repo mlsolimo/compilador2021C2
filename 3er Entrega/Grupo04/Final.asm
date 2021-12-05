@@ -31,6 +31,7 @@ var1                          dd                            ?                   
 
 .CODE
 
+start:
 mov AX,@DATA    ; Se inicializa el segmento de datos
 mov DS,AX
 mov es,ax ;
@@ -166,7 +167,7 @@ FFREE
 
 
 
-mov ax,4c00h	; Se indica fin de ejecucion
+mov ax,4c00h
 int 21h
 
-End
+END start;

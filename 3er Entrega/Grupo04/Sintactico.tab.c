@@ -2537,14 +2537,14 @@ void generarAssembler(t_arbol* pArbol)
 
 	grabarListaEnAssembler(&listaAux, pAssembler);
 
-	fprintf(pAssembler, "\n\n.CODE\n\nmov AX,@DATA    ; Se inicializa el segmento de datos\nmov DS,AX\nmov es,ax ;\n\n");
+	fprintf(pAssembler, "\n\n.CODE\n\nstart:\nmov AX,@DATA    ; Se inicializa el segmento de datos\nmov DS,AX\nmov es,ax ;\n\n");
 
 	while(fgets(Linea, sizeof(Linea), pCode))
 	{
 		fprintf(pAssembler, Linea);
 	}
 
-	fprintf(pAssembler, "\n\n\nmov ax,4c00h	; Se indica fin de ejecucion\nint 21h\n\nEnd");
+	fprintf(pAssembler, "\n\n\nmov ax,4c00h\nint 21h\n\nEND start;");
 
 	fclose(pCode);
 
